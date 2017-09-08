@@ -1,12 +1,12 @@
 import React, { PropTypes } from "react"
-import Elbow from "./Connector/type-elbow"
+import Circle from "./Subject/circle"
 
-export default class ConnectorElbow extends React.Component {
+export default class SubjectCircle extends React.Component {
   render() {
-    const { x, y, dy, dx, radius, outerRadius } = this.props
+    const { radius, innerRadius, outerRadius } = this.props
 
-    const d = Elbow({ x, y, dx, dy, radius, outerRadius })
-    console.log(d, radius)
+    const d = Circle({ radius, innerRadius, outerRadius })
+    console.log(d)
     return (
       <g>
         {d.components.map((c, i) => {
@@ -25,6 +25,6 @@ export default class ConnectorElbow extends React.Component {
   }
 }
 
-ConnectorElbow.defaultProps = {}
+SubjectCircle.defaultProps = {}
 
-ConnectorElbow.propTypes = {}
+SubjectCircle.propTypes = {}
