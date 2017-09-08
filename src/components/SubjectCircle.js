@@ -7,6 +7,7 @@ export default class SubjectCircle extends React.Component {
 
     const d = Circle({ radius, innerRadius, outerRadius })
     console.log(d)
+
     return (
       <g>
         {d.components.map((c, i) => {

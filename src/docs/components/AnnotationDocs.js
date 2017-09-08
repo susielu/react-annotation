@@ -5,6 +5,7 @@ const components = []
 import Annotation from "../../components/Annotation"
 import ConnectorElbow from "../../components/ConnectorElbow"
 import SubjectCircle from "../../components/SubjectCircle"
+import SubjectBadge from "../../components/SubjectBadge"
 import Note from "../../components/Note"
 
 components.push({
@@ -45,13 +46,17 @@ export default class DateInputDocs extends React.Component {
       name: "Annotation",
       demo: (
         <svg width={500} height={500}>
-          <Annotation x={20} y={300} dx={100} dy={-200} radius={50}>
+          <Annotation x={200} y={100} dx={-100} dy={200} radius={50}>
             <ConnectorElbow />
             <Note
               text="Hello let's test out some serious text wrapping"
               title="A test title for wrapping"
             />
             <SubjectCircle />
+          </Annotation>
+
+          <Annotation x={50} y={50}>
+            <SubjectBadge leftRight="left" topBottom="bottom" text="A" />
           </Annotation>
         </svg>
       ),
