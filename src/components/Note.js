@@ -168,7 +168,7 @@ export default class Note extends React.Component {
 
 Note.defaultProps = {
   wrap: 150,
-  align: "left",
+  align: "dynamic",
   orientation: "topBottom",
   padding: 10
 }
