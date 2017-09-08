@@ -1,18 +1,18 @@
 import React, { PropTypes } from "react"
 import Circle from "./Subject/circle"
+import Handle from "./Handle"
 
 export default class SubjectCircle extends React.Component {
   render() {
-    const { radius, innerRadius, outerRadius } = this.props
+    const { radius, innerRadius, outerRadius, editMode } = this.props
 
-    const d = Circle({ radius, innerRadius, outerRadius })
-    console.log(d)
-
+    const d = Circle({ radius, innerRadius, outerRadius, editMode })
+    console.log("handles", d, d.handles.length, d.handles)
     return (
       <g>
         {d.components.map((c, i) => {
           return (
-            <path
+            <c.type
               key={i}
               {...c.attrs}
               className={c.className}
@@ -21,6 +21,7 @@ export default class SubjectCircle extends React.Component {
             />
           )
         })}
+        <Handle handleDrag={this.props.dragSubject} />
       </g>
     )
   }

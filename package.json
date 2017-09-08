@@ -44,9 +44,15 @@
     "material-ui": "^0.17.1"
   },
   "dependencies": {
-    "d3-shape": "1.0.4"
+    "d3-shape": "1.0.4",
+    "react-draggable": "3.0.3"
   },
-  "files": ["LICENSE", "README.md", "CHANGELOG.md", "lib"],
+  "files": [
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md",
+    "lib"
+  ],
   "keywords": [
     "react",
     "component",
