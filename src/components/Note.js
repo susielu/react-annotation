@@ -1,6 +1,7 @@
 import React, { PropTypes } from "react"
 import Elbow from "./Connector/type-elbow"
 import alignment from "./Note/alignment"
+import Handle from "./Handle"
 
 const getOuterBBox = (...domNodes) => {
   return [...domNodes].reduce(
@@ -145,6 +146,7 @@ export default class Note extends React.Component {
 
     return (
       <g transform={`translate(${dx}, ${dy})`}>
+        <Handle handleDrag={this.props.dragNote} />
         <g
           className="annotation-note-content"
           transform={`translate(${this.state.translateX},
