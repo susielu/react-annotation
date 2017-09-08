@@ -1,7 +1,8 @@
 import { lineBuilder } from "../Builder"
 
 // export default ({ type, subjectType }) => {
-export default ({ x, y, dx, dy }) => {
+//TODO allow custom x1, y1
+export default ({ x, y, dx, dy, radius, outerRadius }) => {
   // const annotation = type.annotation
   // const offset = annotation.position
 
@@ -55,24 +56,28 @@ export default ({ x, y, dx, dy }) => {
   //   const r =
   //     (subjectData.outerRadius || subjectData.radius) +
   //     (subjectData.radiusPadding || 0)
-  //   const length = r / Math.sqrt(2)
 
-  //   if (Math.abs(diffX) > length && Math.abs(diffY) > length) {
-  //     x1 = length * (x2 < 0 ? -1 : 1)
-  //     y1 = length * (y2 < 0 ? -1 : 1)
-  //     data = [[x1, y1], [xe, ye], [x2, y2]]
-  //   } else if (Math.abs(diffX) > Math.abs(diffY)) {
-  //     const angle = Math.asin(-y2 / r)
-  //     x1 = Math.abs(Math.cos(angle) * r) * (x2 < 0 ? -1 : 1)
-  //     data = [[x1, y2], [x2, y2]]
-  //   } else {
-  //     const angle = Math.acos(x2 / r)
-  //     y1 = Math.abs(Math.sin(angle) * r) * (y2 < 0 ? -1 : 1)
-  //     data = [[x2, y1], [x2, y2]]
-  //   }
-  // } else {
-  data = [[x1, y1], [xe, ye], [x2, y2]]
-  // }
+  if (outerRadius || radius) {
+    console.log("in radius", diffX, diffY)
+    const r = outerRadius || radius
+    const length = r / Math.sqrt(2)
+
+    if (Math.abs(diffX) > length && Math.abs(diffY) > length) {
+      x1 = length * (x2 < 0 ? -1 : 1)
+      y1 = length * (y2 < 0 ? -1 : 1)
+      data = [[x1, y1], [xe, ye], [x2, y2]]
+    } else if (Math.abs(diffX) > Math.abs(diffY)) {
+      const angle = Math.asin(-y2 / r)
+      x1 = Math.abs(Math.cos(angle) * r) * (x2 < 0 ? -1 : 1)
+      data = [[x1, y2], [x2, y2]]
+    } else {
+      const angle = Math.acos(x2 / r)
+      y1 = Math.abs(Math.sin(angle) * r) * (y2 < 0 ? -1 : 1)
+      data = [[x2, y1], [x2, y2]]
+    }
+  } else {
+    data = [[x1, y1], [xe, ye], [x2, y2]]
+  }
 
   return { components: [lineBuilder({ data, className: "connector" })] }
 }

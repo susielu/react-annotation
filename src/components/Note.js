@@ -2,6 +2,27 @@ import React, { PropTypes } from "react"
 import Elbow from "./Connector/type-elbow"
 import alignment from "./Note/alignment"
 
+const getOuterBBox = (...domNodes) => {
+  return [...domNodes].reduce(
+    (p, c) => {
+      if (c) {
+        const bbox = c.getBBox()
+        p.x = Math.min(p.x, bbox.x)
+        p.y = Math.min(p.y, bbox.y)
+        p.width = Math.max(p.width, bbox.width)
+
+        const yOffset = c && c.attributes && c.attributes.y
+        p.height = Math.max(
+          p.height,
+          ((yOffset && parseFloat(yOffset.value)) || 0) + bbox.height
+        )
+      }
+      return p
+    },
+    { x: 0, y: 0, width: 0, height: 0 }
+  )
+}
+
 export default class Note extends React.Component {
   state = {
     translateX: 0,
@@ -11,24 +32,14 @@ export default class Note extends React.Component {
   }
 
   componentDidMount() {
-    const { orientation, padding, align, text, title } = this.props
-
-    const noteParams = {
-      padding,
-      bbox: this.refs.note.getBBox(),
-      // offset: this.annotation.offset,
-      orientation,
-      align
-    }
-    const { x, y } = alignment(noteParams)
+    const { orientation, padding, align, text, title, dx, dy } = this.props
 
     const titleWrapped =
       this.refs.title && this.wrapText(this.refs.title, title)
     const textWrapped = this.refs.text && this.wrapText(this.refs.text, text)
+
     this.setState(
       {
-        translateX: x,
-        translateY: y,
         titleWrapped,
         textWrapped
       },
@@ -38,8 +49,21 @@ export default class Note extends React.Component {
             textOffset: this.refs.title.getBBox().height
           },
           () => {
+            const bbox = getOuterBBox(this.refs.title, this.refs.text)
+            const noteParams = {
+              padding,
+              bbox,
+              offset: { x: dx, y: dy },
+              orientation,
+              align
+            }
+
+            const { x, y } = alignment(noteParams)
+
             this.setState({
-              bbox: this.getTextBBox(this.refs.title, this.refs.text)
+              translateX: x,
+              translateY: y,
+              bbox
             })
           }
         )
@@ -76,28 +100,6 @@ export default class Note extends React.Component {
       }
     }
     return <tspan {...initialAttrs}>{tspans}</tspan>
-  }
-
-  getTextBBox(title, text) {
-    return [title, text].reduce(
-      (p, c) => {
-        if (c) {
-          const bbox = c.getBBox()
-          console.log("in here", c.getBBox())
-          p.x = Math.min(p.x, bbox.x)
-          p.y = Math.min(p.y, bbox.y)
-          p.width = Math.max(p.width, bbox.width)
-
-          const yOffset = c && c.attributes && c.attributes.y
-          p.height = Math.max(
-            p.height,
-            ((yOffset && parseFloat(yOffset.value)) || 0) + bbox.height
-          )
-        }
-        return p
-      },
-      { x: 0, y: 0, width: 0, height: 0 }
-    )
   }
 
   render() {
