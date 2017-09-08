@@ -36,7 +36,6 @@ export default class Handle extends React.Component {
           stroke="grey"
           fill="white"
           fillOpacity={0}
-          transform="translate(0,0"
         />
       </DraggableCore>
     )

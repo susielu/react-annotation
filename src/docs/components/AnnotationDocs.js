@@ -10,6 +10,7 @@ import ConnectorElbow from "../../components/ConnectorElbow"
 import ConnectorEndDot from "../../components/ConnectorEndDot"
 import ConnectorEndArrow from "../../components/ConnectorEndArrow"
 import SubjectCircle from "../../components/SubjectCircle"
+import SubjectRect from "../../components/SubjectRect"
 import SubjectBadge from "../../components/SubjectBadge"
 import SubjectThreshold from "../../components/SubjectThreshold"
 import Note from "../../components/Note"
@@ -42,42 +43,44 @@ export default class DateInputDocs extends React.Component {
 
   render() {
     const examples = []
-    // <Annotation>
-    //           <Note />
-    //  <ConnectorEndDot />
-    //         <ConnectorStartDot />
-    //          </Annotation>
 
     examples.push({
       name: "Annotation",
       demo: (
         <svg width={1000} height={500}>
           <Handle x={100} y={100} />
-          <EditableAnnotation x={200} y={100} dx={-100} dy={200} radius={50}>
+          <EditableAnnotation x={200} y={100} dx={-100} dy={200}>
             <ConnectorElbow>
               <ConnectorEndDot />
             </ConnectorElbow>
             <Note
               text="Hello let's test out some serious text wrapping"
-              title="A test title for wrapping"
+              title="1 - First"
             />
             <SubjectCircle />
           </EditableAnnotation>
-          <Annotation x={350} y={100} dx={-100} dy={200} radius={50}>
+          <EditableAnnotation
+            x={350}
+            y={100}
+            dx={-100}
+            dy={200}
+            width={100}
+            height={200}
+          >
             <ConnectorLine />
             <Note
               text="Hello let's test out some serious text wrapping"
-              title="A test title for wrapping"
+              title="2 - Second"
             />
-            <SubjectCircle />
-          </Annotation>
+            <SubjectRect />
+          </EditableAnnotation>
           <Annotation x={500} y={100} dx={-100} dy={200}>
             <ConnectorElbow>
               <ConnectorEndArrow />
             </ConnectorElbow>
             <Note
               text="Hello let's test out some serious text wrapping"
-              title="A test title for wrapping"
+              title="3 - Third"
             />
             <SubjectThreshold y1={0} y2={10000} />
           </Annotation>

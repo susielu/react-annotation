@@ -2,7 +2,17 @@ import { lineBuilder } from "../Builder"
 
 // export default ({ type, subjectType }) => {
 //TODO allow custom x1, y1
-export default ({ x, y, dx, dy, radius, outerRadius }) => {
+export default ({
+  x,
+  y,
+  dx,
+  dy,
+  radius,
+  outerRadius,
+  innerRadius,
+  width,
+  height
+}) => {
   // const annotation = type.annotation
   // const offset = annotation.position
 
@@ -14,24 +24,20 @@ export default ({ x, y, dx, dy, radius, outerRadius }) => {
   // const subjectData = annotation.subject
 
   // if (subjectType === "rect") {
-  //   const { width, height } = subjectData
-
-  //   if ((width > 0 && annotation.dx > 0) || (width < 0 && annotation.dx < 0)) {
-  //     if (Math.abs(width) > Math.abs(annotation.dx)) x1 = width / 2
-  //     else x1 = width
-  //   }
-  //   if (
-  //     (height > 0 && annotation.dy > 0) ||
-  //     (height < 0 && annotation.dy < 0)
-  //   ) {
-  //     if (Math.abs(height) > Math.abs(annotation.dy)) y1 = height / 2
-  //     else y1 = height
-  //   }
-  //   if (x1 === width / 2 && y1 === height / 2) {
-  //     x1 = x2
-  //     y1 = y2
-  //   }
-  // }
+  if (width && height) {
+    if ((width > 0 && dx > 0) || (width < 0 && dx < 0)) {
+      if (Math.abs(width) > Math.abs(dx)) x1 = width / 2
+      else x1 = width
+    }
+    if ((height > 0 && dy > 0) || (height < 0 && dy < 0)) {
+      if (Math.abs(height) > Math.abs(dy)) y1 = height / 2
+      else y1 = height
+    }
+    if (x1 === width / 2 && y1 === height / 2) {
+      x1 = x2
+      y1 = y2
+    }
+  }
 
   let data = [[x1, y1], [x2, y2]]
 
@@ -58,7 +64,6 @@ export default ({ x, y, dx, dy, radius, outerRadius }) => {
   //     (subjectData.radiusPadding || 0)
 
   if (outerRadius || radius) {
-    console.log("in radius", diffX, diffY)
     const r = outerRadius || radius
     const length = r / Math.sqrt(2)
 

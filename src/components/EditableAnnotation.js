@@ -4,7 +4,9 @@ import Annotation from "./Annotation"
 export default class EditableAnnotation extends React.Component {
   state = {
     x: 0,
-    y: 0
+    y: 0,
+    dx: 0,
+    dy: 0
   }
 
   componentWillMount() {
@@ -34,6 +36,8 @@ export default class EditableAnnotation extends React.Component {
     const cleanedProps = Object.assign({}, this.props, {
       x: this.state.x,
       y: this.state.y,
+      dx: this.state.dx,
+      dy: this.state.dy,
       dragSubject: this.dragSubject.bind(this),
       dragNote: this.dragNote.bind(this),
       editMode: true

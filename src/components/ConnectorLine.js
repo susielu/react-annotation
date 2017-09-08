@@ -3,9 +3,9 @@ import Line from "./Connector/type-line"
 
 export default class ConnectorLine extends React.Component {
   render() {
-    const { x, y, dy, dx, radius, outerRadius } = this.props
+    const { x, y, dy, dx, radius, outerRadius, width, height } = this.props
 
-    const d = Line({ x, y, dx, dy, radius, outerRadius })
+    const d = Line({ x, y, dx, dy, radius, outerRadius, width, height })
 
     return (
       <g>
