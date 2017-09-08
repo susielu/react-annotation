@@ -21,7 +21,7 @@ export const circleHandles = ({ cx = 0, cy = 0, r1, r2, padding }) => {
 }
 
 export default ({
-  radius = 20,
+  radius,
   radiusPadding,
   outerRadius,
   innerRadius,
@@ -62,7 +62,7 @@ export default ({
         // )
       }
     ]
-    console.log("here ", cHandles)
+
     if (innerRadius) {
       cHandles.push({ ...h.r2, drag: updateRadius.bind(type, "innerRadius") })
     }

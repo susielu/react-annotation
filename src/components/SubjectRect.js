@@ -1,12 +1,12 @@
 import React, { PropTypes } from "react"
-import Circle from "./Subject/circle"
+import Rect from "./Subject/rect"
 import Handle from "./Handle"
 
-export default class SubjectCircle extends React.Component {
+export default class SubjectRect extends React.Component {
   render() {
-    const { radius = 20, innerRadius, outerRadius, editMode } = this.props
+    const { width, height, editMode } = this.props
 
-    const d = Circle({ radius, innerRadius, outerRadius, editMode })
+    const d = Rect({ width, height, editMode })
 
     return (
       <g>
@@ -27,6 +27,6 @@ export default class SubjectCircle extends React.Component {
   }
 }
 
-SubjectCircle.defaultProps = {}
+SubjectRect.defaultProps = {}
 
-SubjectCircle.propTypes = {}
+SubjectRect.propTypes = {}

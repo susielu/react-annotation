@@ -103,6 +103,36 @@ export default class Note extends React.Component {
     return <tspan {...initialAttrs}>{tspans}</tspan>
   }
 
+  componentDidUpdate(prevProps) {
+    if (
+      this.state.bbox.width &&
+      (prevProps.dx !== this.props.dx || prevProps.dy !== this.props.dy) &&
+      (this.refs.title || this.refs.text)
+    ) {
+      const { orientation, padding, align, dx, dy } = this.props
+
+      const bbox = getOuterBBox(this.refs.title, this.refs.text)
+      const noteParams = {
+        padding,
+        bbox,
+        offset: { x: dx, y: dy },
+        orientation,
+        align
+      }
+
+      const { x, y } = alignment(noteParams)
+      const updates = { bbox }
+      if (this.state.translateX !== x) updates.translateX = x
+      if (this.state.translateY !== y) updates.translateY = y
+      if (
+        updates.translateX !== undefined ||
+        updates.translateY !== undefined
+      ) {
+        this.setState(updates)
+      }
+    }
+  }
+
   render() {
     const {
       text,

@@ -3,10 +3,29 @@ import Elbow from "./Connector/type-elbow"
 
 export default class ConnectorElbow extends React.Component {
   render() {
-    const { x, y, dy, dx, radius, outerRadius } = this.props
+    const {
+      x,
+      y,
+      dy,
+      dx,
+      radius,
+      outerRadius,
+      innerRadius,
+      width,
+      height
+    } = this.props
 
-    const d = Elbow({ x, y, dx, dy, radius, outerRadius })
-    console.log(d, radius)
+    const d = Elbow({
+      x,
+      y,
+      dx,
+      dy,
+      radius,
+      outerRadius,
+      innerRadius,
+      width,
+      height
+    })
 
     const cleanedProps = Object.assign({}, this.props)
     delete cleanedProps.children
@@ -16,12 +35,6 @@ export default class ConnectorElbow extends React.Component {
         ...cleanedProps,
         ...child.props,
         lineData: d.components[0].data
-      })
-    )
-
-    console.log(
-      React.Children.map(this.props.children, child => {
-        console.log("CHILD", child)
       })
     )
 
