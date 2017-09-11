@@ -1,4 +1,5 @@
 import React, { PropTypes } from "react"
+import classnames from "classnames"
 
 export default class Annotation extends React.Component {
   render() {
@@ -11,13 +12,33 @@ export default class Annotation extends React.Component {
     if (ny !== undefined) cleanedProps.dy = ny - y
 
     const childrenWithProps = React.Children.map(this.props.children, child =>
-      React.cloneElement(child, { ...cleanedProps, ...child.props })
+      React.cloneElement(child, {
+        x: 0,
+        y: 0,
+        dx: 0,
+        dy: 0,
+        color: "grey",
+        ...cleanedProps,
+        ...child.props
+      })
     )
 
-    return <g transform={`translate(${x}, ${y})`}>{childrenWithProps}</g>
+    return (
+      <g
+        className={classnames("annotation", this.props.className)}
+        transform={`translate(${x}, ${y})`}
+      >
+        {childrenWithProps}
+      </g>
+    )
   }
 }
 
-Annotation.defaultProps = {}
-
-Annotation.propTypes = {}
+Annotation.propTypes = {
+  x: PropTypes.number,
+  y: PropTypes.number,
+  dx: PropTypes.number,
+  dy: PropTypes.number,
+  color: PropTypes.string,
+  editMode: PropTypes.bool
+}

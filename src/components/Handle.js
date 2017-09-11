@@ -29,10 +29,10 @@ export default class Handle extends React.Component {
       >
         <circle
           className="handle"
-          cx={0}
-          cy={0}
+          cx={x}
+          cy={y}
           r={r}
-          strokeDasharray="1,2"
+          strokeDasharray="5"
           stroke="grey"
           fill="white"
           fillOpacity={0}
@@ -42,6 +42,11 @@ export default class Handle extends React.Component {
   }
 }
 
-Handle.defaultProps = {}
-
-Handle.propTypes = {}
+Handle.propTypes = {
+  x: PropTypes.number,
+  y: PropTypes.number,
+  r: PropTypes.number,
+  handleStart: PropTypes.func,
+  handleStop: PropTypes.func,
+  handleDrag: PropTypes.func
+}

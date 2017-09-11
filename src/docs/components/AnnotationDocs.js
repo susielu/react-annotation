@@ -9,11 +9,12 @@ import ConnectorLine from "../../components/ConnectorLine"
 import ConnectorElbow from "../../components/ConnectorElbow"
 import ConnectorEndDot from "../../components/ConnectorEndDot"
 import ConnectorEndArrow from "../../components/ConnectorEndArrow"
-import SubjectCircle from "../../components/SubjectCircle"
-import SubjectRect from "../../components/SubjectRect"
-import SubjectBadge from "../../components/SubjectBadge"
-import SubjectThreshold from "../../components/SubjectThreshold"
-import Note from "../../components/Note"
+import SubjectCircle from "../../components/Subject/SubjectCircle"
+import SubjectRect from "../../components/Subject/SubjectRect"
+import SubjectBadge from "../../components/Subject/SubjectBadge"
+import SubjectThreshold from "../../components/Subject/SubjectThreshold"
+import Note from "../../components/Note/Note"
+import { AnnotationLabel } from "../../components/Types"
 
 components.push({
   name: "Annotation",
@@ -23,6 +24,8 @@ components.push({
     }
   `
 })
+
+//Annotation Collection on finish wrapping function
 
 export default class DateInputDocs extends React.Component {
   constructor(props) {
@@ -49,6 +52,13 @@ export default class DateInputDocs extends React.Component {
       demo: (
         <svg width={1000} height={500}>
           <Handle x={100} y={100} />
+          <AnnotationLabel
+            x={50}
+            y={100}
+            dy={30}
+            title="This title is a longer title"
+            text="Now some longer text as well"
+          />
           <EditableAnnotation x={200} y={100} dx={-100} dy={200}>
             <ConnectorElbow>
               <ConnectorEndDot />
@@ -60,6 +70,7 @@ export default class DateInputDocs extends React.Component {
             <SubjectCircle />
           </EditableAnnotation>
           <EditableAnnotation
+            className="TESTING"
             x={350}
             y={100}
             dx={-100}
@@ -78,6 +89,7 @@ export default class DateInputDocs extends React.Component {
             <ConnectorElbow>
               <ConnectorEndArrow />
             </ConnectorElbow>
+
             <Note
               text="Hello let's test out some serious text wrapping"
               title="3 - Third"

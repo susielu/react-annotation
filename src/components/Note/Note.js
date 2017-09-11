@@ -1,7 +1,6 @@
 import React, { PropTypes } from "react"
-import Elbow from "./Connector/type-elbow"
-import alignment from "./Note/alignment"
-import Handle from "./Handle"
+import alignment from "./alignment"
+import Handle from "../Handle"
 
 const getOuterBBox = (...domNodes) => {
   return [...domNodes].reduce(
@@ -33,11 +32,21 @@ export default class Note extends React.Component {
   }
 
   componentDidMount() {
-    const { orientation, padding, align, text, title, dx, dy } = this.props
+    const {
+      orientation,
+      padding,
+      align,
+      text,
+      title,
+      wrap,
+      dx,
+      dy
+    } = this.props
 
     const titleWrapped =
-      this.refs.title && this.wrapText(this.refs.title, title)
-    const textWrapped = this.refs.text && this.wrapText(this.refs.text, text)
+      this.refs.title && this.wrapText(this.refs.title, title, wrap)
+    const textWrapped =
+      this.refs.text && this.wrapText(this.refs.text, text, wrap)
 
     this.setState(
       {
@@ -72,7 +81,7 @@ export default class Note extends React.Component {
     )
   }
 
-  wrapText(textRef, text, width = 30, lineHeight = 1.2) {
+  wrapText(textRef, text, width, lineHeight = 1.2) {
     const initialAttrs = {
       x: 0,
       dy: ".8em"
@@ -82,6 +91,7 @@ export default class Note extends React.Component {
       .split(/[ \t\r\n]+/)
       .reverse()
       .filter(w => w !== "")
+
     let word,
       line = []
 
@@ -89,17 +99,31 @@ export default class Note extends React.Component {
 
     while ((word = words.pop())) {
       line.push(word)
-      textRef.nodeValue = line.join(" ")
+      textRef.lastChild.textContent = line.join(" ")
 
-      if (textRef.getComputedTextLength() > width && line.length > 1) {
+      const length = textRef.lastChild.getComputedTextLength()
+
+      textRef.lastChild.textContent = ""
+
+      if (length > width && line.length > 1) {
         line.pop()
         tspans.push(
           <tspan {...initialAttrs} lineHeight={lineHeight + "em"}>
-            {word}
+            {line.join(" ")}
           </tspan>
         )
+        line = [word]
       }
     }
+
+    if (line.length !== 0) {
+      tspans.push(
+        <tspan {...initialAttrs} lineHeight={lineHeight + "em"}>
+          {line.join(" ")}
+        </tspan>
+      )
+    }
+
     return <tspan {...initialAttrs}>{tspans}</tspan>
   }
 
@@ -142,7 +166,7 @@ export default class Note extends React.Component {
       orientation,
       padding,
       align,
-      wrap
+      editMode
     } = this.props
     let noteTitle, noteText
 
@@ -174,9 +198,14 @@ export default class Note extends React.Component {
       )
     }
 
+    let handle
+
+    if (editMode) {
+      handle = <Handle handleDrag={this.props.dragNote} />
+    }
+
     return (
-      <g transform={`translate(${dx}, ${dy})`}>
-        <Handle handleDrag={this.props.dragNote} />
+      <g transform={`translate(${dx}, ${dy})`} className="annotation-note">
         <g
           className="annotation-note-content"
           transform={`translate(${this.state.translateX},
@@ -187,19 +216,21 @@ export default class Note extends React.Component {
             className="annotation-note-bg"
             width={this.state.bbox.width}
             height={this.state.bbox.height}
-            stroke="grey"
-            fill="none"
+            stroke="none"
+            fill="white"
+            fillOpacity="0"
           />
           {noteTitle}
           {noteText}
         </g>
+        {handle}
       </g>
     )
   }
 }
 
 Note.defaultProps = {
-  wrap: 150,
+  wrap: 120,
   align: "dynamic",
   orientation: "topBottom",
   padding: 10

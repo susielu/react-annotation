@@ -8,7 +8,7 @@ export default class ConnectorLine extends React.Component {
     const d = Line({ x, y, dx, dy, radius, outerRadius, width, height })
 
     return (
-      <g>
+      <g className="annotation-connector">
         {d.components.map((c, i) => {
           return (
             <path

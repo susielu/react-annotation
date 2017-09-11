@@ -1,5 +1,6 @@
 import React, { PropTypes } from "react"
 import Annotation from "./Annotation"
+import classnames from "classnames"
 
 export default class EditableAnnotation extends React.Component {
   state = {
@@ -40,7 +41,8 @@ export default class EditableAnnotation extends React.Component {
       dy: this.state.dy,
       dragSubject: this.dragSubject.bind(this),
       dragNote: this.dragNote.bind(this),
-      editMode: true
+      editMode: true,
+      className: classnames(this.props.className, "editable")
     })
 
     return <Annotation {...cleanedProps} />
