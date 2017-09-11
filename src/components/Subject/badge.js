@@ -64,7 +64,6 @@ export default ({ radius = 14, leftRight, topBottom, text, color }) => {
   })
 
   circle.attrs.transform = transform
-  // circle.attrs.fill = color
   circle.attrs["stroke-width"] = "3px"
   circle.attrs.fill = "white"
 

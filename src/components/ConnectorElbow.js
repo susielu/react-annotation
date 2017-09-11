@@ -3,17 +3,7 @@ import Elbow from "./Connector/type-elbow"
 
 export default class ConnectorElbow extends React.Component {
   render() {
-    const {
-      x,
-      y,
-      dy,
-      dx,
-      radius,
-      outerRadius,
-      innerRadius,
-      width,
-      height
-    } = this.props
+    const { x, y, dy, dx, radius, outerRadius, width, height } = this.props
 
     const d = Elbow({
       x,
@@ -22,7 +12,6 @@ export default class ConnectorElbow extends React.Component {
       dy,
       radius,
       outerRadius,
-      innerRadius,
       width,
       height
     })
@@ -39,7 +28,7 @@ export default class ConnectorElbow extends React.Component {
     )
 
     return (
-      <g>
+      <g className="annotation-connector">
         {d.components.map((c, i) => {
           return (
             <path

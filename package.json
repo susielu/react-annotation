@@ -44,6 +44,7 @@
     "material-ui": "^0.17.1"
   },
   "dependencies": {
+    "classnames": "2.2.5",
     "d3-shape": "1.0.4",
     "react-draggable": "3.0.3"
   },
