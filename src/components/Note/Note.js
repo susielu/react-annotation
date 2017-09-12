@@ -29,7 +29,7 @@ export default class Note extends React.Component {
   state = {
     translateX: 0,
     translateY: 0,
-    textOffset: 0,
+    labelOffset: 0,
     bbox: { width: 0, height: 0, x: 0, y: 0 }
   }
 
@@ -39,59 +39,64 @@ export default class Note extends React.Component {
       padding,
       align,
       lineType,
-      text,
+      label,
       title,
       wrap,
       dx,
       dy
     } = this.props
 
-    const titleWrapped =
-      this.refs.title && this.wrapText(this.refs.title, title, wrap)
-    const textWrapped =
-      this.refs.text && this.wrapText(this.refs.text, text, wrap)
+    const newState = {}
+    if (title)
+      newState.titleWrapped =
+        this.refs.title && this.wrapText(this.refs.title, title, wrap)
 
-    this.setState(
-      {
-        titleWrapped,
-        textWrapped
-      },
-      () => {
+    if (label)
+      newState.labelWrapped =
+        this.refs.label && this.wrapText(this.refs.label, label, wrap)
+
+    this.setState(newState, () => {
+      console.log("REFS", this.props, this.refs)
+
+      const setLabel = () => {
+        const bbox = getOuterBBox(this.refs.title, this.refs.label)
+        const noteParams = {
+          padding,
+          bbox,
+          offset: { x: dx, y: dy },
+          orientation,
+          align
+        }
+
+        if (lineType === "vertical") noteParams.orientation = "leftRight"
+        else if (lineType === "horizontal") noteParams.orientation = "topBottom"
+
+        const { x, y } = alignment(noteParams)
+
+        this.setState({
+          translateX: x,
+          translateY: y,
+          bbox
+        })
+      }
+
+      if (title) {
         this.setState(
           {
-            textOffset: this.refs.title.getBBox().height
+            labelOffset: this.refs.title.getBBox().height
           },
-          () => {
-            const bbox = getOuterBBox(this.refs.title, this.refs.text)
-            const noteParams = {
-              padding,
-              bbox,
-              offset: { x: dx, y: dy },
-              orientation,
-              align
-            }
-
-            if (lineType === "vertical") noteParams.orientation = "leftRight"
-            else if (lineType === "horizontal")
-              noteParams.orientation = "topBottom"
-
-            const { x, y } = alignment(noteParams)
-
-            this.setState({
-              translateX: x,
-              translateY: y,
-              bbox
-            })
-          }
+          setLabel
         )
+      } else if (label) {
+        setLabel()
       }
-    )
+    })
   }
 
   wrapText(textRef, text, width, lineHeight = 1.2) {
     const initialAttrs = {
       x: 0,
-      dy: ".8em"
+      dy: "1.2em"
     }
 
     const words = text
@@ -115,7 +120,7 @@ export default class Note extends React.Component {
       if (length > width && line.length > 1) {
         line.pop()
         tspans.push(
-          <tspan {...initialAttrs} lineHeight={lineHeight + "em"}>
+          <tspan key={tspans.length} {...initialAttrs}>
             {line.join(" ")}
           </tspan>
         )
@@ -125,7 +130,7 @@ export default class Note extends React.Component {
 
     if (line.length !== 0) {
       tspans.push(
-        <tspan {...initialAttrs} lineHeight={lineHeight + "em"}>
+        <tspan key={tspans.length} {...initialAttrs}>
           {line.join(" ")}
         </tspan>
       )
@@ -138,11 +143,11 @@ export default class Note extends React.Component {
     if (
       this.state.bbox.width &&
       (prevProps.dx !== this.props.dx || prevProps.dy !== this.props.dy) &&
-      (this.refs.title || this.refs.text)
+      (this.refs.title || this.refs.label)
     ) {
       const { orientation, padding, align, dx, dy, lineType } = this.props
 
-      const bbox = getOuterBBox(this.refs.title, this.refs.text)
+      const bbox = getOuterBBox(this.refs.title, this.refs.label)
       const noteParams = {
         padding,
         bbox,
@@ -169,42 +174,50 @@ export default class Note extends React.Component {
 
   render() {
     const {
-      text,
       dx,
       dy,
       title,
+      label,
       orientation,
       padding,
       align,
       editMode,
       lineType,
-      color
+      color,
+      titleColor,
+      labelColor
     } = this.props
 
     let noteTitle, noteText, noteLineType
 
     if (title) {
       noteTitle = (
-        <text ref="title" className="annotation-note-title" fontWeight="bold">
+        <text
+          ref="title"
+          className="annotation-note-title"
+          fontWeight="bold"
+          fill={titleColor || color}
+        >
           {this.state.titleWrapped || (
             <tspan x={0} dy=".8em">
-              {text}
+              {title}
             </tspan>
           )}
         </text>
       )
     }
 
-    if (text) {
+    if (label) {
       noteText = (
         <text
-          ref="text"
-          className="annotation-note-text"
-          y={this.state.textOffset * 1.1}
+          ref="label"
+          className="annotation-note-label"
+          y={this.state.labelOffset * 1.1}
+          fill={labelColor || color}
         >
-          {this.state.textWrapped || (
+          {this.state.labelWrapped || (
             <tspan x={0} dy=".8em">
-              {text}
+              {label}
             </tspan>
           )}
         </text>
@@ -267,9 +280,20 @@ Note.defaultProps = {
   wrap: 120,
   align: "dynamic",
   orientation: "topBottom",
-  padding: 10
+  padding: 3
 }
 
 Note.propTypes = {
-  lineType: PropTypes.oneOf(["vertical", "horizontal"])
+  dx: PropTypes.number,
+  dy: PropTypes.number,
+  title: PropTypes.string,
+  label: PropTypes.string,
+  orientation: PropTypes.oneOf(["leftRight", "topBottom"]),
+  padding: PropTypes.number,
+  align: PropTypes.oneOf(["left", "right", "middle", "top", "bottom"]),
+  editMode: PropTypes.bool,
+  lineType: PropTypes.oneOf(["vertical", "horizontal"]),
+  color: PropTypes.string,
+  titleColor: PropTypes.string,
+  labelColor: PropTypes.string
 }

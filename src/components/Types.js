@@ -9,6 +9,40 @@ import Note from "./Note/Note"
 const getAnnotationType = editMode =>
   editMode ? EditableAnnotation : Annotation
 
+// const annotationOptions = Subject => {
+//   return props => {
+//     const { disable = [], connectorType } = props
+//     const CONNECTORS = {
+//       type: {
+//         curve: ConnectorCurve,
+//         line: ConnectorLine,
+//         elbow: ConnectorElbow
+//       },
+//       end: {
+//         dot: ConnectorEndDot,
+//         arrow: ConnectorEndArrow
+//       }
+//     }
+
+//     let Connector
+//     if (disable.indexOf("connector") !== -1) {
+//       Connector = (connectorType && CONNECTORS[connectorType]) || connectorElbow
+//     }
+
+//     return (
+//       <Annotation>
+//         {Connector && (
+//           <Connector>
+//             <ConnectorEnd />
+//           </Connector>
+//         )}
+//         {Note && <Note />}
+//         {Subject && <Subject />}
+//       </Annotation>
+//     )
+//   }
+// }
+
 export function AnnotationLabel(props) {
   const AnnotationType = getAnnotationType(props.editMode)
   return (
