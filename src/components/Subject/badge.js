@@ -2,7 +2,14 @@ import { lineBuilder, arcBuilder } from "../Builder"
 // import { event } from "d3-selection"
 
 // export default ({ subjectData = {}, type = {} }, annotation = {}) => {
-export default ({ radius = 14, leftRight, topBottom, text, color }) => {
+export default ({
+  radius = 14,
+  leftRight,
+  topBottom,
+  text,
+  color,
+  editMode
+}) => {
   // const typeSettings = type.typeSettings && type.typeSettings.subject
 
   // if (!subjectData.radius) {
@@ -95,27 +102,33 @@ export default ({ radius = 14, leftRight, topBottom, text, color }) => {
     components.push(pointer)
   }
 
-  // if (type.editMode) {
-  //   const dragBadge = () => {
-  //     subjectData.x =
-  //       event.x < -radius * 2
-  //         ? "left"
-  //         : event.x > radius * 2 ? "right" : undefined
-  //     subjectData.y =
-  //       event.y < -radius * 2
-  //         ? "top"
-  //         : event.y > radius * 2 ? "bottom" : undefined
+  if (editMode) {
+    const dragBadge = event => {
+      const x =
+        event.x < -radius * 2
+          ? "left"
+          : event.x > radius * 2 ? "right" : undefined
+      const y =
+        event.y < -radius * 2
+          ? "top"
+          : event.y > radius * 2 ? "bottom" : undefined
 
-  //     type.redrawSubject()
-  //   }
+      // type.redrawSubject()
+      return { x, y }
+    }
 
-  //   const bHandles = { x: x * 2, y: y * 2, drag: dragBadge.bind(type) }
-  //   if (!bHandles.x && !bHandles.y) {
-  //     bHandles.y = -radius
-  //   }
+    const bHandles = {
+      x: x * 2,
+      y: y * 2,
+      drag: dragBadge, //.bind(type),
+      type: "dragXY"
+    }
+    if (!bHandles.x && !bHandles.y) {
+      bHandles.y = -radius
+    }
 
-  //   handles = type.mapHandles([bHandles])
-  // }
+    handles = bHandles //type.mapHandles([bHandles])
+  }
 
   let textNode
   if (text) {

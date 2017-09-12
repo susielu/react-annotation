@@ -5,10 +5,11 @@ const components = []
 import EditableAnnotation from "../../components/EditableAnnotation"
 import Annotation from "../../components/Annotation"
 import Handle from "../../components/Handle"
-import ConnectorLine from "../../components/ConnectorLine"
-import ConnectorElbow from "../../components/ConnectorElbow"
-import ConnectorEndDot from "../../components/ConnectorEndDot"
-import ConnectorEndArrow from "../../components/ConnectorEndArrow"
+import ConnectorLine from "../../components/Connector/ConnectorLine"
+import ConnectorElbow from "../../components/Connector/ConnectorElbow"
+import ConnectorCurve from "../../components/Connector/ConnectorCurve"
+import ConnectorEndDot from "../../components/Connector/ConnectorEndDot"
+import ConnectorEndArrow from "../../components/Connector/ConnectorEndArrow"
 import SubjectCircle from "../../components/Subject/SubjectCircle"
 import SubjectRect from "../../components/Subject/SubjectRect"
 import SubjectBadge from "../../components/Subject/SubjectBadge"
@@ -85,10 +86,10 @@ export default class DateInputDocs extends React.Component {
             />
             <SubjectRect />
           </EditableAnnotation>
-          <Annotation x={500} y={100} dx={-100} dy={200}>
-            <ConnectorElbow>
+          <Annotation x={500} y={100} dx={-100} dy={100}>
+            <ConnectorCurve>
               <ConnectorEndArrow />
-            </ConnectorElbow>
+            </ConnectorCurve>
 
             <Note
               text="Hello let's test out some serious text wrapping"
@@ -97,9 +98,9 @@ export default class DateInputDocs extends React.Component {
             <SubjectThreshold y1={0} y2={10000} />
           </Annotation>
 
-          <Annotation x={50} y={50}>
+          <EditableAnnotation x={50} y={50}>
             <SubjectBadge leftRight="left" topBottom="bottom" text="A" />
-          </Annotation>
+          </EditableAnnotation>
         </svg>
       ),
       source: `

@@ -1,8 +1,8 @@
 import React, { PropTypes } from "react"
 import Annotation from "./Annotation"
 import EditableAnnotation from "./EditableAnnotation"
-import ConnectorLine from "./ConnectorLine"
-import ConnectorElbow from "./ConnectorElbow"
+import ConnectorLine from "./Connector/ConnectorLine"
+import ConnectorElbow from "./Connector/ConnectorElbow"
 import SubjectCircle from "./Subject/SubjectCircle"
 import Note from "./Note/Note"
 
