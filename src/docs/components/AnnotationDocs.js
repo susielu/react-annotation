@@ -83,6 +83,7 @@ export default class DateInputDocs extends React.Component {
             <Note
               text="Hello let's test out some serious text wrapping"
               title="2 - Second"
+              lineType="vertical"
             />
             <SubjectRect />
           </EditableAnnotation>

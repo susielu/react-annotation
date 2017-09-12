@@ -1,6 +1,8 @@
 import React, { PropTypes } from "react"
 import alignment from "./alignment"
 import Handle from "../Handle"
+import noteVertical from "./lineType-vertical"
+import noteHorizontal from "./lineType-horizontal"
 
 const getOuterBBox = (...domNodes) => {
   return [...domNodes].reduce(
@@ -36,6 +38,7 @@ export default class Note extends React.Component {
       orientation,
       padding,
       align,
+      lineType,
       text,
       title,
       wrap,
@@ -67,6 +70,10 @@ export default class Note extends React.Component {
               orientation,
               align
             }
+
+            if (lineType === "vertical") noteParams.orientation = "leftRight"
+            else if (lineType === "horizontal")
+              noteParams.orientation = "topBottom"
 
             const { x, y } = alignment(noteParams)
 
@@ -133,7 +140,7 @@ export default class Note extends React.Component {
       (prevProps.dx !== this.props.dx || prevProps.dy !== this.props.dy) &&
       (this.refs.title || this.refs.text)
     ) {
-      const { orientation, padding, align, dx, dy } = this.props
+      const { orientation, padding, align, dx, dy, lineType } = this.props
 
       const bbox = getOuterBBox(this.refs.title, this.refs.text)
       const noteParams = {
@@ -143,6 +150,9 @@ export default class Note extends React.Component {
         orientation,
         align
       }
+
+      if (lineType === "vertical") noteParams.orientation = "leftRight"
+      else if (lineType === "horizontal") noteParams.orientation = "topBottom"
 
       const { x, y } = alignment(noteParams)
       const updates = { bbox }
@@ -166,9 +176,12 @@ export default class Note extends React.Component {
       orientation,
       padding,
       align,
-      editMode
+      editMode,
+      lineType,
+      color
     } = this.props
-    let noteTitle, noteText
+
+    let noteTitle, noteText, noteLineType
 
     if (title) {
       noteTitle = (
@@ -198,6 +211,26 @@ export default class Note extends React.Component {
       )
     }
 
+    if (lineType && this.state.bbox.width) {
+      const noteParams = {
+        bbox: this.state.bbox,
+        align,
+        offset: { x: dx, y: dy }
+      }
+
+      const noteComponent = ((lineType === "vertical" &&
+        noteVertical(noteParams)) ||
+        (lineType === "horizontal" && noteHorizontal(noteParams))).components[0]
+
+      noteLineType = (
+        <noteComponent.type
+          className={noteComponent.className}
+          {...noteComponent.attrs}
+          stroke={color}
+        />
+      )
+    }
+
     let handle
 
     if (editMode) {
@@ -223,6 +256,7 @@ export default class Note extends React.Component {
           {noteTitle}
           {noteText}
         </g>
+        {noteLineType}
         {handle}
       </g>
     )
@@ -236,4 +270,6 @@ Note.defaultProps = {
   padding: 10
 }
 
-Note.propTypes = {}
+Note.propTypes = {
+  lineType: PropTypes.oneOf(["vertical", "horizontal"])
+}

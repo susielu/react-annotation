@@ -20,7 +20,6 @@ export default ({
   // if (!connectorData) {
   //   connectorData = {}
   // }
-  console.log("points", points)
   if (!points || typeof points === "number") {
     points = createPoints({ x: dx, y: dy }, points)
   }
