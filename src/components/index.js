@@ -15,6 +15,17 @@ import Note from "./Note/Note"
 import Annotation from "./Annotation"
 import EditableAnnotation from "./EditableAnnotation"
 
+import {
+  AnnotationLabel,
+  AnnotationCallout,
+  AnnotationCalloutCircle,
+  AnnotationCalloutCurve,
+  AnnotationCalloutElbow,
+  AnnotationCalloutRect,
+  AnnotationBadge,
+  AnnotationXYThreshold
+} from "./Types"
+
 export {
   Connector,
   ConnectorCurve,
@@ -27,7 +38,15 @@ export {
   SubjectThreshold,
   Note,
   Annotation,
-  EditableAnnotation
+  EditableAnnotation,
+  AnnotationLabel,
+  AnnotationCallout,
+  AnnotationCalloutCircle,
+  AnnotationCalloutCurve,
+  AnnotationCalloutElbow,
+  AnnotationCalloutRect,
+  AnnotationBadge,
+  AnnotationXYThreshold
 }
 
 export default {
@@ -42,5 +61,13 @@ export default {
   SubjectThreshold,
   Note,
   Annotation,
-  EditableAnnotation
+  EditableAnnotation,
+  AnnotationLabel,
+  AnnotationCallout,
+  AnnotationCalloutCircle,
+  AnnotationCalloutCurve,
+  AnnotationCalloutElbow,
+  AnnotationCalloutRect,
+  AnnotationBadge,
+  AnnotationXYThreshold
 }
