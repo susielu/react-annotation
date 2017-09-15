@@ -56,8 +56,6 @@ export default class Note extends React.Component {
         this.refs.label && this.wrapText(this.refs.label, label, wrap)
 
     this.setState(newState, () => {
-      console.log("REFS", this.props, this.refs)
-
       const setLabel = () => {
         const bbox = getOuterBBox(this.refs.title, this.refs.label)
         const noteParams = {

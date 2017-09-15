@@ -50,7 +50,6 @@ export default ({
       // subjectData[attr] = r
       // type.redrawSubject()
       // type.redrawConnector()
-      console.log("in update Radius")
     }
 
     const cHandles = [

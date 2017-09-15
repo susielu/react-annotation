@@ -10,7 +10,6 @@ export default ({
   color,
   editMode
 }) => {
-  console.log("in badge")
   // const typeSettings = type.typeSettings && type.typeSettings.subject
 
   // if (!subjectData.radius) {
