@@ -11,7 +11,6 @@ export default class Connector extends React.Component {
     }
 
     const d = this.getComponents(this.props) || []
-
     const cleanedProps = Object.assign({}, this.props)
     delete cleanedProps.children
 
@@ -27,7 +26,7 @@ export default class Connector extends React.Component {
       <g className="annotation-connector">
         {d.components.map((c, i) => {
           const attrs = {}
-
+          if (!c) return null
           Object.keys(c.attrs).forEach(k => {
             if (c.attrs[k] && k !== "text") {
               attrs[k.replace(/-([a-z])/g, g => g[1].toUpperCase())] =

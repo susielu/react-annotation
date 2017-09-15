@@ -18,7 +18,7 @@ export default class Subject extends React.Component {
       <g className="annotation-subject">
         {d.components.map((c, i) => {
           const attrs = {}
-
+          if (!c) return null
           Object.keys(c.attrs).forEach(k => {
             if (c.attrs[k] && k !== "text") {
               attrs[k.replace(/-([a-z])/g, g => g[1].toUpperCase())] =

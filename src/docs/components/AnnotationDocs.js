@@ -15,7 +15,16 @@ import SubjectRect from "../../components/Subject/SubjectRect"
 import SubjectBadge from "../../components/Subject/SubjectBadge"
 import SubjectThreshold from "../../components/Subject/SubjectThreshold"
 import Note from "../../components/Note/Note"
-import { AnnotationLabel } from "../../components/Types"
+import {
+  AnnotationLabel,
+  AnnotationCallout,
+  AnnotationCalloutCircle,
+  AnnotationCalloutCurve,
+  AnnotationCalloutElbow,
+  AnnotationCalloutRect,
+  AnnotationBadge,
+  AnnotationXYThreshold
+} from "../../components/Types"
 
 components.push({
   name: "Annotation",
@@ -96,23 +105,31 @@ export default class DateInputDocs extends React.Component {
         x: 50,
         y: 100,
         dy: 30,
+        dx: 200,
+        color: "blue",
+        type: AnnotationBadge,
         note: {
-          title: "This title is a longer tilte",
-          label: "Now some longer text as well"
+          title: "This title is a longer title",
+          label: "Now some longer text as well",
+          wrap: 150
+          // lineType: "horizontal"
+        },
+        connector: {
+          end: "arrow"
+        },
+        subject: {
+          text: "A",
+          leftRight: "left"
         }
       }
     ]
 
     const annotations = a.map((d, i) => {
-      return (
-        <Annotation key={i} x={d.x} y={d.y} dy={d.dy}>
-          <ConnectorElbow>
-            <ConnectorEndDot />
-          </ConnectorElbow>
-          <Note label={d.note.label} title={d.note.title} />
-        </Annotation>
-      )
+      return <d.type key={i} {...d} />
     })
+
+    //make a d3-annotation adapter
+    //Allow people to make their own custom combinations to annotation types
 
     examples.push({
       name: "Annotation",

@@ -9,7 +9,7 @@ export default ({
   dy,
   radius,
   outerRadius,
-  innerRadius,
+  radiusPadding,
   width,
   height
 }) => {
@@ -59,12 +59,9 @@ export default ({
   //   subjectType === "circle" &&
   //   (subjectData.outerRadius || subjectData.radius)
   // ) {
-  //   const r =
-  //     (subjectData.outerRadius || subjectData.radius) +
-  //     (subjectData.radiusPadding || 0)
 
   if (outerRadius || radius) {
-    const r = outerRadius || radius
+    const r = (outerRadius || radius) + (radiusPadding || 0)
     const length = r / Math.sqrt(2)
 
     if (Math.abs(diffX) > length && Math.abs(diffY) > length) {

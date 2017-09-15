@@ -290,7 +290,14 @@ Note.propTypes = {
   label: PropTypes.string,
   orientation: PropTypes.oneOf(["leftRight", "topBottom"]),
   padding: PropTypes.number,
-  align: PropTypes.oneOf(["left", "right", "middle", "top", "bottom"]),
+  align: PropTypes.oneOf([
+    "left",
+    "right",
+    "middle",
+    "top",
+    "bottom",
+    "dynamic"
+  ]),
   editMode: PropTypes.bool,
   lineType: PropTypes.oneOf(["vertical", "horizontal"]),
   color: PropTypes.string,

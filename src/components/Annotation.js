@@ -11,17 +11,14 @@ export default class Annotation extends React.Component {
     if (nx !== undefined) cleanedProps.dx = nx - x
     if (ny !== undefined) cleanedProps.dy = ny - y
 
-    const childrenWithProps = React.Children.map(this.props.children, child =>
-      React.cloneElement(child, {
-        x: 0,
-        y: 0,
-        dx: 0,
-        dy: 0,
-        color: "grey",
-        ...cleanedProps,
-        ...child.props
-      })
-    )
+    const childrenWithProps = React.Children
+      .toArray(this.props.children)
+      .map(child =>
+        React.cloneElement(child, {
+          ...cleanedProps,
+          ...child.props
+        })
+      )
 
     return (
       <g
@@ -32,6 +29,14 @@ export default class Annotation extends React.Component {
       </g>
     )
   }
+}
+
+Annotation.defaultProps = {
+  x: 0,
+  y: 0,
+  dx: 0,
+  dy: 0,
+  color: "grey"
 }
 
 Annotation.propTypes = {

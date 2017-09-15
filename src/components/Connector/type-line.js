@@ -8,6 +8,7 @@ export const lineSetup = ({
   dy,
   radius,
   outerRadius,
+  radiusPadding,
   width,
   height
 }) => {
@@ -29,10 +30,7 @@ export const lineSetup = ({
   if (outerRadius || radius) {
     const h = Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2))
     const angle = Math.asin(-y2 / h)
-    // const r =
-    //   subjectData.outerRadius ||
-    //   subjectData.radius + (subjectData.radiusPadding || 0)
-    const r = outerRadius || radius
+    const r = (outerRadius || radius) + (radiusPadding || 0)
 
     x1 = Math.abs(Math.cos(angle) * r) * (x2 < 0 ? -1 : 1)
     y1 = Math.abs(Math.sin(angle) * r) * (y2 < 0 ? -1 : 1)
