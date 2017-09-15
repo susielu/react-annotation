@@ -1,5 +1,5 @@
 // export individual components
-import Connector from "./Connector"
+import Connector from "./Connector/Connector"
 import ConnectorCurve from "./Connector/ConnectorCurve"
 import ConnectorElbow from "./Connector/ConnectorElbow"
 import ConnectorLine from "./Connector/ConnectorLine"
