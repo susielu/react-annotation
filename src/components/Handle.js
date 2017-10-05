@@ -1,4 +1,5 @@
-import React, { PropTypes } from "react"
+import React from "react"
+import PropTypes from "prop-types"
 // import EndDot from "./Connector/end-dot"
 import { DraggableCore } from "react-draggable"
 export default class Handle extends React.Component {
