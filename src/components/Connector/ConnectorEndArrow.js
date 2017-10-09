@@ -1,6 +1,9 @@
-import React, { PropTypes } from "react"
+/* eslint-disable no-unused-vars */
+import React from "react"
+/* eslint-enable no-unused-vars */
 import EndArrow from "./end-arrow"
 import ConnectorEnd from "./ConnectorEnd"
+import PropTypes from "prop-types"
 
 export default class ConnectorEndArrow extends ConnectorEnd {
   getComponents({ x, y, dy, dx, lineData, color }) {

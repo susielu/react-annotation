@@ -1,6 +1,6 @@
 import React from "react"
-import { PrismCode } from "react-prism"
-import RaisedButton from "material-ui/RaisedButton"
+// import { PrismCode } from "react-prism"
+// import RaisedButton from "material-ui/RaisedButton"
 
 const Home = ({ match }) => {
   // const documentation = <Documentation

@@ -1,10 +1,10 @@
-import React, { PropTypes } from "react"
+import React from "react"
 
 export default class Connector extends React.Component {
   getComponents() {}
 
   render() {
-    const { editMode, color, dx, dy } = this.props
+    const { color, dx, dy } = this.props
 
     if (dx === 0 && dy === 0) {
       return <g className="annotation-connector" />
@@ -50,6 +50,3 @@ export default class Connector extends React.Component {
     )
   }
 }
-
-Connector.defaultProps = {}
-Connector.propTypes = {}

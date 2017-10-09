@@ -1,6 +1,9 @@
-import React, { PropTypes } from "react"
+/* eslint-disable no-unused-vars */
+import React from "react"
+/* eslint-enable no-unused-vars */
 import Threshold from "./threshold"
 import Subject from "./Subject"
+import PropTypes from "prop-types"
 
 export default class SubjectThreshold extends Subject {
   getComponents({ x1, x2, y1, y2, x, y, editMode }) {

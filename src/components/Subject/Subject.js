@@ -1,4 +1,4 @@
-import React, { PropTypes } from "react"
+import React from "react"
 import Handle from "../Handle"
 
 export default class Subject extends React.Component {
@@ -42,6 +42,3 @@ export default class Subject extends React.Component {
     )
   }
 }
-
-Subject.defaultProps = {}
-Subject.propTypes = {}

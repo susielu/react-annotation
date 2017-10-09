@@ -1,4 +1,4 @@
-import React, { PropTypes } from "react"
+import React from "react"
 import Annotation from "./Annotation"
 import classnames from "classnames"
 
@@ -48,7 +48,3 @@ export default class EditableAnnotation extends React.Component {
     return <Annotation {...cleanedProps} />
   }
 }
-
-EditableAnnotation.defaultProps = {}
-
-EditableAnnotation.propTypes = {}

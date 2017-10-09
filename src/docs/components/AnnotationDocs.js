@@ -108,12 +108,6 @@ export default class DateInputDocs extends React.Component {
         dx: 200,
         color: "blue",
         type: AnnotationBadge,
-        note: {
-          title: "This title is a longer title",
-          label: "Now some longer text as well",
-          wrap: 150
-          // lineType: "horizontal"
-        },
         connector: {
           end: "arrow"
         },
@@ -128,14 +122,21 @@ export default class DateInputDocs extends React.Component {
       return <d.type key={i} {...d} />
     })
 
-    //make a d3-annotation adapter
-    //Allow people to make their own custom combinations to annotation types
-
     examples.push({
       name: "Annotation",
       demo: (
         <svg width={1000} height={500}>
           {annotations}
+          <Annotation x={100} y={100} dx={200} dy={50} radius={50}>
+            <ConnectorElbow />
+            <SubjectCircle />
+            <circle r={5} />
+            <Note
+              wrap={50}
+              title="YESSS"
+              label="Super easy to customize annotations"
+            />
+          </Annotation>
         </svg>
       ),
       source: `

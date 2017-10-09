@@ -1,8 +1,9 @@
-import React, { PropTypes } from "react"
+import React from "react"
 import alignment from "./alignment"
 import Handle from "../Handle"
 import noteVertical from "./lineType-vertical"
 import noteHorizontal from "./lineType-horizontal"
+import PropTypes from "prop-types"
 
 const getOuterBBox = (...domNodes) => {
   return [...domNodes].reduce(
@@ -176,8 +177,6 @@ export default class Note extends React.Component {
       dy,
       title,
       label,
-      orientation,
-      padding,
       align,
       editMode,
       lineType,

@@ -1,8 +1,7 @@
 import React from "react"
 import FlatButton from "material-ui/FlatButton"
 
-const Footer = ({ gh }) => {
-  const [user, repo] = gh.split("/")
+const Footer = () => {
   return (
     <div className="container-fluid">
       <div className="row">

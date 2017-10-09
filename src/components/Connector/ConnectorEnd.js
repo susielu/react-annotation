@@ -1,4 +1,4 @@
-import React, { PropTypes } from "react"
+import React from "react"
 
 export default class ConnectorEnd extends React.Component {
   getComponents() {}
@@ -11,6 +11,3 @@ export default class ConnectorEnd extends React.Component {
     return <c.type className={c.className} {...c.attrs} fill={color} />
   }
 }
-
-ConnectorEnd.defaultProps = {}
-ConnectorEnd.propTypes = {}

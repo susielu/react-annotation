@@ -30,7 +30,7 @@
     "enzyme": "2.9.1",
     "eslint": "3.8.1",
     "history": "4.2.0",
-    "react": "15.4.2",
+    "react": "^15.5.0",
     "react-addons-css-transition-group": "15.3.2",
     "react-addons-test-utils": "^15.3.2",
     "react-addons-transition-group": "15.3.2",
@@ -46,6 +46,7 @@
   "dependencies": {
     "classnames": "2.2.5",
     "d3-shape": "1.0.4",
+    "prop-types": "15.6.0",
     "react-draggable": "3.0.3"
   },
   "files": [

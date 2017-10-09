@@ -5,6 +5,17 @@ import { curveCatmullRom } from "d3-shape"
 // import { pointHandle } from "../Handles"
 
 // export default ({ type, connectorData, subjectType }) => {
+const createPoints = function(offset, anchors = 2) {
+  const diff = { x: offset.x / (anchors + 1), y: offset.y / (anchors + 1) }
+  const p = []
+
+  let i = 1
+  for (; i <= anchors; i++) {
+    p.push([diff.x * i + (i % 2) * 20, diff.y * i - (i % 2) * 20])
+  }
+  return p
+}
+
 export default ({
   curve,
   points,
@@ -52,15 +63,4 @@ export default ({
   const components = [lineBuilder({ data, curve, className: "connector" })]
 
   return { components, handles }
-}
-
-const createPoints = function(offset, anchors = 2) {
-  const diff = { x: offset.x / (anchors + 1), y: offset.y / (anchors + 1) }
-  const p = []
-
-  let i = 1
-  for (; i <= anchors; i++) {
-    p.push([diff.x * i + (i % 2) * 20, diff.y * i - (i % 2) * 20])
-  }
-  return p
 }

@@ -1,4 +1,4 @@
-import React, { PropTypes } from "react"
+import React from "react"
 import Annotation from "./Annotation"
 import EditableAnnotation from "./EditableAnnotation"
 import ConnectorLine from "./Connector/ConnectorLine"
