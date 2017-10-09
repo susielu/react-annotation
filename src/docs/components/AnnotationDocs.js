@@ -44,7 +44,9 @@ export default class DateInputDocs extends React.Component {
     this.onChange = this.onChange.bind(this)
     this.state = {
       date: "04/12/17",
-      openEndedDate: null
+      openEndedDate: null,
+      title: "YESSS",
+      label: "Super easy to customize annotations"
     }
   }
 
@@ -125,19 +127,31 @@ export default class DateInputDocs extends React.Component {
     examples.push({
       name: "Annotation",
       demo: (
-        <svg width={1000} height={500}>
-          {annotations}
-          <Annotation x={100} y={100} dx={200} dy={50} radius={50}>
-            <ConnectorElbow />
-            <SubjectCircle />
-            <circle r={5} />
-            <Note
-              wrap={50}
-              title="YESSS"
-              label="Super easy to customize annotations"
-            />
-          </Annotation>
-        </svg>
+        <div>
+          <button
+            onClick={() =>
+              this.setState({
+                title: "a longer title test",
+                label: undefined
+                //label: "a shorter label still with wrapping"
+              })}
+          >
+            Test
+          </button>
+          <svg width={1000} height={500}>
+            {annotations}
+            <Annotation x={100} y={100} dx={200} dy={50} radius={50}>
+              <ConnectorElbow />
+              <SubjectCircle />
+              <circle r={5} />
+              <Note
+                wrap={150}
+                title={this.state.title}
+                label={this.state.label}
+              />
+            </Annotation>
+          </svg>
+        </div>
       ),
       source: `
         import { Annotation } from 'react-annotation';

@@ -27,34 +27,55 @@ const getOuterBBox = (...domNodes) => {
 }
 
 export default class Note extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.updateText = this.updateText.bind(this)
+  }
   state = {
     translateX: 0,
     translateY: 0,
     labelOffset: 0,
+    changed: 0,
     bbox: { width: 0, height: 0, x: 0, y: 0 }
   }
-
   componentDidMount() {
-    const {
-      orientation,
-      padding,
-      align,
-      lineType,
-      label,
-      title,
-      wrap,
-      dx,
-      dy
-    } = this.props
+    this.updateText(this.props)
+  }
+  componentWillReceiveProps(nextProps) {
+    if (
+      nextProps.title !== this.props.title ||
+      nextProps.label !== this.props.label
+    ) {
+      this.updateText(nextProps)
+    }
+  }
+  updateText({
+    orientation,
+    padding,
+    align,
+    lineType,
+    label,
+    title,
+    wrap,
+    dx,
+    dy
+  }) {
+    const newState = {
+      titleWrapped: null,
+      labelWrapped: null
+    }
+    newState.changed = this.state.changed + 1
 
-    const newState = {}
-    if (title)
+    if (title) {
       newState.titleWrapped =
-        this.refs.title && this.wrapText(this.refs.title, title, wrap)
-
+        this.refs.title &&
+        this.wrapText(this.refs.title, newState.changed, title, wrap)
+    }
     if (label)
       newState.labelWrapped =
-        this.refs.label && this.wrapText(this.refs.label, label, wrap)
+        this.refs.label &&
+        this.wrapText(this.refs.label, newState.changed, label, wrap)
 
     this.setState(newState, () => {
       const setLabel = () => {
@@ -79,20 +100,16 @@ export default class Note extends React.Component {
         })
       }
 
-      if (title) {
-        this.setState(
-          {
-            labelOffset: this.refs.title.getBBox().height
-          },
-          setLabel
-        )
-      } else if (label) {
-        setLabel()
-      }
+      this.setState(
+        {
+          labelOffset: (title && this.refs.title.getBBox().height) || 0
+        },
+        setLabel
+      )
     })
   }
 
-  wrapText(textRef, text, width, lineHeight = 1.2) {
+  wrapText(textRef, key, text, width, lineHeight = 1.2) {
     const initialAttrs = {
       x: 0,
       dy: "1.2em"
@@ -119,7 +136,7 @@ export default class Note extends React.Component {
       if (length > width && line.length > 1) {
         line.pop()
         tspans.push(
-          <tspan key={tspans.length} {...initialAttrs}>
+          <tspan key={tspans.length + text} {...initialAttrs}>
             {line.join(" ")}
           </tspan>
         )
@@ -129,13 +146,17 @@ export default class Note extends React.Component {
 
     if (line.length !== 0) {
       tspans.push(
-        <tspan key={tspans.length} {...initialAttrs}>
+        <tspan key={tspans.length + text} {...initialAttrs}>
           {line.join(" ")}
         </tspan>
       )
     }
 
-    return <tspan {...initialAttrs}>{tspans}</tspan>
+    return (
+      <tspan {...initialAttrs} key={key + text}>
+        {tspans}
+      </tspan>
+    )
   }
 
   componentDidUpdate(prevProps) {
@@ -186,13 +207,13 @@ export default class Note extends React.Component {
     } = this.props
 
     let noteTitle, noteText, noteLineType
-
     if (title) {
       noteTitle = (
         <text
           ref="title"
           className="annotation-note-title"
           fontWeight="bold"
+          key="title"
           fill={titleColor || color}
         >
           {this.state.titleWrapped || (
@@ -210,6 +231,7 @@ export default class Note extends React.Component {
           ref="label"
           className="annotation-note-label"
           y={this.state.labelOffset * 1.1}
+          key="label"
           fill={labelColor || color}
         >
           {this.state.labelWrapped || (
