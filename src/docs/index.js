@@ -1,48 +1,56 @@
 import React from "react"
-import { HashRouter, Route } from "react-router-dom"
-import Home from "./Home"
-import Documentation from "./Documentation"
 import injectTapEventPlugin from "react-tap-event-plugin"
 injectTapEventPlugin()
-import LayoutFooter from "./layout/Footer"
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider"
-// import 'bootstrap/dist/css/bootstrap.css';
-import "./flexboxgrid.css"
 import "./prism.css"
 import "./index.css"
-
-const gh = "reactstrap/component-template"
-const basename = process.env.REACT_APP_GH_PAGES_PATH
-  ? `/${process.env.REACT_APP_GH_PAGES_PATH}`
-  : ""
+import { Introduction, Setup } from "./Sections"
 
 const Docs = test => {
+  const sections = [
+    "Introduction",
+    "Setup",
+    "Types",
+    "Extending Types",
+    "API",
+    "Notes"
+  ].map(d => (
+    <p>
+      <a>{d}</a>
+    </p>
+  ))
+
   return (
     <MuiThemeProvider>
       <div className="container-fluid">
-        <HashRouter basename={basename} hashType="noslash">
-          <div className="App">
-            <div className="container-fluid">
-              <Route
-                exact
-                pattern="/"
-                render={({ location }) => {
-                  if (location.pathname === "/") {
-                    return (
-                      <div>
-                        <Home />
-                        <Documentation />
-                      </div>
-                    )
-                  }
-                  return <Home />
-                }}
-              />
-              <Route path="/:component" component={Documentation} />
+        <div className="row">
+          <div className="col-xs-10 col-xs-offset-1">
+            <header className="box-row">
+              <h1 className="">react-annotation</h1>
+              <p>
+                Made with <img src="img/heart.png" /> by
+                <a href="http://www.susielu.com"> Susie Lu</a>
+              </p>
+            </header>
+
+            <div className="row">
+              <div className="col-xs-3">{sections}</div>
+              <div className="col-xs-9">
+                <Introduction />
+                <Setup />
+              </div>
             </div>
-            <LayoutFooter gh={gh} />
           </div>
-        </HashRouter>
+          <div className="col-xs-10 col-xs-offset-1">
+            <div className="row">
+              <footer className="col-xs-9 col-xs-offset-3">
+                <small>
+                  Made by <a href="http://www.susielu.com">Susie Lu</a>
+                </small>
+              </footer>
+            </div>
+          </div>
+        </div>
       </div>
     </MuiThemeProvider>
   )

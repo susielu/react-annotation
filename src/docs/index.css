@@ -1,13 +1,19 @@
+:root {
+  --font-color: #668389;
+  --accent-color: #9610ff;
+}
+html {
+  font-size: 14px;
+}
+
 h1,
 h2,
 h3,
 h4,
 h5,
-h6,
-strong,
-b {
+h6 {
   font-weight: 300;
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: "Bungee", Helvetica, Arial, sans-serif;
 }
 
 h1,
@@ -17,8 +23,8 @@ h3 {
 }
 
 h1 {
-  font-size: 3em;
-  line-height: 1em;
+  font-size: 3.6em;
+  line-height: 110%;
 }
 
 h2 {
@@ -26,7 +32,12 @@ h2 {
 }
 
 h3 {
-  font-size: 1.8em;
+  font-size: 1em;
+}
+
+strong,
+b {
+  font-weight: 300;
 }
 
 hr {
@@ -35,25 +46,36 @@ hr {
 }
 
 body {
-  font-family: -apple-system, system-ui, BlinkMacSystemFont, Helvetica, Arial,
-    sans-serif;
+  font-family: "Nunito", -apple-system, system-ui, BlinkMacSystemFont, Helvetica,
+    Arial, sans-serif;
   line-height: 1.8em;
+  font-size: 1.2em;
+  color: var(--font-color);
 }
 
 a {
   text-decoration: none;
   font-weight: bold;
-  color: #00bcd4;
+  color: var(--accent-color);
+}
+
+section {
+  border-bottom: 1px solid var(--accent-color);
+}
+
+section {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .center {
   text-align: center;
 }
-
+/* 
 header {
   margin-top: 50px;
   margin-bottom: 50px;
-}
+} */
 
 .docs-example {
   position: relative;
@@ -70,7 +92,7 @@ header {
   color: #aaa;
   font-size: smaller;
   font-weight: 500;
-  content: 'EXAMPLE';
+  content: "EXAMPLE";
 }
 
 .docs-example::after {
@@ -107,12 +129,12 @@ header {
 }
 
 .docs-sidebar .nav-item {
-  padding: .2rem 0 .2rem 0;
+  padding: 0.2rem 0 0.2rem 0;
 }
 
 .docs-sidebar .nav-link {
   color: #888;
-  padding: .3rem .5rem .3rem 1rem;
+  padding: 0.3rem 0.5rem 0.3rem 1rem;
   border-left: 2px solid transparent;
 }
 
@@ -130,15 +152,15 @@ header {
 }
 
 .docs-example > .container .row > [class^="col-"] {
-  padding-top: .75rem;
-  padding-bottom: .75rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
   background-color: #e5edf5;
   border: 1px solid #c9c1d5;
   color: #5f5f5f;
 }
 
 .docs-example .form-control + .form-control {
-  margin-top: .5rem;
+  margin-top: 0.5rem;
 }
 
 .docs-example .nav-tabs {
@@ -153,13 +175,4 @@ header {
 
 .docs-component-props {
   padding-top: 10px;
-}
-
-.Abacus-Filter-Menu-Title {
-  text-transform: uppercase;
-  font-size: .8em;
-}
-
-.Abacus-Sentence-Filter-Panel .Abacus-DateInput {
-  border-color: #00bcd4 !important;
 }
