@@ -78,15 +78,13 @@ svg.types {
   height: 440px;
 }
 
-svg.types text {
-  fill: var(--font-color);
-}
-
 svg.types text.title {
   font-weight: 900;
+  fill: var(--font-color);
 }
 svg.types text.summary {
   font-size: 0.8em;
+  fill: var(--font-color);
 }
 
 .center {
@@ -98,8 +96,15 @@ svg.types text.summary {
   cursor: pointer;
 }
 
-.types-ui .icon.selected {
+.types-ui .icon.selected,
+.types-ui img.tiny-icon.selected {
   border: 1px dotted var(--accent-color);
+}
+
+img.tiny-icon {
+  /* width: 24px; */
+  vertical-align: middle;
+  padding: 4px;
 }
 
 /* 

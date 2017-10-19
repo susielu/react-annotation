@@ -8,7 +8,7 @@ export const muiTheme = {
   fontFamily: '"Nunito", "Open-Sans", Arial, sans-serif',
   // // borderRadius: 2,
   palette: {
-    primary1Color: "#668389",
+    primary1Color: "#9610ff",
     //   // primary2Color: cyan700,
     //   // primary3Color: grey400,
     //   accent1Color: "#b2dfdb",

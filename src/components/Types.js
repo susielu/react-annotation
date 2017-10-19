@@ -78,9 +78,9 @@ const annotationMapper = (
         </ConnectorType>
       )}
       {note &&
-      disable.indexOf("note") === -1 && (
-        <Note {...NoteDefaultProps} {...note} />
-      )}
+        disable.indexOf("note") === -1 && (
+          <Note {...NoteDefaultProps} {...note} />
+        )}
       {Subject && disable.indexOf("subject") === -1 && <Subject />}
     </AnnotationType>
   )

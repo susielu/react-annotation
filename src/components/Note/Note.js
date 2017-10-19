@@ -45,7 +45,8 @@ export default class Note extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (
       nextProps.title !== this.props.title ||
-      nextProps.label !== this.props.label
+      nextProps.label !== this.props.label ||
+      nextProps.wrap !== this.props.wrap
     ) {
       this.updateText(nextProps)
     }
@@ -160,13 +161,13 @@ export default class Note extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    const { orientation, padding, align, dx, dy, lineType } = this.props
+
     if (
       this.state.bbox.width &&
       (prevProps.dx !== this.props.dx || prevProps.dy !== this.props.dy) &&
       (this.refs.title || this.refs.label)
     ) {
-      const { orientation, padding, align, dx, dy, lineType } = this.props
-
       const bbox = getOuterBBox(this.refs.title, this.refs.label)
       const noteParams = {
         padding,
@@ -181,6 +182,32 @@ export default class Note extends React.Component {
 
       const { x, y } = alignment(noteParams)
       const updates = { bbox }
+      if (this.state.translateX !== x) updates.translateX = x
+      if (this.state.translateY !== y) updates.translateY = y
+      if (
+        updates.translateX !== undefined ||
+        updates.translateY !== undefined
+      ) {
+        this.setState(updates)
+      }
+    } else if (
+      this.state.align !== prevProps.align ||
+      this.props.orientation !== prevProps.orientation ||
+      this.props.padding !== prevProps.padding
+    ) {
+      const noteParams = {
+        padding,
+        bbox: this.state.bbox,
+        offset: { x: dx, y: dy },
+        orientation,
+        align
+      }
+
+      if (lineType === "vertical") noteParams.orientation = "leftRight"
+      else if (lineType === "horizontal") noteParams.orientation = "topBottom"
+
+      const { x, y } = alignment(noteParams)
+      const updates = {}
       if (this.state.translateX !== x) updates.translateX = x
       if (this.state.translateY !== y) updates.translateY = y
       if (
@@ -252,7 +279,8 @@ export default class Note extends React.Component {
 
       const noteComponent = ((lineType === "vertical" &&
         noteVertical(noteParams)) ||
-        (lineType === "horizontal" && noteHorizontal(noteParams))).components[0]
+        (lineType === "horizontal" && noteHorizontal(noteParams))
+      ).components[0]
 
       noteLineType = (
         <noteComponent.type

@@ -18,8 +18,12 @@
     "test": "react-scripts test --env=jsdom",
     "lint": "eslint src",
     "browserify":
-      "browserify ./bundle-index.js -g [ envify --NODE_ENV production ] -g uglifyify | uglifyjs --compress --mangle > ./bundle.js",
+      "browserify --transform browserify-global-shim --standalone ./bundle-index.js -g [ envify --NODE_ENV production ] -g uglifyify | uglifyjs --compress --mangle > ./bundle.js",
     "prebuild": "babel src/components --out-dir lib --ignore test.js"
+  },
+  "browserify-global-shim": {
+    "react": "React",
+    "react-dom": "ReactDOM"
   },
   "devDependencies": {
     "babel-cli": "6.14.0",

@@ -21,7 +21,7 @@ const Title = ({ text, id }) => {
   )
 }
 
-const Code = ({ children }) => {
+export const Code = ({ children }) => {
   return (
     <pre>
       <PrismCode className="language-jsx">{dedent(children)}</PrismCode>
@@ -133,6 +133,12 @@ export function ExtendingTypes() {
     </section>
   )
 }
+
+// export function d3Translator () {
+//   return <section>
+//     <Title text=""
+//   </section>
+// }
 
 export function Examples() {
   return (
