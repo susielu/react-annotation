@@ -17,6 +17,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "lint": "eslint src",
+    "browserify":
+      "browserify ./lib/index.js -g [ envify --NODE_ENV production ] -g uglifyify | uglifyjs --compress --mangle > ./bundle.js",
     "prebuild": "babel src/components --out-dir lib --ignore test.js"
   },
   "devDependencies": {
@@ -24,12 +26,15 @@
     "babel-preset-es2015": "6.14.0",
     "babel-preset-react": "6.11.1",
     "babel-preset-stage-0": "6.5.0",
+    "browserify": "14.4.0",
     "conventional-changelog-cli": "1.1.1",
     "conventional-recommended-bump": "0.3.0",
     "dentist": "1.0.3",
+    "envify": "4.1.0",
     "enzyme": "2.9.1",
     "eslint": "3.8.1",
     "history": "4.2.0",
+    "material-ui": "^0.17.1",
     "react": "^15.5.0",
     "react-addons-css-transition-group": "15.3.2",
     "react-addons-test-utils": "^15.3.2",
@@ -41,7 +46,8 @@
     "react-scripts": "0.8.5",
     "react-tap-event-plugin": "2.0.1",
     "react-test-renderer": "15.6.1",
-    "material-ui": "^0.17.1"
+    "uglify-js": "3.1.4",
+    "uglifyify": "4.0.4"
   },
   "dependencies": {
     "classnames": "2.2.5",
@@ -49,12 +55,7 @@
     "prop-types": "15.6.0",
     "react-draggable": "3.0.3"
   },
-  "files": [
-    "LICENSE",
-    "README.md",
-    "CHANGELOG.md",
-    "lib"
-  ],
+  "files": ["LICENSE", "README.md", "CHANGELOG.md", "lib"],
   "keywords": [
     "react",
     "component",

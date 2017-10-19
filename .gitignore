@@ -8,7 +8,7 @@ coverage
 
 # production
 dist
-#build
+build
 lib
 
 # misc
