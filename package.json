@@ -18,7 +18,7 @@
     "test": "react-scripts test --env=jsdom",
     "lint": "eslint src",
     "browserify":
-      "browserify ./lib/index.js -g [ envify --NODE_ENV production ] -g uglifyify | uglifyjs --compress --mangle > ./bundle.js",
+      "browserify ./bundle-index.js -g [ envify --NODE_ENV production ] -g uglifyify | uglifyjs --compress --mangle > ./bundle.js",
     "prebuild": "babel src/components --out-dir lib --ignore test.js"
   },
   "devDependencies": {
