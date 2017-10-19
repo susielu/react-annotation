@@ -37,7 +37,7 @@ h3 {
 
 strong,
 b {
-  font-weight: 300;
+  font-weight: 900;
 }
 
 hr {
@@ -68,9 +68,40 @@ section {
   padding-bottom: 1rem;
 }
 
+svg {
+  width: 100%;
+  background: #f6f7fc;
+  border: 1px solid #d6daea;
+}
+
+svg.types {
+  height: 440px;
+}
+
+svg.types text {
+  fill: var(--font-color);
+}
+
+svg.types text.title {
+  font-weight: 900;
+}
+svg.types text.summary {
+  font-size: 0.8em;
+}
+
 .center {
   text-align: center;
 }
+
+.types-ui .icon {
+  width: 50px;
+  cursor: pointer;
+}
+
+.types-ui .icon.selected {
+  border: 1px dotted var(--accent-color);
+}
+
 /* 
 header {
   margin-top: 50px;

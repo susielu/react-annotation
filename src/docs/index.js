@@ -2,9 +2,20 @@ import React from "react"
 import injectTapEventPlugin from "react-tap-event-plugin"
 injectTapEventPlugin()
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider"
+import getMuiTheme from "material-ui/styles/getMuiTheme"
+import { muiTheme } from "./theme"
+
 import "./prism.css"
 import "./index.css"
-import { Introduction, Setup } from "./Sections"
+import {
+  Introduction,
+  Setup,
+  Types,
+  ExtendingTypes,
+  Examples,
+  API,
+  Notes
+} from "./Sections"
 
 const Docs = test => {
   const sections = [
@@ -12,6 +23,7 @@ const Docs = test => {
     "Setup",
     "Types",
     "Extending Types",
+    "Examples",
     "API",
     "Notes"
   ].map(d => (
@@ -21,7 +33,7 @@ const Docs = test => {
   ))
 
   return (
-    <MuiThemeProvider>
+    <MuiThemeProvider muiTheme={getMuiTheme(muiTheme)}>
       <div className="container-fluid">
         <div className="row">
           <div className="col-xs-10 col-xs-offset-1">
@@ -38,6 +50,11 @@ const Docs = test => {
               <div className="col-xs-9">
                 <Introduction />
                 <Setup />
+                <Types />
+                <ExtendingTypes />
+                <Examples />
+                <API />
+                <Notes />
               </div>
             </div>
           </div>
