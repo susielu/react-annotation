@@ -11,6 +11,7 @@ import {
   Introduction,
   Setup,
   Types,
+  AnnotationTypesAPI,
   ExtendingTypes,
   InPractice,
   Examples,
@@ -24,9 +25,9 @@ const Docs = test => {
     "Setup",
     "Types",
     "Extending Types",
+    "API",
     "In Practice",
     "Examples",
-    "API",
     "Notes"
   ].map(d => (
     <p>
@@ -53,10 +54,11 @@ const Docs = test => {
                 <Introduction />
                 <Setup />
                 <Types />
+                <AnnotationTypesAPI />
                 <ExtendingTypes />
+                <API />
                 <InPractice />
                 <Examples />
-                <API />
                 <Notes />
               </div>
             </div>

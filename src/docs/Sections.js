@@ -81,10 +81,69 @@ export function Setup() {
 }
 
 export function Types() {
+  const source = `
+  All annotations are made of just three parts, a **note**, a **connector**, and a **subject**.
+  
+  <img alt="Anatomy of an annotation" src="img/anatomy.png" />
+  
+  They are the foundational blocks of this library.`
   return (
     <section>
       <Title text="Annotation Types" id="types" />
+      <ReactMarkdown source={source} />
       <TypesUI />
+    </section>
+  )
+}
+
+export function AnnotationTypesAPI() {
+  const source = `
+  ### **_Built-in Annotations_**
+  Built-in annotations are a set of preset Subject, Connectors, and Notes assembled for the set in the [Annotation Types](#annotation-types) section.
+  
+  **AnnotationCalloutCircle**
+  - radius or outerRadius and innerRadius: Number, pixels
+  - radiusPadding: Number, pixels
+  
+  **AnnotationCalloutRect**
+  - width: Number, pixels
+  - height: Number, pixels
+  
+  **AnnotationXYThreshold**
+  - x1, x2 or y1, y2: Number, pixels
+
+  **AnnotationCalloutCustom**
+  - custom: Array, JSX SVG elements to create the custom subject shape
+  - customID (required):a custom DOM Element ID for masking the connector with the subject
+  - transform: String, for offsetting the subject so it can be centered
+  
+  **AnnotationBracket**
+  - width or height: Number, pixels
+  - depth: Number, pixels depending on +/- it will determine which way the bracket extrudes from
+  - type: String, "square" (default), or "curly"
+
+  **AnnotationBadge**: this is the only base annotation that doesn't have a connector or note
+  - text: String
+  - radius: Number, pixels
+  - x: "left" or "right"
+  - y: "top" or "bottom"
+  
+  **No subject**
+  - AnnotationLabel
+  - AnnotationCallout
+  - AnnotationCalloutElbow
+  - AnnotationCalloutCurve
+  
+  
+  annotation.**on()**
+  Takes the values 'subjectover', 'subjeout', 'subjectclick', 'connectorover', 'connectout', 'connectorclick', 'noteover', 'noteout', 'notecclick', 'dragend', 'dragstart' as custom dispatch events you can hook into. 
+
+  - **disable ([string])**: takes the values 'connector', 'subject', and 'note' pass them in this array if you want to disable those parts from rendering
+  `
+  return (
+    <section>
+      <Title text="Built-In Types API" id="types-api" />
+      <ReactMarkdown source={source} />
     </section>
   )
 }
@@ -151,10 +210,6 @@ export function ExtendingTypes() {
 
 export function InPractice() {
   const source = `
-  
-  ### Customize the Subject by picking a base annotation
-
-  
   ### Selecting Elements
   
   - All of the visible shapes (aside from the edit handles) in the default annotations are **paths**
@@ -165,17 +220,19 @@ export function InPractice() {
   
   ### Basic Styles
   
-  The library comes with default styles, on the annotation components. You can override these styles with CSS. There is also a color property on annotations that will easily change the color of the entire annotation.
+  There is also a color property on annotations that will easily change the color of the entire annotation.
   
   ### Tips
   
   - In addition to the alignment settings for the note, you can also use the css ${"`text-anchor`"} attribute to align the text within the note
 
-  - If you are importing custom fonts, you may notice the annotations don't load perfectly with text wrapping and alignment. To fix that you can use, ${"`document.fonts.ready`"} to make sure the fonts are loaded first to reflect the custom font's spacing for all of the calculations. Here's an example:
+  - If you are importing custom fonts, you may notice the annotations don't load perfectly with text wrapping and alignment. To fix that you can use, ${"`document.fonts.ready`"} to make sure the fonts are loaded first to reflect the custom font's spacing for all of the calculations. 
+
+  ### Migrating from d3-annotation
   `
   return (
     <section>
-      <Title text="API Built-in Types" id="api-built-in" />
+      <Title text="In Practice" id="in-practice" />
       <ReactMarkdown source={source} />
     </section>
   )
@@ -191,17 +248,13 @@ export function Examples() {
 
 export function API() {
   const source1 = `  
-  All annotations are made of just three parts, a **note**, a **connector**, and a **subject**.
+
   
-  <img alt="Anatomy of an annotation" src="img/anatomy.png" />
-  
-  They are the foundational blocks of this library.
-  annotation.**annotations([ objects ])**
   
   ### **_Composable Annotations_**
   When using composable annotations, you have an Annotation component, a subject, a connector, and a note are its children.
   
-  You can see this as the second half of code snippet in the [Annotation Types UI]("#annotation-types"), and the [Extending Types]("#extending-types) sections.
+  Examples are in the [Annotation Types UI]("#annotation-types"), and the [Extending Types]("#extending-types) sections.
   
   ### Annotation
   **&lt;Annotation />**
@@ -284,98 +337,26 @@ export function API() {
 
   **&lt;ConnectorEndArrow />** no additional props
 
-  **&lt;ConnectorEndDot />** no additiona props
+  **&lt;ConnectorEndDot />** no additional props
   
+  - Default dot is a circle with a radius of 3.
+  
+  ### Notes
 
+  **&lt;Note />**
+  - **title (string)**
+  - **label (string)**
+  - **padding (number)**
+  - **orientation (string, "leftRight" or "topBottom")**: Determines based on the dx, and dy, which direction to orient the \`Note\`. Default is set to \`"topBottom\`
+  - **lineType (string, "vertical" or "horizontal")**: Creates a line along the edge of the note text. **Please Note** if you set this to \`"vertical"\` then \`orientation\` is fixed at \`"leftRight"\` and vice versa if it is \`"horizontal"\` then \`orientation\` is fixed at \`"topBottom"\` 
+  
+  - **align (string, "left", "right", "middle", "top", "bottom", "dynamic")**: When the orientation is set to \`"topBottom"\` or lineType is set to \`"horiztonal"\` you can align the note with \`"top"\`, \`"bottom"\`, \`"middle"\`, or \`"dynamic"\`. When the orientation is set to \`"leftRight"\` or \`lineType\` is set to \`"vertical"\` you can align the note with \`"left"\`, \`"right"\`, \`"middle"\`, or \`"dynamic"\`. In addition to the alignment settings for the note, you can also use the css ${"`text-anchor`"} attribute to align the text within the note
+  - **color (string)**: Color string, inherited from Annotation but can be customized by directly adding to Note as a prop
+ - **wrapSplitter (string or regex)**:
 
+  **&lt;BracketNote />** use with &lt;SubjectBracket />
+  - This Note has all of the same properties as the regular Note, except it has dynamic positioning of the dx, and dy depending on the settings given to \`SubjectBracket\`
 
-  - **note (object)**: You can specify a title and label property here. All of the annotation types that come with d3-annotation have built in functionality to take the title and the label and add them to the note, however the underlying system is composable in a way that you could customize the note to contain any type of content. You can also use this to overwrite the default note properties (align, orientation, lineType, wrap, padding) in the type. For example if on one of the notes you wanted to align it differently. In v2.1.0 and higher you can pass a regex or string to customize the wrapping <code>{ wrapSplitter: /\\n/ }</code> 
-  - **connector (object)**: Some connectors such as the curve connector require additional parameters to set up the annotation. You can also use this to overwrite the default connector properties (type, end) in the type. For example if you wanted to add an arrow to the end of some of the annotations in the array you could add <code>{ end: "arrow" }</code> to this connector property on the relevant annotations. In v2.1.0 and higher, there is also a <code>{ endScale: 2 }</code> that allows you to scale the size of the <code>dot</code> or <code>arrow</code> end types
-  - **subject (object)**: Some subjects such as the circle require additional parameters to set up the annotation. 
-  
-
-
-  - **disable ([string])**: takes the values 'connector', 'subject', and 'note' pass them in this array if you want to disable those parts from rendering
-
-
-  If you don't pass anything to this function, it returns the current array of annotations.
-
-
-  annotation.**editMode(boolean)**
-  
-  If this is true, then the annotation will create handles for parts of the annotation that are draggable. You can style these handles with the <code>circle.handle</code> selector. If you are hooking this up to a button, you will need to run the update function below, after changing the editMode. Example in [Map with Tooltips and Edit Mode](#map)
-  
-  annotation.**update()**
-  
-  Redraws all of the annotations. Typcially used to reflect updated settings. If you are only updating the position (x, y) or the offset (dx, dy) you do not need to run ${"`call`"} on makeAnnotations afterwards. Example in [Layout - Encircling Annotation](#encircle).
-  
-  annotation.**updateText()**
-  
-  If you only want to update the text then use this function. It will re-evaluate with the new text and text wrapping settings. This is separated from the ${"`update()`"} function for flexibility with performance. If you call the entire set again it will run both functions.
-  
-  annotation.**updatedAccessors()**
-  
-  Redraws all the annotations with updated accessor scales. Example in [Responsive with Types and Hover](#responsive)
-  
-  annotation.**type( d3annotationType )**
-  You can pass different types into the annotation objects themselves, but you can also set a default type here. If you want to change the type, you will need to re-call the d3.annotation function on your element to recreate the annotations with the new type. Example in [Responsive with Types and Hover](#responsive)
-  
-  
-  annotation.**json()**
-  
-  You can run this in the developer console and it will print out the current annotation settings and copy them to your clipboard. Please note that in the console each annotation will also include the type that you've associated with it.
-  
-  annotation.**collection()**
-  
-  Access to the collection of annotations with the instantiated types.
-  
-  annotation.**textWrap()**
-  Change the overall textWrap, otherwise in the annotation object array you can change each individual one with the <code>{note: {wrap: 30}}</code> property. This function calls ${"`updateText()`"} internally so you do not need to call both functions when updating ${"`textWrap`"}.
-  
-  annotation.**notePadding()**
-  Change the overall notePadding, otherwise in the annotation object array you can change each individual one with the <code>{note: {padding: 30}}</code> property
-  
-  annotation.**disable()**
-  Takes the values 'connector', 'subject', and 'note' pass them in this array if you want to disable those parts from rendering
-  
-  annotation.**on()**
-  Takes the values 'subjectover', 'subjeout', 'subjectclick', 'connectorover', 'connectout', 'connectorclick', 'noteover', 'noteout', 'notecclick', 'dragend', 'dragstart' as custom dispatch events you can hook into. 
-
-
-  **AnnotationCalloutCircle**
-  - radius or outerRadius and innerRadius: Number, pixels
-  - radiusPadding: Number, pixels
-  
-  **AnnotationCalloutRect**
-  - width: Number, pixels
-  - height: Number, pixels
-  
-  **AnnotationXYThreshold**
-  - x1, x2 or y1, y2: Number, pixels
-
-  **AnnotationCalloutCustom**
-  - custom: Array, JSX SVG elements to create the custom subject shape
-  - customID (required):a custom DOM Element ID for masking the connector with the subject
-  - transform: String, for offsetting the subject so it can be centered
-  
-  **AnnotationBracket**
-  - width or height: Number, pixels
-  - depth: Number, pixels depending on +/- it will determine which way the bracket extrudes from
-  - type: String, "square" (default), or "curly"
-
-  **AnnotationBadge**: this is the only base annotation that doesn't have a connector or note
-  - text: String
-  - radius: Number, pixels
-  - x: "left" or "right"
-  - y: "top" or "bottom"
-  
-  **No subject**
-  - AnnotationLabel
-  - AnnotationCallout
-  - AnnotationCalloutElbow
-  - AnnotationCalloutCurve
-  
-  
   `
   return (
     <section>

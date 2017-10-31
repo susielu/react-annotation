@@ -112,7 +112,7 @@ header {
   margin-top: 50px;
   margin-bottom: 50px;
 } */
-
+/* 
 .docs-example {
   position: relative;
   padding: 3em 1em 1em;
@@ -211,6 +211,13 @@ header {
 
 .docs-component-props {
   padding-top: 10px;
+} */
+
+p code,
+li code {
+  font-size: 0.9em;
+  /* color: var(--accent-color); */
+  opacity: 0.6;
 }
 
 img {
