@@ -21,5 +21,6 @@ SubjectCircle.propTypes = {
   radius: PropTypes.number,
   innerRadius: PropTypes.number,
   outerRadius: PropTypes.number,
+  radiusPadding: PropTypes.number,
   editMode: PropTypes.bool
 }

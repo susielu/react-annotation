@@ -11,8 +11,11 @@ import SubjectBadge from "./Subject/SubjectBadge"
 import SubjectCircle from "./Subject/SubjectCircle"
 import SubjectRect from "./Subject/SubjectRect"
 import SubjectThreshold from "./Subject/SubjectThreshold"
+import SubjectBracket from "./Subject/SubjectBracket"
+import SubjectCustom from "./Subject/SubjectCustom"
 
 import Note from "./Note/Note"
+import BracketNote from "./Note/BracketNote"
 
 import Annotation from "./Annotation"
 import EditableAnnotation from "./EditableAnnotation"
@@ -24,8 +27,10 @@ import {
   AnnotationCalloutCurve,
   AnnotationCalloutElbow,
   AnnotationCalloutRect,
+  AnnotationXYThreshold,
   AnnotationBadge,
-  AnnotationXYThreshold
+  AnnotationBracket,
+  AnnotationCalloutCustom
 } from "./Types"
 
 export {
@@ -40,7 +45,10 @@ export {
   SubjectCircle,
   SubjectRect,
   SubjectThreshold,
+  SubjectBracket,
+  SubjectCustom,
   Note,
+  BracketNote,
   Annotation,
   EditableAnnotation,
   AnnotationLabel,
@@ -49,8 +57,10 @@ export {
   AnnotationCalloutCurve,
   AnnotationCalloutElbow,
   AnnotationCalloutRect,
+  AnnotationXYThreshold,
   AnnotationBadge,
-  AnnotationXYThreshold
+  AnnotationBracket,
+  AnnotationCalloutCustom
 }
 
 export default {
@@ -65,7 +75,10 @@ export default {
   SubjectCircle,
   SubjectRect,
   SubjectThreshold,
+  SubjectBracket,
+  SubjectCustom,
   Note,
+  BracketNote,
   Annotation,
   EditableAnnotation,
   AnnotationLabel,
@@ -74,6 +87,8 @@ export default {
   AnnotationCalloutCurve,
   AnnotationCalloutElbow,
   AnnotationCalloutRect,
+  AnnotationXYThreshold,
   AnnotationBadge,
-  AnnotationXYThreshold
+  AnnotationBracket,
+  AnnotationCalloutCustom
 }

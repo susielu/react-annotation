@@ -8,8 +8,11 @@ import ConnectorEndDot from "./Connector/ConnectorEndDot"
 import ConnectorEndArrow from "./Connector/ConnectorEndArrow"
 import SubjectCircle from "./Subject/SubjectCircle"
 import SubjectBadge from "./Subject/SubjectBadge"
+import SubjectBracket from "./Subject/SubjectBracket"
+import BracketNote from "./Note/BracketNote"
 import SubjectRect from "./Subject/SubjectRect"
 import SubjectThreshold from "./Subject/SubjectThreshold"
+import SubjectCustom from "./Subject/SubjectCustom"
 import Note from "./Note/Note"
 import classnames from "classnames"
 
@@ -21,7 +24,8 @@ const annotationMapper = (
   Connector,
   NoteDefaultProps = {},
   Subject,
-  SubjectDefaultProps = {}
+  SubjectDefaultProps = {},
+  NoteType = Note
 ) => {
   const {
     disable = [],
@@ -79,7 +83,7 @@ const annotationMapper = (
       )}
       {note &&
         disable.indexOf("note") === -1 && (
-          <Note {...NoteDefaultProps} {...note} />
+          <NoteType {...NoteDefaultProps} {...note} />
         )}
       {Subject && disable.indexOf("subject") === -1 && <Subject />}
     </AnnotationType>
@@ -147,11 +151,33 @@ export function AnnotationXYThreshold(props) {
 }
 
 export function AnnotationBadge(props) {
-  const className = classnames("callout badge", props.className)
+  const className = classnames("badge", props.className)
   return annotationMapper(
     { disable: ["connector", "note"], ...props, className },
     null,
     null,
     SubjectBadge
+  )
+}
+
+export function AnnotationBracket(props) {
+  const className = classnames("bracket", props.className)
+  return annotationMapper(
+    { disable: ["connector"], ...props, className },
+    null,
+    null,
+    SubjectBracket,
+    { depth: 20 },
+    BracketNote
+  )
+}
+
+export function AnnotationCalloutCustom(props) {
+  const className = classnames("callout custom", props.className)
+  return annotationMapper(
+    { ...props, className },
+    ConnectorElbow,
+    { lineType: "horizontal" },
+    SubjectCustom
   )
 }

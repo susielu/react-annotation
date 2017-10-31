@@ -12,3 +12,104 @@ export function DonutIcon() {
     </g>
   )
 }
+
+export function PuppersIcon() {
+  return [
+    <circle
+      data-color="color-2"
+      fill="none"
+      stroke="#9610ff"
+      strokeWidth="2"
+      stroke-linecap="square"
+      strokeMiterlimit="10"
+      cx="21"
+      cy="30"
+      r="3"
+      strokeLinejoin="miter"
+    />,
+    <circle
+      data-color="color-2"
+      fill="none"
+      stroke="#9610ff"
+      strokeWidth="2"
+      stroke-linecap="square"
+      strokeMiterlimit="10"
+      cx="43"
+      cy="30"
+      r="3"
+      strokeLinejoin="miter"
+    />,
+    <path
+      data-cap="butt"
+      fill="#9610ff"
+      stroke="#9610ff"
+      strokeWidth="2"
+      strokeMiterlimit="10"
+      d="M10,30c-4.41828,0-8-3.58172-8-8V2 h0.00002C10.349,2,17.3799,7.70411,19.41478,15.41368"
+      strokeLinejoin="miter"
+      stroke-linecap="butt"
+    />,
+    <path
+      data-cap="butt"
+      fill="none"
+      stroke="#9610ff"
+      strokeWidth="2"
+      strokeMiterlimit="10"
+      d="M54,30c4.41828,0,8-3.58172,8-8V2 h-0.00002C53.651,2,46.6201,7.70411,44.58522,15.41368"
+      strokeLinejoin="miter"
+      stroke-linecap="butt"
+    />,
+    <path
+      data-cap="butt"
+      fill="none"
+      stroke="#9610ff"
+      strokeWidth="2"
+      strokeMiterlimit="10"
+      d="M16.002,54.84206 C12.35271,52.04201,10,47.63634,10,42.68117V30c0-8.83656,7.16344-16,16-16h12c8.83656,0,16,7.16344,16,16v12.68117 c0,4.95414-2.35173,9.35901-5.99972,12.15914"
+      strokeLinejoin="miter"
+      stroke-linecap="butt"
+    />,
+    <path
+      data-cap="butt"
+      fill="#9610ff"
+      stroke="#9610ff"
+      strokeWidth="2"
+      strokeMiterlimit="10"
+      d="M40.00097,57.99969 C38.17657,60.42876,35.27177,62,32,62c-3.2738,0-6.18016-1.57318-8.00435-4.00481"
+      strokeLinejoin="miter"
+      stroke-linecap="butt"
+    />,
+    <path
+      data-cap="butt"
+      data-color="color-2"
+      fill="none"
+      stroke="#9610ff"
+      strokeWidth="2"
+      strokeMiterlimit="10"
+      d="M26.15749,40H24 c-4.41833,0-8,3.58167-8,8v10h8c4.41833,0,8-3.58179,8-8v-3.20166"
+      strokeLinejoin="miter"
+      stroke-linecap="butt"
+    />,
+    <path
+      data-cap="butt"
+      data-color="color-2"
+      fill="none"
+      stroke="#9610ff"
+      strokeWidth="2"
+      strokeMiterlimit="10"
+      d="M37.84251,40H40 c4.41833,0,8,3.58167,8,8v10h-8c-4.41833,0-8-3.58179-8-8v-3.20166"
+      strokeLinejoin="miter"
+      stroke-linecap="butt"
+    />,
+    <path
+      data-color="color-2"
+      fill="#9610ff"
+      stroke="#9610ff"
+      strokeWidth="2"
+      stroke-linecap="square"
+      strokeMiterlimit="10"
+      d="M28.16125,38 h7.6775c1.67701,0,2.60936,1.93987,1.56174,3.24939l-3.83875,4.79844c-0.80065,1.00081-2.32282,1.00081-3.12348,0l-3.83875-4.79844 C25.55189,39.93987,26.48423,38,28.16125,38z"
+      strokeLinejoin="miter"
+    />
+  ]
+}

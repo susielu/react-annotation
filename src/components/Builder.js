@@ -28,6 +28,32 @@ export const lineBuilder = ({
   return builder
 }
 
+export const pathBuilder = ({
+  d,
+  curve = curveLinear,
+  canvasContext,
+  className,
+  classID
+}) => {
+  const lineGen = line().curve(curve)
+
+  const builder = {
+    type: "path",
+    className,
+    classID
+  }
+
+  if (canvasContext) {
+    lineGen.context(canvasContext)
+  } else {
+    builder.attrs = {
+      d
+    }
+  }
+
+  return builder
+}
+
 export const arcBuilder = ({ data, canvasContext, className, classID }) => {
   const builder = {
     type: "path",

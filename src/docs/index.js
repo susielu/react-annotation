@@ -12,6 +12,7 @@ import {
   Setup,
   Types,
   ExtendingTypes,
+  InPractice,
   Examples,
   API,
   Notes
@@ -23,6 +24,7 @@ const Docs = test => {
     "Setup",
     "Types",
     "Extending Types",
+    "In Practice",
     "Examples",
     "API",
     "Notes"
@@ -52,6 +54,7 @@ const Docs = test => {
                 <Setup />
                 <Types />
                 <ExtendingTypes />
+                <InPractice />
                 <Examples />
                 <API />
                 <Notes />

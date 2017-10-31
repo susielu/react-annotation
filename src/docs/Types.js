@@ -14,6 +14,7 @@ import classnames from "classnames"
 import Annotations from "../components/index"
 import theme from "./theme"
 import { Code } from "./Sections"
+import { DonutIcon, PuppersIcon } from "./Icons"
 
 const types = {
   AnnotationLabel: {
@@ -97,6 +98,31 @@ const types = {
       text: "A"
     },
     img: "a-badge.png"
+  },
+  AnnotationBracket: {
+    typeSettings: {
+      note: {},
+      connector: { type: "elbow" }
+    },
+    summary: "Subject options: height or width, depth, type (square or curly)",
+    subject: {
+      height: 100,
+      type: "square"
+    },
+    img: "a-bracket.png"
+  },
+  AnnotationCalloutCustom: {
+    typeSettings: {
+      note: { lineType: "horizontal" },
+      connector: { type: "elbow" }
+    },
+    summary: "Subject options: radius, text, x:left or right, y:top or bottom",
+    subject: {
+      custom: PuppersIcon(),
+      customID: "puppers",
+      transform: "translate(-32, -32)"
+    },
+    img: "a-custom.png"
   }
 }
 
@@ -108,6 +134,8 @@ const typesOrder = [
   "AnnotationCalloutCircle",
   "AnnotationCalloutRect",
   "AnnotationXYThreshold",
+  "AnnotationBracket",
+  "AnnotationCalloutCustom",
   "AnnotationBadge"
 ]
 
@@ -174,7 +202,6 @@ export default class Types extends React.Component {
       t.typeSettings.note,
       this.state.note
     )
-    console.log("SETTINGS", subject, connector, note)
 
     const subjectJoined = Object.assign({}, t.subject, subject)
     const connectorJoined = Object.assign(
@@ -261,8 +288,6 @@ export default class Types extends React.Component {
       alignFirst = "top"
       alignSecond = "bottom"
     }
-
-    console.log("subject", subjectJoined, t.typeSettings, subject)
 
     return (
       <div>
@@ -431,7 +456,7 @@ export default class Types extends React.Component {
           </CardText>
         </Card>
         <h3>Use {name}</h3>
-        <svg className="types">
+        <svg className="types viz">
           <g transform="translate(30,60)">
             <text className="title">{name}</text>
             <text className="summary" y={30}>
@@ -441,8 +466,8 @@ export default class Types extends React.Component {
           <Annotation
             x={150}
             y={170}
-            dy={117}
-            dx={162}
+            dy={name === "AnnotationBracket" ? undefined : 117}
+            dx={name === "AnnotationBracket" ? undefined : 162}
             editMode={this.state.editMode}
             subject={subjectJoined}
             connector={connector}
@@ -479,13 +504,12 @@ export default class Types extends React.Component {
         //
         /* Or with composable annotation parts */
       
-        <Annotation 
+        <${this.state.editMode ? `EditableAnnotation` : `Annotation`}
           x={150}
           y={170}
           dy={117}
           dx={162}
           color={"${theme.accent}"}     
-          ${this.state.editMode ? "editMode={true}" : ""}
           
           title={"${note.title}"}
           label={"${note.label}"}
@@ -504,7 +528,7 @@ export default class Types extends React.Component {
           <Note ${Object.keys(noteJoined)
             .map(k => `\n            ${k}="${noteJoined[k]}"`)
             .join("")} />
-        </Annotation>
+        </${this.state.editMode ? `EditableAnnotation` : `Annotation`}>
         `
             .replace(/^\s*\n/gm, "")
             .replace(/\/\//g, "\n")}

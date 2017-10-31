@@ -44,6 +44,7 @@
     "react-addons-test-utils": "^15.3.2",
     "react-addons-transition-group": "15.3.2",
     "react-dom": "^15.4.2",
+    "react-markdown": "2.5.0",
     "react-prism": "4.0.0",
     "react-router": "^4.0.0-beta.6",
     "react-router-dom": "4.0.0",
