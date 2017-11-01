@@ -19,6 +19,7 @@
     "test": "react-scripts test --env=jsdom",
     "lint": "eslint src",
     "rollup": "rollup -c rollup.js ",
+    "webpack": "NODE_ENV=production webpack",
     "prebuild": "babel src/components --out-dir lib --ignore test.js"
   },
   "browserify": {
@@ -34,9 +35,11 @@
     "babel-preset-es2015": "6.14.0",
     "babel-preset-react": "6.11.1",
     "babel-preset-stage-0": "6.5.0",
-    "babelrc-rollup": "3.0.0",
     "conventional-changelog-cli": "1.1.1",
     "conventional-recommended-bump": "0.3.0",
+    "d3-array": "1.2.1",
+    "d3-axis": "1.0.8",
+    "d3-scale": "1.0.6",
     "dentist": "1.0.3",
     "envify": "4.1.0",
     "enzyme": "2.9.1",
@@ -56,9 +59,9 @@
     "react-scripts": "0.8.5",
     "react-tap-event-plugin": "2.0.1",
     "react-test-renderer": "15.6.1",
-    "rollup-plugin-babel": "3.0.2",
     "uglify-js": "3.1.4",
-    "uglifyify": "4.0.4"
+    "uglifyify": "4.0.4",
+    "webpack": "1.13.1"
   },
   "dependencies": {
     "classnames": "2.2.5",

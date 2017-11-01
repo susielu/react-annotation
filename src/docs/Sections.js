@@ -5,6 +5,7 @@ import { PrismCode } from "react-prism"
 import TypesUI from "./Types"
 import Chip from "material-ui/Chip"
 import Avatar from "material-ui/Avatar"
+import { Tooltip } from "./Examples"
 
 import {
   Annotation,
@@ -72,8 +73,9 @@ export function Setup() {
       <Title text={"Setup"} id="setup" />
       <h3>Using NPM</h3>
       <p>You can add the react-annotation as a node module by running</p>
-
       <Code>{"npm i react-annotation -S"}</Code>
+      If you're new to using React, I suggest using react-create-app to start
+      your project.
     </section>
   )
 }
@@ -258,7 +260,18 @@ export function InPractice() {
 
   - If you are importing custom fonts, you may notice the annotations don't load perfectly with text wrapping and alignment. To fix that you can use, ${"`document.fonts.ready`"} to make sure the fonts are loaded first to reflect the custom font's spacing for all of the calculations. 
 
+  ### Integration with Semiotic
+
+  react-annotation is integrated with semiotic. If you want to use one of these annotation types you simply need to.
+
   ### Migrating from d3-annotation
+
+  Differences from d3-annotation
+  - Component names are capitalized so annotationLabel in d3-annotation corresponds with AnnotationLabel in react-annotation
+  - There is no concept of an annotation collection. This felt unnecessary since the annotation data was being pushed into each annotation directly
+  - There is no concept of accessors. The assumption is that you would make over your annotations and give them the x, y, with any type of scaling functions.
+  
+  If you want to update your code from d3-annotation to react-annotation, here's an example: 
   `
   return (
     <section>
@@ -272,6 +285,7 @@ export function Examples() {
   return (
     <section>
       <Title text="Examples" id="examples" />
+      <Tooltip />
     </section>
   )
 }
