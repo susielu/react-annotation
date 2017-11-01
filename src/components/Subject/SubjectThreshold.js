@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from "react"
 /* eslint-enable no-unused-vars */
-import Threshold from "./threshold"
+import Threshold from "viz-annotation/lib/Subject/threshold"
 import Subject from "./Subject"
 import PropTypes from "prop-types"
 

@@ -1,8 +1,8 @@
 import React from "react"
-import alignment from "./alignment"
+import alignment from "viz-annotation/lib/Note/alignment"
 import Handle from "../Handle"
-import noteVertical from "./lineType-vertical"
-import noteHorizontal from "./lineType-horizontal"
+import noteVertical from "viz-annotation/lib/Note/lineType-vertical"
+import noteHorizontal from "viz-annotation/lib/Note/lineType-horizontal"
 import PropTypes from "prop-types"
 
 const getOuterBBox = (...domNodes) => {
@@ -50,8 +50,10 @@ export default class Note extends React.Component {
     ) {
       this.updateText(nextProps)
     }
-
-    if (nextProps.editMode && this.props.align === "dynamic") {
+    if (
+      nextProps.editMode &&
+      (nextProps.align === "dynamic" || !nextProps.align)
+    ) {
       this.updateText(nextProps)
     }
   }
@@ -63,6 +65,7 @@ export default class Note extends React.Component {
     label,
     title,
     wrap,
+    wrapSplitter,
     dx,
     dy
   }) {
@@ -75,12 +78,24 @@ export default class Note extends React.Component {
     if (title) {
       newState.titleWrapped =
         this.refs.title &&
-        this.wrapText(this.refs.title, newState.changed, title, wrap)
+        this.wrapText(
+          this.refs.title,
+          newState.changed,
+          title,
+          wrap,
+          wrapSplitter
+        )
     }
     if (label)
       newState.labelWrapped =
         this.refs.label &&
-        this.wrapText(this.refs.label, newState.changed, label, wrap)
+        this.wrapText(
+          this.refs.label,
+          newState.changed,
+          label,
+          wrap,
+          wrapSplitter
+        )
 
     this.setState(newState, () => {
       const setLabel = () => {
@@ -92,7 +107,6 @@ export default class Note extends React.Component {
           orientation,
           align
         }
-
         if (lineType === "vertical") noteParams.orientation = "leftRight"
         else if (lineType === "horizontal") noteParams.orientation = "topBottom"
 
@@ -114,14 +128,14 @@ export default class Note extends React.Component {
     })
   }
 
-  wrapText(textRef, key, text, width) {
+  wrapText(textRef, key, text, width, wrapSplitter) {
     const initialAttrs = {
       x: 0,
       dy: "1.2em"
     }
 
     const words = text
-      .split(/[ \t\r\n]+/)
+      .split(wrapSplitter || /[ \t\r\n]+/)
       .reverse()
       .filter(w => w !== "")
 

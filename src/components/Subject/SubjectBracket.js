@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from "react"
 /* eslint-enable no-unused-vars */
-import Bracket from "./bracket"
+import Bracket from "viz-annotation/lib/Subject/bracket"
 import Subject from "./Subject"
 import PropTypes from "prop-types"
 

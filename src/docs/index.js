@@ -1,9 +1,11 @@
+/* eslint-disable no-unused-vars */
 import React from "react"
-import injectTapEventPlugin from "react-tap-event-plugin"
+/* eslint-enable no-unused-vars */ import injectTapEventPlugin from "react-tap-event-plugin"
 injectTapEventPlugin()
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider"
 import getMuiTheme from "material-ui/styles/getMuiTheme"
 import { muiTheme } from "./theme"
+// import { goToAnchor } from "react-scrollable-anchor"
 
 import "./prism.css"
 import "./index.css"
@@ -21,17 +23,17 @@ import {
 
 const Docs = test => {
   const sections = [
-    "Introduction",
-    "Setup",
-    "Types",
-    "Extending Types",
-    "API",
-    "In Practice",
-    "Examples",
-    "Notes"
+    { id: "introduction", name: "Introduction" },
+    { id: "setup", name: "Setup" },
+    { id: "types", name: "Types" },
+    { id: "extending-types", name: "Extending Types" },
+    { id: "api", name: "API" },
+    { id: "in-practice", name: "In Practice" },
+    { id: "Examples", name: "Examples" },
+    { id: "Notes", name: "Notes" }
   ].map(d => (
     <p>
-      <a>{d}</a>
+      <a href={"#" + d.id}>{d.name}</a>
     </p>
   ))
 

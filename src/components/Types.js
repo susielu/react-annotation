@@ -43,7 +43,8 @@ const annotationMapper = (
     className,
     onDrag,
     onDragStart,
-    onDragEnd
+    onDragEnd,
+    editMode
   } = props
   const CONNECTORS = {
     type: {
@@ -77,6 +78,7 @@ const annotationMapper = (
       onDrag={onDrag}
       onDragStart={onDragStart}
       onDragEnd={onDragEnd}
+      editMode={editMode}
       {...SubjectDefaultProps}
       {...subject}
     >

@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from "react"
 /* eslint-enable no-unused-vars */
-import EndArrow from "./end-arrow"
+import EndArrow from "viz-annotation/lib/Connector/end-arrow"
 import ConnectorEnd from "./ConnectorEnd"
 import PropTypes from "prop-types"
 

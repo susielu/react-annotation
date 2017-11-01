@@ -12,13 +12,17 @@
     "url": "https://github.com/susielu/react-annotation/issues"
   },
   "main": "lib/index.js",
+  "web": "bundle.js",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "lint": "eslint src",
-    "browserify": "browserify --transform browserify-global-shim --standalone ./bundle-index.js -g [ envify --NODE_ENV production ] -g uglifyify | uglifyjs --compress --mangle > ./bundle.js",
+    "rollup": "rollup -c rollup.js ",
     "prebuild": "babel src/components --out-dir lib --ignore test.js"
+  },
+  "browserify": {
+    "transform": ["browserify-global-shim"]
   },
   "browserify-global-shim": {
     "react": "React",
@@ -26,10 +30,11 @@
   },
   "devDependencies": {
     "babel-cli": "6.14.0",
+    "babel-eslint": "^8.0.1",
     "babel-preset-es2015": "6.14.0",
     "babel-preset-react": "6.11.1",
     "babel-preset-stage-0": "6.5.0",
-    "browserify": "14.4.0",
+    "babelrc-rollup": "3.0.0",
     "conventional-changelog-cli": "1.1.1",
     "conventional-recommended-bump": "0.3.0",
     "dentist": "1.0.3",
@@ -51,6 +56,7 @@
     "react-scripts": "0.8.5",
     "react-tap-event-plugin": "2.0.1",
     "react-test-renderer": "15.6.1",
+    "rollup-plugin-babel": "3.0.2",
     "uglify-js": "3.1.4",
     "uglifyify": "4.0.4"
   },
@@ -58,14 +64,10 @@
     "classnames": "2.2.5",
     "d3-shape": "1.0.4",
     "prop-types": "15.6.0",
-    "react-draggable": "3.0.3"
+    "react-draggable": "3.0.3",
+    "viz-annotation": "0.0.1-3"
   },
-  "files": [
-    "LICENSE",
-    "README.md",
-    "CHANGELOG.md",
-    "lib"
-  ],
+  "files": ["LICENSE", "README.md", "CHANGELOG.md", "lib"],
   "keywords": [
     "react",
     "component",

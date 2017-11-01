@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from "react"
 /* eslint-enable no-unused-vars */
-import Rect from "./rect"
+import Rect from "viz-annotation/lib/Subject/rect"
 import Subject from "./Subject"
 import PropTypes from "prop-types"
 

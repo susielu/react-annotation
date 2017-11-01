@@ -1,4 +1,6 @@
+/* eslint-disable no-unused-vars */
 import React from "react"
+/* eslint-enable no-unused-vars */
 import { PrismCode } from "react-prism"
 import TypesUI from "./Types"
 import Chip from "material-ui/Chip"
@@ -20,7 +22,7 @@ import AlertIcon from "material-ui/svg-icons/alert/error-outline"
 
 const Title = ({ text, id }) => {
   return (
-    <h2>
+    <h2 id={id}>
       <a href={`#${id}`}>#</a> {text}
     </h2>
   )
@@ -115,14 +117,13 @@ export function AnnotationTypesAPI() {
     - end (string, "dot", or "arrow"):
     - **curve (function):** Made to use a curve function from [d3-shape](https://github.com/d3/d3-shape). Defaults to \`curveCatmullRom\`.
     - **points (array[[x,y],[x,y]...])**: Anchor points for the curve function  
-    - **endScale (number)**: A multiplying factor for sizing the connector end  - **note (object with the following properties and (values))**: 
+    - **endScale (number)**: A multiplying factor for sizing the connector end  
+  - **note (object with the following properties and (values))**: 
     - **title (string)**
     - **label (string)**
     - **padding (number)**
     - **orientation (string, "leftRight" or "topBottom")**: Determines based on the dx, and dy, which direction to orient the \`Note\`. Default is set to \`"topBottom\`
     - **lineType (string, "vertical" or "horizontal")**: Creates a line along the edge of the note text. **Please Note** if you set this to \`"vertical"\` then \`orientation\` is fixed at \`"leftRight"\` and vice versa if it is \`"horizontal"\` then \`orientation\` is fixed at \`"topBottom"\` 
-    
-    
     - **align (string, "left", "right", "middle", "top", "bottom", "dynamic")**: When the orientation is set to \`"topBottom"\` or lineType is set to \`"horiztonal"\` you can align the note with \`"top"\`, \`"bottom"\`, \`"middle"\`, or \`"dynamic"\`. When the orientation is set to \`"leftRight"\` or \`lineType\` is set to \`"vertical"\` you can align the note with \`"left"\`, \`"right"\`, \`"middle"\`, or \`"dynamic"\`. In addition to the alignment settings for the note, you can also use the css ${"`text-anchor`"} attribute to align the text within the note
     - **color (string)**: Color string, inherited from Annotation but can be customized by directly adding to Note as a prop
     - **wrapSplitter (string or regex)**:
@@ -195,7 +196,7 @@ export function ExtendingTypes() {
           radius={35}
           color={theme.accent}
           title="Custom annotation"
-          label="A donut a day is just really cute"
+          label="Donut annotations be free!"
         >
           <DonutIcon />
           <SubjectCircle />
@@ -295,15 +296,14 @@ export function API() {
   - **nx (number)**: X Position of the note and one end of the connector, as the raw x,y position **not** an offset
   - **ny (number)**: Y Position of the note and one end of the connector, as the raw x,y position **not** an offset
   - **color(string)**: only in version 2.0, you can pass a color string that will be applied to the annotation. This color can be overridden via css or inline-styles
-  - **onDragStart(function)**: Passes the current props of the annotation when dragging starts
-  - **onDrag(function)**: Passes the current props of the annotation while dragging 
-  - **onDragEnd(function)**: Passes the current props of the annotation when dragging ends
 
    **&lt;EditableAnnotation />**
   
   All the same props as \`Annotation\`, with built in anchors for dragging the annotation
 
-  - TODO: create callback functions here
+  - **onDragStart(function)**: Passes the current props of the annotation when dragging starts
+  - **onDrag(function)**: Passes the current props of the annotation while dragging 
+  - **onDragEnd(function)**: Passes the current props of the annotation when dragging ends
 
   ### Subjects
 
