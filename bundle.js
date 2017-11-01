@@ -284,7 +284,7 @@ window["ReactAnnotation"] =
 /* 2 */
 /***/ function(module, exports) {
 
-	(function() { module.exports = window[undefined]; }());
+	(function() { module.exports = window["React"]; }());
 
 /***/ },
 /* 3 */
@@ -7125,7 +7125,7 @@ window["ReactAnnotation"] =
 /* 30 */
 /***/ function(module, exports) {
 
-	(function() { module.exports = window[undefined]; }());
+	(function() { module.exports = window["ReactDOM"]; }());
 
 /***/ },
 /* 31 */
