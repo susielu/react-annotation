@@ -1681,6 +1681,7 @@ var Annotations = {
   AnnotationCalloutCustom: AnnotationCalloutCustom
 };
 
+console.log(window, "test");
 window.Annotations = Annotations;
 
 })));
