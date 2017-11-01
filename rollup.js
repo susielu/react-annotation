@@ -16,7 +16,7 @@ rc.presets.forEach((preset, i) => {
 })
 
 export default {
-  entry: "src/components/index.js",
+  entry: "src/components/web.js",
   plugins: [babel(rc)],
   targets: [
     {

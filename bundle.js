@@ -1,8 +1,8 @@
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('viz-annotation/lib/Connector/type-curve'), require('viz-annotation/lib/Connector/type-elbow'), require('viz-annotation/lib/Connector/type-line'), require('viz-annotation/lib/Connector/end-dot'), require('prop-types'), require('viz-annotation/lib/Connector/end-arrow'), require('react-draggable'), require('viz-annotation/lib/Subject/badge'), require('viz-annotation/lib/Subject/circle'), require('viz-annotation/lib/Subject/rect'), require('viz-annotation/lib/Subject/threshold'), require('viz-annotation/lib/Subject/bracket'), require('viz-annotation/lib/Note/alignment'), require('viz-annotation/lib/Note/lineType-vertical'), require('viz-annotation/lib/Note/lineType-horizontal'), require('classnames')) :
-	typeof define === 'function' && define.amd ? define(['exports', 'react', 'viz-annotation/lib/Connector/type-curve', 'viz-annotation/lib/Connector/type-elbow', 'viz-annotation/lib/Connector/type-line', 'viz-annotation/lib/Connector/end-dot', 'prop-types', 'viz-annotation/lib/Connector/end-arrow', 'react-draggable', 'viz-annotation/lib/Subject/badge', 'viz-annotation/lib/Subject/circle', 'viz-annotation/lib/Subject/rect', 'viz-annotation/lib/Subject/threshold', 'viz-annotation/lib/Subject/bracket', 'viz-annotation/lib/Note/alignment', 'viz-annotation/lib/Note/lineType-vertical', 'viz-annotation/lib/Note/lineType-horizontal', 'classnames'], factory) :
-	(factory((global.React = {}),global.React,global.Curve,global.Elbow,global.Line,global.EndDot,global.PropTypes,global.EndArrow,global.reactDraggable,global.Badge,global.Circle,global.Rect,global.Threshold,global.Bracket,global.alignment,global.noteVertical,global.noteHorizontal,global.classnames));
-}(this, (function (exports,React,Curve,Elbow,Line,EndDot,PropTypes,EndArrow,reactDraggable,Badge,Circle,Rect,Threshold,Bracket,alignment,noteVertical,noteHorizontal,classnames) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(require('react'), require('viz-annotation/lib/Connector/type-curve'), require('viz-annotation/lib/Connector/type-elbow'), require('viz-annotation/lib/Connector/type-line'), require('viz-annotation/lib/Connector/end-dot'), require('prop-types'), require('viz-annotation/lib/Connector/end-arrow'), require('react-draggable'), require('viz-annotation/lib/Subject/badge'), require('viz-annotation/lib/Subject/circle'), require('viz-annotation/lib/Subject/rect'), require('viz-annotation/lib/Subject/threshold'), require('viz-annotation/lib/Subject/bracket'), require('viz-annotation/lib/Note/alignment'), require('viz-annotation/lib/Note/lineType-vertical'), require('viz-annotation/lib/Note/lineType-horizontal'), require('classnames')) :
+	typeof define === 'function' && define.amd ? define(['react', 'viz-annotation/lib/Connector/type-curve', 'viz-annotation/lib/Connector/type-elbow', 'viz-annotation/lib/Connector/type-line', 'viz-annotation/lib/Connector/end-dot', 'prop-types', 'viz-annotation/lib/Connector/end-arrow', 'react-draggable', 'viz-annotation/lib/Subject/badge', 'viz-annotation/lib/Subject/circle', 'viz-annotation/lib/Subject/rect', 'viz-annotation/lib/Subject/threshold', 'viz-annotation/lib/Subject/bracket', 'viz-annotation/lib/Note/alignment', 'viz-annotation/lib/Note/lineType-vertical', 'viz-annotation/lib/Note/lineType-horizontal', 'classnames'], factory) :
+	(factory(global.React,global.Curve,global.Elbow,global.Line,global.EndDot,global.PropTypes,global.EndArrow,global.reactDraggable,global.Badge,global.Circle,global.Rect,global.Threshold,global.Bracket,global.alignment,global.noteVertical,global.noteHorizontal,global.classnames));
+}(this, (function (React,Curve,Elbow,Line,EndDot,PropTypes,EndArrow,reactDraggable,Badge,Circle,Rect,Threshold,Bracket,alignment,noteVertical,noteHorizontal,classnames) { 'use strict';
 
 React = React && React.hasOwnProperty('default') ? React['default'] : React;
 Curve = Curve && Curve.hasOwnProperty('default') ? Curve['default'] : Curve;
@@ -1651,7 +1651,7 @@ function AnnotationCalloutCustom(props) {
 }
 
 // export individual components
-var index = {
+var Annotations = {
   Connector: Connector,
   ConnectorCurve: ConnectorCurve,
   ConnectorElbow: ConnectorElbow,
@@ -1681,36 +1681,7 @@ var index = {
   AnnotationCalloutCustom: AnnotationCalloutCustom
 };
 
-exports.Connector = Connector;
-exports.ConnectorCurve = ConnectorCurve;
-exports.ConnectorElbow = ConnectorElbow;
-exports.ConnectorLine = ConnectorLine;
-exports.ConnectorEndDot = ConnectorEndDot;
-exports.ConnectorEndArrow = ConnectorEndArrow;
-exports.Subject = Subject;
-exports.SubjectBadge = SubjectBadge;
-exports.SubjectCircle = SubjectCircle;
-exports.SubjectRect = SubjectRect;
-exports.SubjectThreshold = SubjectThreshold;
-exports.SubjectBracket = SubjectBracket;
-exports.SubjectCustom = SubjectCustom;
-exports.Note = Note;
-exports.BracketNote = BracketNote;
-exports.Annotation = Annotation;
-exports.EditableAnnotation = EditableAnnotation;
-exports.AnnotationLabel = AnnotationLabel;
-exports.AnnotationCallout = AnnotationCallout;
-exports.AnnotationCalloutCircle = AnnotationCalloutCircle;
-exports.AnnotationCalloutCurve = AnnotationCalloutCurve;
-exports.AnnotationCalloutElbow = AnnotationCalloutElbow;
-exports.AnnotationCalloutRect = AnnotationCalloutRect;
-exports.AnnotationXYThreshold = AnnotationXYThreshold;
-exports.AnnotationBadge = AnnotationBadge;
-exports.AnnotationBracket = AnnotationBracket;
-exports.AnnotationCalloutCustom = AnnotationCalloutCustom;
-exports['default'] = index;
-
-Object.defineProperty(exports, '__esModule', { value: true });
+window.Annotations = Annotations;
 
 })));
 //# sourceMappingURL=bundle.js.map
