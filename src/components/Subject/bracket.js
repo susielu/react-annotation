@@ -1,28 +1,27 @@
 import { lineBuilder, pathBuilder } from "../Builder"
-// import { event } from "d3-selection"
 
 //This curly brace function was
 //made by Alex Hornbake
 //http://bl.ocks.org/alexhornbake/6005176
 function makeCurlyBrace(x1, y1, x2, y2, w, q) {
   //Calculate unit vector
-  var dx = x1 - x2
-  var dy = y1 - y2
-  var len = Math.sqrt(dx * dx + dy * dy)
+  let dx = x1 - x2
+  let dy = y1 - y2
+  let len = Math.sqrt(dx * dx + dy * dy)
   dx = dx / len
   dy = dy / len
 
   //Calculate Control Points of path,
-  var qx1 = x1 + q * w * dy
-  var qy1 = y1 - q * w * dx
-  var qx2 = x1 - 0.25 * len * dx + (1 - q) * w * dy
-  var qy2 = y1 - 0.25 * len * dy - (1 - q) * w * dx
-  var tx1 = x1 - 0.5 * len * dx + w * dy
-  var ty1 = y1 - 0.5 * len * dy - w * dx
-  var qx3 = x2 + q * w * dy
-  var qy3 = y2 - q * w * dx
-  var qx4 = x1 - 0.75 * len * dx + (1 - q) * w * dy
-  var qy4 = y1 - 0.75 * len * dy - (1 - q) * w * dx
+  let qx1 = x1 + q * w * dy
+  let qy1 = y1 - q * w * dx
+  let qx2 = x1 - 0.25 * len * dx + (1 - q) * w * dy
+  let qy2 = y1 - 0.25 * len * dy - (1 - q) * w * dx
+  let tx1 = x1 - 0.5 * len * dx + w * dy
+  let ty1 = y1 - 0.5 * len * dy - w * dx
+  let qx3 = x2 + q * w * dy
+  let qy3 = y2 - q * w * dx
+  let qx4 = x1 - 0.75 * len * dx + (1 - q) * w * dy
+  let qy4 = y1 - 0.75 * len * dy - (1 - q) * w * dx
 
   return (
     "M " +
@@ -60,17 +59,8 @@ function makeCurlyBrace(x1, y1, x2, y2, w, q) {
   )
 }
 
-export default ({ height, width, depth, type }) => {
-  // if (!subjectData.width) {
-  //   subjectData.width = 100
-  // }
-  // if (!subjectData.height) {
-  //   subjectData.height = 100
-  // }
-
+export default ({ height, width, depth, type, editMode }) => {
   let handles = []
-  // let { width, height } = subjectData
-
   let data
   let bracket
   if (type === "square") {
@@ -94,27 +84,22 @@ export default ({ height, width, depth, type }) => {
     })
   }
 
-  // if (type.editMode) {
-  //   const updateWidth = () => {
-  //     subjectData.width = event.x
-  //     type.redrawSubject()
-  //     type.redrawConnector()
-  //   }
+  if (editMode) {
+    handles = [
+      {
+        x: height ? depth : width / 2,
+        y: height ? height / 2 : depth,
+        key: "depth",
+        type: height ? "X" : "Y"
+      },
+      {
+        x: width || 0,
+        y: height || 0,
+        key: height ? "height" : "width"
+      }
+    ]
+  }
 
-  //   const updateHeight = () => {
-  //     subjectData.height = event.y
-  //     type.redrawSubject()
-  //     type.redrawConnector()
-  //   }
-
-  //   const rHandles = [
-  //     { x: width, y: height / 2, drag: updateWidth.bind(type) },
-  //     { x: width / 2, y: height, drag: updateHeight.bind(type) }
-  //   ]
-
-  //   handles = type.mapHandles(rHandles)
-  // }
-  // console.log(bracket, start, end, xOffset, yOffset)
   bracket.attrs["fill-opacity"] = 0.1
   return { components: [bracket], handles }
 }

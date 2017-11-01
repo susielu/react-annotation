@@ -1,6 +1,4 @@
-// import { circleHandles } from "../Handles"
 import { arcBuilder } from "../Builder"
-// import { event } from "d3-selection"
 
 export const circleHandles = ({ cx = 0, cy = 0, r1, r2, padding }) => {
   const h = { move: { x: cx, y: cy } }
@@ -25,13 +23,8 @@ export default ({
   radiusPadding,
   outerRadius,
   innerRadius,
-  editMode,
-  type
+  editMode
 }) => {
-  // if (!subjectData.radius && !subjectData.outerRadius) {
-  //   subjectData.radius = 20
-  // }
-
   let handles = []
   const c = arcBuilder({
     data: { radius, outerRadius, innerRadius },
@@ -45,28 +38,17 @@ export default ({
       padding: radiusPadding
     })
 
-    const updateRadius = attr => {
-      // const r = subjectData[attr] + event.dx * Math.sqrt(2)
-      // subjectData[attr] = r
-      // type.redrawSubject()
-      // type.redrawConnector()
-    }
-
     const cHandles = [
       {
-        ...h.r1
-        // drag: updateRadius.bind(
-        //   type,
-        //   outerRadius !== undefined ? "outerRadius" : "radius"
-        // )
+        ...h.r1,
+        key: c.data.outerRadius ? "outerRadius" : "radius"
       }
     ]
 
     if (innerRadius) {
-      cHandles.push({ ...h.r2, drag: updateRadius.bind(type, "innerRadius") })
+      cHandles.push({ ...h.r2, key: "innerRadius" })
     }
     handles = cHandles
-    // handles = type.mapHandles(cHandles)
   }
 
   c.attrs["fill-opacity"] = 0

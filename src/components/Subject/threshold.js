@@ -1,9 +1,6 @@
 import { lineBuilder } from "../Builder"
 
-// export default ({ subjectData, type }) => {
 export default ({ x1, x2, y1, y2, x, y }) => {
-  // const offset = type.annotation.position
-
   x1 = (x1 !== undefined ? x1 : x) - x
   x2 = (x2 !== undefined ? x2 : x) - x
   y1 = (y1 !== undefined ? y1 : y) - y

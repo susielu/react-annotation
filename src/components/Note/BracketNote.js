@@ -1,7 +1,10 @@
+/* eslint-disable no-unused-vars */
 import React from "react"
+/* eslint-enable no-unused-vars */
+
 import Note from "./Note"
 
-export default function BracketNote({ width, height, depth, anchor, ...rest }) {
+export default function BracketNote({ width, height, depth, ...rest }) {
   let dx = rest.dx,
     orientation,
     align = "middle",
@@ -16,13 +19,14 @@ export default function BracketNote({ width, height, depth, anchor, ...rest }) {
     if (!dy) dy = depth
     orientation = "topBottom"
   }
-  console.log(width, height, depth, dx, dy, orientation, align)
+
   return (
     <Note
       align={align}
       orientation={orientation}
       padding={10}
       {...rest}
+      editMode={false}
       dx={dx}
       dy={dy}
     />

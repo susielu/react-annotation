@@ -1,9 +1,6 @@
 import { lineBuilder } from "../Builder"
 
-// export default ({ annotation, start, end }) => {
-
-export default ({ x, y, dx, dy, start, end }) => {
-  // const offset = annotation.position
+export default ({ dx, dy, start, end, scale = 1 }) => {
   if (!start) {
     start = [dx, dy]
   } else {
@@ -16,10 +13,7 @@ export default ({ x, y, dx, dy, start, end }) => {
   let x1 = end[0],
     y1 = end[1]
 
-  // let dx = start[0]
-  // let dy = start[1]
-
-  let size = 10
+  let size = 10 * scale
   let angleOffset = 16 / 180 * Math.PI
   let angle = Math.atan(start[1] / start[0])
 

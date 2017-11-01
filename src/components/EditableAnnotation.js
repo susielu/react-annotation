@@ -19,28 +19,60 @@ export default class EditableAnnotation extends React.Component {
     })
   }
 
+  getData() {
+    return Object.assign({}, this.props, this.state)
+  }
+
+  dragEnd() {
+    if (this.props.onDragEnd) {
+      this.props.onDragEnd(this.getData())
+    }
+  }
+
+  dragStart() {
+    if (this.props.onDragStart) {
+      this.props.onDragStart(this.getData())
+    }
+  }
+
   dragSubject(event, data) {
-    this.setState({
-      x: this.state.x + data.deltaX,
-      y: this.state.y + data.deltaY
+    this.setState(
+      {
+        x: this.state.x + data.deltaX,
+        y: this.state.y + data.deltaY
+      },
+      () => {
+        if (this.props.onDrag) this.props.onDrag(this.getData())
+      }
+    )
+  }
+
+  dragSubjectSettings(event, data) {
+    this.setState(data, () => {
+      if (this.props.onDrag) this.props.onDrag(this.getData())
     })
   }
 
   dragNote(event, data) {
-    this.setState({
-      dx: this.state.dx + data.deltaX,
-      dy: this.state.dy + data.deltaY
-    })
+    this.setState(
+      {
+        dx: this.state.dx + data.deltaX,
+        dy: this.state.dy + data.deltaY
+      },
+      () => {
+        if (this.props.onDrag) this.props.onDrag(this.getData())
+      }
+    )
   }
 
   render() {
     const cleanedProps = Object.assign({}, this.props, {
-      x: this.state.x,
-      y: this.state.y,
-      dx: this.state.dx,
-      dy: this.state.dy,
+      ...this.state,
       dragSubject: this.dragSubject.bind(this),
       dragNote: this.dragNote.bind(this),
+      dragSubjectSettings: this.dragSubjectSettings.bind(this),
+      dragEnd: this.dragEnd.bind(this),
+      dragStart: this.dragStart.bind(this),
       editMode: true,
       className: classnames(this.props.className, "editable")
     })

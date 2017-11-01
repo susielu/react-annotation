@@ -7,7 +7,16 @@ import PropTypes from "prop-types"
 
 export default class SubjectRect extends Subject {
   getComponents({ width = 100, height = 100, editMode }) {
-    return Rect({ width, height, editMode })
+    const components = Rect({ width, height, editMode })
+    components.handleKeys = { width, height }
+
+    components.handleFunction = (h, data) => {
+      return {
+        [h.key]: h.key === "width" ? width + data.deltaX : height + data.deltaY
+      }
+    }
+
+    return components
   }
 }
 

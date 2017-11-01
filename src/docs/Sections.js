@@ -6,13 +6,9 @@ import Avatar from "material-ui/Avatar"
 
 import {
   Annotation,
-  EditableAnnotation,
   SubjectCircle,
-  SubjectBracket,
-  SubjectCustom,
   ConnectorElbow,
   ConnectorEndDot,
-  BracketNote,
   Note
 } from "../components/index"
 
@@ -99,50 +95,83 @@ export function Types() {
 export function AnnotationTypesAPI() {
   const source = `
   ### **_Built-in Annotations_**
-  Built-in annotations are a set of preset Subject, Connectors, and Notes assembled for the set in the [Annotation Types](#annotation-types) section.
+  Built-in annotations are a set of preset Subjects, Connectors, and Notes as seen in the [Annotation Types](#annotation-types) section.
   
-  **AnnotationCalloutCircle**
-  - radius or outerRadius and innerRadius: Number, pixels
-  - radiusPadding: Number, pixels
-  
-  **AnnotationCalloutRect**
-  - width: Number, pixels
-  - height: Number, pixels
-  
-  **AnnotationXYThreshold**
-  - x1, x2 or y1, y2: Number, pixels
-
-  **AnnotationCalloutCustom**
-  - custom: Array, JSX SVG elements to create the custom subject shape
-  - customID (required):a custom DOM Element ID for masking the connector with the subject
-  - transform: String, for offsetting the subject so it can be centered
-  
-  **AnnotationBracket**
-  - width or height: Number, pixels
-  - depth: Number, pixels depending on +/- it will determine which way the bracket extrudes from
-  - type: String, "square" (default), or "curly"
-
-  **AnnotationBadge**: this is the only base annotation that doesn't have a connector or note
-  - text: String
-  - radius: Number, pixels
-  - x: "left" or "right"
-  - y: "top" or "bottom"
-  
-  **No subject**
-  - AnnotationLabel
-  - AnnotationCallout
-  - AnnotationCalloutElbow
-  - AnnotationCalloutCurve
-  
-  
-  annotation.**on()**
-  Takes the values 'subjectover', 'subjeout', 'subjectclick', 'connectorover', 'connectout', 'connectorclick', 'noteover', 'noteout', 'notecclick', 'dragend', 'dragstart' as custom dispatch events you can hook into. 
-
+  All built-in annotation types have the following props
+  - **x (number)**: X position of the subject and one end of the connector
+  - **y (number)**: Y position of the subject and one end of the connector
+  - **dx (number)**: X Position of the note and one end of the connector, as an offset from x,y
+  - **dx (number)**: Y Position of the note and one end of the connector, as an offset from x,y
+  - **nx (number)**: X Position of the note and one end of the connector, as the raw x,y position **not** an offset
+  - **ny (number)**: Y Position of the note and one end of the connector, as the raw x,y position **not** an offset
+  - **color(string)**: only in version 2.0, you can pass a color string that will be applied to the annotation. This color can be overridden via css or inline-styles
+  - **editMode(boolean)**:
   - **disable ([string])**: takes the values 'connector', 'subject', and 'note' pass them in this array if you want to disable those parts from rendering
+  - **onDragStart(function)**: Passes the current props of the annotation when dragging starts
+  - **onDrag(function)**: Passes the current props of the annotation while dragging 
+  - **onDragEnd(function)**: Passes the current props of the annotation when dragging ends
+  - **connector (object with the following properties and (values))**
+    - type (string, "line", "elbow", or "curve"): 
+    - end (string, "dot", or "arrow"):
+    - **curve (function):** Made to use a curve function from [d3-shape](https://github.com/d3/d3-shape). Defaults to \`curveCatmullRom\`.
+    - **points (array[[x,y],[x,y]...])**: Anchor points for the curve function  
+    - **endScale (number)**: A multiplying factor for sizing the connector end  - **note (object with the following properties and (values))**: 
+    - **title (string)**
+    - **label (string)**
+    - **padding (number)**
+    - **orientation (string, "leftRight" or "topBottom")**: Determines based on the dx, and dy, which direction to orient the \`Note\`. Default is set to \`"topBottom\`
+    - **lineType (string, "vertical" or "horizontal")**: Creates a line along the edge of the note text. **Please Note** if you set this to \`"vertical"\` then \`orientation\` is fixed at \`"leftRight"\` and vice versa if it is \`"horizontal"\` then \`orientation\` is fixed at \`"topBottom"\` 
+    
+    
+    - **align (string, "left", "right", "middle", "top", "bottom", "dynamic")**: When the orientation is set to \`"topBottom"\` or lineType is set to \`"horiztonal"\` you can align the note with \`"top"\`, \`"bottom"\`, \`"middle"\`, or \`"dynamic"\`. When the orientation is set to \`"leftRight"\` or \`lineType\` is set to \`"vertical"\` you can align the note with \`"left"\`, \`"right"\`, \`"middle"\`, or \`"dynamic"\`. In addition to the alignment settings for the note, you can also use the css ${"`text-anchor`"} attribute to align the text within the note
+    - **color (string)**: Color string, inherited from Annotation but can be customized by directly adding to Note as a prop
+    - **wrapSplitter (string or regex)**:
+  - **subject (object)**: The following section details the props that can be sent to each Annotation Type's subject property
+  
+  Specific variables can be sent as properties of the \`subject\` annotation
+
+  **&lt;AnnotationCalloutCircle />**
+  - **radius (number)**: Radius of circle
+  - **radiusPadding (number)**: Padding outside of circle, affects space between circle stroke and start of connector
+  - **innerRadius (number)**: Inner radius to make a ring annotation
+  - **outerRadius (number)**: Outer radius to make a ring annotation
+  
+  **&lt;AnnotationCalloutRect />**
+  - **width (number)**: Accepts negative and positive values
+  - **height (number)**: Accepts negative and positive values
+  
+  
+  **&lt;AnnotationXYThreshold />**
+  - **x1, x2 or y1, y2 (number)**: x1, x2 for a horizontal line, y1, y2 for a vertical line
+
+  **&lt;AnnotationCalloutCustom />**
+  - **customID (string: Required)**: Needed for masking the connector by the subject, must be a unique DOM id for the entire page.
+  - **custom ([array of JSX SVG shapes])**: Array of JSX SVG shapes that are used to compose the custom element.
+  - **transform (SVG transform string)**: Convenience if you need to offset your custom shape
+  
+  **&lt;AnnotationBracket />**
+  - **width or height (number)**: Using width creates a horizontal bracket, using a height creates a vertical bracket
+  - **depth (number)**: How far the bracket pops out from the corners. Defaults to 20.
+  - **type (string, "square" or "curly")**: Type of bracket 
+
+  **&lt;AnnotationBadge />**: this is the only base annotation that doesn't have a connector or note
+  - **text (string)**: Text placed in the center of the badge
+  - **radius (number)**: Default of 14px
+  - **topBottom (string, "top" or "bottom")**: Location, can be combined with leftRight to offset the badge into a corner such as the top right corner. Default places the badge in the center.
+  - **leftRight (string, "left" or "right")**: Location, can be combined with topBottom to offset the badge into a corner such as the top right corner. Default places the badge in the center.
+  "
+  
+  These built-in types do not have a Subject
+  - **&lt;AnnotationLabel />**
+  - **&lt;AnnotationCallout />**
+  - **&lt;AnnotationCalloutElbow />**
+  - **&lt;AnnotationCalloutCurve />**
+
+
   `
   return (
     <section>
-      <Title text="Built-In Types API" id="types-api" />
+      <Title text="API" id="types-api" />
       <ReactMarkdown source={source} />
     </section>
   )
@@ -168,8 +197,8 @@ export function ExtendingTypes() {
           title="Custom annotation"
           label="A donut a day is just really cute"
         >
-          <SubjectCircle />
           <DonutIcon />
+          <SubjectCircle />
           <ConnectorElbow>
             <ConnectorEndDot />
           </ConnectorElbow>
@@ -266,6 +295,9 @@ export function API() {
   - **nx (number)**: X Position of the note and one end of the connector, as the raw x,y position **not** an offset
   - **ny (number)**: Y Position of the note and one end of the connector, as the raw x,y position **not** an offset
   - **color(string)**: only in version 2.0, you can pass a color string that will be applied to the annotation. This color can be overridden via css or inline-styles
+  - **onDragStart(function)**: Passes the current props of the annotation when dragging starts
+  - **onDrag(function)**: Passes the current props of the annotation while dragging 
+  - **onDragEnd(function)**: Passes the current props of the annotation when dragging ends
 
    **&lt;EditableAnnotation />**
   
@@ -317,6 +349,9 @@ export function API() {
   - **dx (number)**: X Position of the note and one end of the connector, as an offset from x,y
   - **dx (number)**: Y Position of the note and one end of the connector, as an offset from x,y
 
+  All connectors have this 
+  - **connectorProps (object)**: any additional props on the group element containing the note. For example this is where you could attach mouseover events.
+
   **&lt;ConnectorLine />** no additional props
 
 
@@ -353,6 +388,7 @@ export function API() {
   - **align (string, "left", "right", "middle", "top", "bottom", "dynamic")**: When the orientation is set to \`"topBottom"\` or lineType is set to \`"horiztonal"\` you can align the note with \`"top"\`, \`"bottom"\`, \`"middle"\`, or \`"dynamic"\`. When the orientation is set to \`"leftRight"\` or \`lineType\` is set to \`"vertical"\` you can align the note with \`"left"\`, \`"right"\`, \`"middle"\`, or \`"dynamic"\`. In addition to the alignment settings for the note, you can also use the css ${"`text-anchor`"} attribute to align the text within the note
   - **color (string)**: Color string, inherited from Annotation but can be customized by directly adding to Note as a prop
  - **wrapSplitter (string or regex)**:
+ - **gProps (object)**: any additional props on the group element containing the note. For example this is where you could attach mouseover events.
 
   **&lt;BracketNote />** use with &lt;SubjectBracket />
   - This Note has all of the same properties as the regular Note, except it has dynamic positioning of the dx, and dy depending on the settings given to \`SubjectBracket\`

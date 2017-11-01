@@ -6,8 +6,34 @@ import Subject from "./Subject"
 import PropTypes from "prop-types"
 
 export default class SubjectBadge extends Subject {
-  getComponents({ leftRight, topBottom, text, editMode, color }) {
-    return Badge({ leftRight, topBottom, text, editMode, color })
+  getComponents({ leftRight, topBottom, text, editMode, color, radius }) {
+    const components = Badge({
+      leftRight,
+      topBottom,
+      text,
+      editMode,
+      color,
+      radius
+    })
+
+    components.handleKeys = { leftRight, topBottom }
+    components.handleFunction = (h, data) => {
+      const lr =
+        data.x < -radius * 2
+          ? "left"
+          : data.x > radius * 2 ? "right" : undefined
+      const tb =
+        data.y < -radius * 2
+          ? "top"
+          : data.y > radius * 2 ? "bottom" : undefined
+
+      return {
+        leftRight: lr,
+        topBottom: tb
+      }
+    }
+
+    return components
   }
 }
 

@@ -1,10 +1,7 @@
 import { lineBuilder } from "../Builder"
-// import { event } from "d3-selection"
 import { lineSetup } from "./type-line"
 import { curveCatmullRom } from "d3-shape"
-// import { pointHandle } from "../Handles"
 
-// export default ({ type, connectorData, subjectType }) => {
 const createPoints = function(offset, anchors = 2) {
   const diff = { x: offset.x / (anchors + 1), y: offset.y / (anchors + 1) }
   const p = []
@@ -28,9 +25,6 @@ export default ({
   width,
   height
 }) => {
-  // if (!connectorData) {
-  //   connectorData = {}
-  // }
   if (!points || typeof points === "number") {
     points = createPoints({ x: dx, y: dy }, points)
   }

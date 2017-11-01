@@ -6,8 +6,8 @@ import ConnectorEnd from "./ConnectorEnd"
 import PropTypes from "prop-types"
 
 export default class ConnectorEndDot extends ConnectorEnd {
-  getComponents({ x, y, dy, dx, lineData }) {
-    return EndDot({ x, y, dx, dy, lineData })
+  getComponents({ x, y, dy, dx, lineData, scale }) {
+    return EndDot({ x, y, dx, dy, lineData, scale })
   }
 }
 
@@ -16,6 +16,7 @@ ConnectorEndDot.propTypes = {
   y: PropTypes.number,
   dx: PropTypes.number,
   dy: PropTypes.number,
+  scale: PropTypes.number,
   lineData: PropTypes.array
   //array of arrays of x,y coordinates for the connector line
 }

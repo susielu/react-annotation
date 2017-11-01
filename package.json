@@ -17,8 +17,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "lint": "eslint src",
-    "browserify":
-      "browserify --transform browserify-global-shim --standalone ./bundle-index.js -g [ envify --NODE_ENV production ] -g uglifyify | uglifyjs --compress --mangle > ./bundle.js",
+    "browserify": "browserify --transform browserify-global-shim --standalone ./bundle-index.js -g [ envify --NODE_ENV production ] -g uglifyify | uglifyjs --compress --mangle > ./bundle.js",
     "prebuild": "babel src/components --out-dir lib --ignore test.js"
   },
   "browserify-global-shim": {
@@ -37,6 +36,7 @@
     "envify": "4.1.0",
     "enzyme": "2.9.1",
     "eslint": "3.8.1",
+    "eslint-plugin-react": "7.4.0",
     "history": "4.2.0",
     "material-ui": "^0.17.1",
     "react": "^15.5.0",
@@ -60,7 +60,12 @@
     "prop-types": "15.6.0",
     "react-draggable": "3.0.3"
   },
-  "files": ["LICENSE", "README.md", "CHANGELOG.md", "lib"],
+  "files": [
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md",
+    "lib"
+  ],
   "keywords": [
     "react",
     "component",

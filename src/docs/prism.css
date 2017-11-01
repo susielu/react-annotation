@@ -159,7 +159,7 @@ pre[class*="language-"] {
 .token.prolog,
 .token.doctype,
 .token.cdata {
-  color: #008000;
+  color: #668389;
   font-style: italic;
 }
 
@@ -168,7 +168,7 @@ pre[class*="language-"] {
 }
 
 .token.string {
-  color: #a31515;
+  color: #e91e63;
 }
 
 .token.punctuation,
@@ -193,7 +193,7 @@ pre[class*="language-"] {
 .language-json .token.boolean,
 .language-json .token.number,
 code[class*="language-css"] {
-  color: #0000ff;
+  color: #2196f3;
 }
 
 .token.function {

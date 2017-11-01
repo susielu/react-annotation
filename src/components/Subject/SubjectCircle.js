@@ -13,7 +13,21 @@ export default class SubjectCircle extends Subject {
     radiusPadding,
     editMode
   }) {
-    return Circle({ radius, radiusPadding, innerRadius, outerRadius, editMode })
+    const components = Circle({
+      radius,
+      radiusPadding,
+      innerRadius,
+      outerRadius,
+      editMode
+    })
+
+    components.handleKeys = { radius, innerRadius, outerRadius }
+    components.handleFunction = (h, data) => {
+      return {
+        [h.key]: components.handleKeys[h.key] + data.deltaX * Math.sqrt(2)
+      }
+    }
+    return components
   }
 }
 

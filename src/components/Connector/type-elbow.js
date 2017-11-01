@@ -1,10 +1,6 @@
 import { lineBuilder } from "../Builder"
 
-// export default ({ type, subjectType }) => {
-//TODO allow custom x1, y1
 export default ({
-  x,
-  y,
   dx,
   dy,
   radius,
@@ -13,17 +9,11 @@ export default ({
   width,
   height
 }) => {
-  // const annotation = type.annotation
-  // const offset = annotation.position
+  let x1 = 0,
+    x2 = dx,
+    y1 = 0,
+    y2 = dy
 
-  let x1 = 0, //annotation.x - offset.x,
-    x2 = dx, //x1 + annotation.dx,
-    y1 = 0, //annotation.y - offset.y,
-    y2 = dy //y1 + annotation.dy
-
-  // const subjectData = annotation.subject
-
-  // if (subjectType === "rect") {
   if (width && height) {
     if ((width > 0 && dx > 0) || (width < 0 && dx < 0)) {
       if (Math.abs(width) > Math.abs(dx)) x1 = width / 2
@@ -54,11 +44,6 @@ export default ({
     ye = y2
     xe = x1 + diffY * opposite
   }
-
-  // if (
-  //   subjectType === "circle" &&
-  //   (subjectData.outerRadius || subjectData.radius)
-  // ) {
 
   if (outerRadius || radius) {
     const r = (outerRadius || radius) + (radiusPadding || 0)

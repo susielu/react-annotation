@@ -142,7 +142,7 @@ const typesOrder = [
 export default class Types extends React.Component {
   state = {
     name: "AnnotationLabel",
-    description: types["AnnotationLabel"].summary,
+    description: types.AnnotationLabel.summary,
     editMode: true,
     connector: {},
     note: {},
@@ -193,6 +193,7 @@ export default class Types extends React.Component {
     const t = types[name]
     const subject = this.state.subject
     const connector = this.state.connector
+
     const note = Object.assign(
       {},
       {

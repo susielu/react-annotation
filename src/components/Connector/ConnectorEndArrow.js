@@ -6,7 +6,7 @@ import ConnectorEnd from "./ConnectorEnd"
 import PropTypes from "prop-types"
 
 export default class ConnectorEndArrow extends ConnectorEnd {
-  getComponents({ x, y, dy, dx, lineData, color }) {
+  getComponents({ x, y, dy, dx, lineData, scale }) {
     let start = lineData[1]
     const end = lineData[0]
     const distance = Math.sqrt(
@@ -16,7 +16,7 @@ export default class ConnectorEndArrow extends ConnectorEnd {
       start = lineData[2]
     }
 
-    return EndArrow({ x, y, dx, dy, start, end })
+    return EndArrow({ x, y, dx, dy, start, end, scale })
   }
 }
 
@@ -25,5 +25,6 @@ ConnectorEndArrow.propTypes = {
   y: PropTypes.number,
   dx: PropTypes.number,
   dy: PropTypes.number,
+  scale: PropTypes.number,
   lineData: PropTypes.array
 }

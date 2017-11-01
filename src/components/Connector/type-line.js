@@ -1,9 +1,6 @@
 import { lineBuilder } from "../Builder"
 
-// export const lineSetup = ({ type, subjectType }) => {
 export const lineSetup = ({
-  x,
-  y,
   dx,
   dy,
   radius,
@@ -12,20 +9,10 @@ export const lineSetup = ({
   width,
   height
 }) => {
-  // let annotation = type.annotation
-  // let offset = annotation.position
-
-  let x1 = 0, //annotation.x - offset.x,
-    x2 = dx, //x1 + annotation.dx,
-    y1 = 0, //annotation.y - offset.y,
-    y2 = dy //y1 + annotation.dy
-
-  // const subjectData = annotation.subject
-
-  // if (
-  //   subjectType === "circle" &&
-  //   (subjectData.outerRadius || subjectData.radius)
-  // ) {
+  let x1 = 0,
+    x2 = dx,
+    y1 = 0,
+    y2 = dy
 
   if (outerRadius || radius) {
     const h = Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2))
@@ -37,8 +24,6 @@ export const lineSetup = ({
   }
 
   if (width && height) {
-    // const { width, height } = subjectData
-
     if ((width > 0 && dx > 0) || (width < 0 && dx < 0)) {
       if (Math.abs(width) > Math.abs(dx)) x1 = width / 2
       else x1 = width

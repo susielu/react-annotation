@@ -6,6 +6,7 @@ import ConnectorElbow from "./Connector/ConnectorElbow"
 import ConnectorCurve from "./Connector/ConnectorCurve"
 import ConnectorEndDot from "./Connector/ConnectorEndDot"
 import ConnectorEndArrow from "./Connector/ConnectorEndArrow"
+import DefaultSubject from "./Subject/Subject"
 import SubjectCircle from "./Subject/SubjectCircle"
 import SubjectBadge from "./Subject/SubjectBadge"
 import SubjectBracket from "./Subject/SubjectBracket"
@@ -23,7 +24,7 @@ const annotationMapper = (
   props,
   Connector,
   NoteDefaultProps = {},
-  Subject,
+  Subject = DefaultSubject,
   SubjectDefaultProps = {},
   NoteType = Note
 ) => {
@@ -39,10 +40,10 @@ const annotationMapper = (
     nx,
     ny,
     color,
-    className
-    //TODO come back to understand
-    //data
-    //id
+    className,
+    onDrag,
+    onDragStart,
+    onDragEnd
   } = props
   const CONNECTORS = {
     type: {
@@ -73,6 +74,9 @@ const annotationMapper = (
       ny={ny}
       color={color}
       className={className}
+      onDrag={onDrag}
+      onDragStart={onDragStart}
+      onDragEnd={onDragEnd}
       {...SubjectDefaultProps}
       {...subject}
     >

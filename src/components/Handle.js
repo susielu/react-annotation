@@ -1,5 +1,4 @@
 import React from "react"
-// import EndDot from "./Connector/end-dot"
 import { DraggableCore } from "react-draggable"
 import PropTypes from "prop-types"
 
@@ -11,13 +10,9 @@ export default class Handle extends React.Component {
       r = 10,
       handleStart,
       handleDrag,
-      handleStop
+      handleStop,
+      offsetParent
     } = this.props
-    // const { x, y, dy, dx, lineData, color = "grey" } = this.props
-
-    // const d = EndDot({ x, y, dx, dy, lineData })
-    // const c = d.components[0]
-    // return <c.type className={c.className} {...c.attrs} fill={color} />
 
     return (
       <DraggableCore
@@ -27,6 +22,7 @@ export default class Handle extends React.Component {
         onStart={handleStart}
         onDrag={handleDrag}
         onStop={handleStop}
+        offsetParent={offsetParent}
         defaultClassNameDragging="dragging"
       >
         <circle

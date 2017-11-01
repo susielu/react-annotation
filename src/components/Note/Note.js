@@ -50,6 +50,10 @@ export default class Note extends React.Component {
     ) {
       this.updateText(nextProps)
     }
+
+    if (nextProps.editMode && this.props.align === "dynamic") {
+      this.updateText(nextProps)
+    }
   }
   updateText({
     orientation,
@@ -110,7 +114,7 @@ export default class Note extends React.Component {
     })
   }
 
-  wrapText(textRef, key, text, width, lineHeight = 1.2) {
+  wrapText(textRef, key, text, width) {
     const initialAttrs = {
       x: 0,
       dy: "1.2em"
@@ -294,11 +298,21 @@ export default class Note extends React.Component {
     let handle
 
     if (editMode) {
-      handle = <Handle handleDrag={this.props.dragNote} />
+      handle = (
+        <Handle
+          handleStart={this.props.dragStart}
+          handleStop={this.props.dragEnd}
+          handleDrag={this.props.dragNote}
+        />
+      )
     }
 
     return (
-      <g transform={`translate(${dx}, ${dy})`} className="annotation-note">
+      <g
+        transform={`translate(${dx}, ${dy})`}
+        className="annotation-note"
+        {...this.props.gProps}
+      >
         <g
           className="annotation-note-content"
           transform={`translate(${this.state.translateX},

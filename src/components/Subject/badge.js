@@ -1,7 +1,5 @@
 import { lineBuilder, arcBuilder } from "../Builder"
-// import { event } from "d3-selection"
 
-// export default ({ subjectData = {}, type = {} }, annotation = {}) => {
 export default ({
   radius = 14,
   leftRight,
@@ -10,29 +8,9 @@ export default ({
   color,
   editMode
 }) => {
-  // const typeSettings = type.typeSettings && type.typeSettings.subject
-
-  // if (!subjectData.radius) {
-  //   if (typeSettings && typeSettings.radius) {
-  //     subjectData.radius = typeSettings.radius
-  //   } else {
-  //     subjectData.radius = 14
-  //   }
-  // }
-  // if (!subjectData.x) {
-  //   if (typeSettings && typeSettings.x) {
-  //     subjectData.x = typeSettings.x
-  //   }
-  // }
-  // if (!subjectData.y) {
-  //   if (typeSettings && typeSettings.y) {
-  //     subjectData.y = typeSettings.y
-  //   }
-  // }
-
   let handles = []
   const components = []
-  // const radius = subjectData.radius
+
   const innerRadius = radius * 0.7
   let x = 0
   let y = 0
@@ -103,31 +81,16 @@ export default ({
   }
 
   if (editMode) {
-    const dragBadge = event => {
-      const x =
-        event.x < -radius * 2
-          ? "left"
-          : event.x > radius * 2 ? "right" : undefined
-      const y =
-        event.y < -radius * 2
-          ? "top"
-          : event.y > radius * 2 ? "bottom" : undefined
-
-      // type.redrawSubject()
-      return { x, y }
-    }
-
     const bHandles = {
       x: x * 2,
       y: y * 2,
-      drag: dragBadge, //.bind(type),
-      type: "dragXY"
+      offsetParent: true
     }
     if (!bHandles.x && !bHandles.y) {
       bHandles.y = -radius
     }
 
-    handles = bHandles //type.mapHandles([bHandles])
+    handles = [bHandles]
   }
 
   let textNode
