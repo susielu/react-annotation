@@ -26,6 +26,7 @@ export default {
       sourceMap: true,
       globals: {
         react: "React",
+        "prop-types": "PropTypes",
         "react-dom": "ReactDOM"
       }
     }
