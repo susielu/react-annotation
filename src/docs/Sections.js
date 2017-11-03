@@ -47,9 +47,10 @@ export function Introduction() {
           establish context, and direct our users to insights and anomalies
         </strong>. I made{" "}
         <a href="http://d3-annotation.susielu.com/">d3-annotation</a> to tackle
-        this problem, however our team uses React more and more. Due to easier
-        composability and performance, I've re-made that library as a React
-        module.
+        this problem, however most of our apps are built in React. The design is
+        heavily based on d3-annotation, with{" "}
+        <a href="#migrating">a few differences</a>, two new annotation types,
+        and easy to compose annotations.
       </p>
 
       <p>
@@ -72,10 +73,13 @@ export function Setup() {
     <section>
       <Title text={"Setup"} id="setup" />
       <h3>Using NPM</h3>
-      <p>You can add the react-annotation as a node module by running</p>
+      <p>You can add the react-annotation as a node module by running:</p>
       <Code>{"npm i react-annotation -S"}</Code>
-      If you're new to using React, I suggest using react-create-app to start
-      your project.
+      If you're new to using React, I suggest using{" "}
+      <a href="https://github.com/facebookincubator/create-react-app">
+        react-create-app
+      </a>{" "}
+      to start your project.
     </section>
   )
 }
@@ -86,7 +90,9 @@ export function Types() {
   
   <img alt="Anatomy of an annotation" src="img/anatomy.png" />
   
-  They are the foundational blocks of this library.`
+  They are the foundational blocks of this library. Explore the UI below to understand the built-in types.
+  `
+
   return (
     <section>
       <Title text="Annotation Types" id="types" />
@@ -99,7 +105,7 @@ export function Types() {
 export function AnnotationTypesAPI() {
   const source = `
   ### **_Built-in Annotations_**
-  Built-in annotations are a set of preset Subjects, Connectors, and Notes as seen in the [Annotation Types](#annotation-types) section.
+  Built-in annotations are a set of preset Subjects, Connectors, and Notes as seen in the [Annotation Types](#types) section.
   
   All built-in annotation types have the following props
   - **x (number)**: X position of the subject and one end of the connector
@@ -108,15 +114,15 @@ export function AnnotationTypesAPI() {
   - **dx (number)**: Y Position of the note and one end of the connector, as an offset from x,y
   - **nx (number)**: X Position of the note and one end of the connector, as the raw x,y position **not** an offset
   - **ny (number)**: Y Position of the note and one end of the connector, as the raw x,y position **not** an offset
-  - **color(string)**: only in version 2.0, you can pass a color string that will be applied to the annotation. This color can be overridden via css or inline-styles
-  - **editMode(boolean)**:
-  - **disable ([string])**: takes the values 'connector', 'subject', and 'note' pass them in this array if you want to disable those parts from rendering
-  - **onDragStart(function)**: Passes the current props of the annotation when dragging starts
-  - **onDrag(function)**: Passes the current props of the annotation while dragging 
-  - **onDragEnd(function)**: Passes the current props of the annotation when dragging ends
+  - **color(string)**: A color string that will be applied to the annotation. This color can be overridden via css
+  - **editMode(boolean)**: Turns on handles for moving annotations, the following are only trigged with editMode on:
+    - **onDragStart(function)**: Passes the current props of the annotation when dragging starts
+    - **onDrag(function)**: Passes the current props of the annotation while dragging 
+    - **onDragEnd(function)**: Passes the current props of the annotation when dragging ends
+  - **disable ([string])**: takes the values 'connector', 'subject', and 'note'. Pass them in this array if you want to disable those parts from rendering
   - **connector (object with the following properties and (values))**
-    - type (string, "line", "elbow", or "curve"): 
-    - end (string, "dot", or "arrow"):
+    - **type (string, "line", "elbow", or "curve")** 
+    - **end (string, "dot", or "arrow")**
     - **curve (function):** Made to use a curve function from [d3-shape](https://github.com/d3/d3-shape). Defaults to \`curveCatmullRom\`.
     - **points (array[[x,y],[x,y]...])**: Anchor points for the curve function  
     - **endScale (number)**: A multiplying factor for sizing the connector end  
@@ -124,18 +130,18 @@ export function AnnotationTypesAPI() {
     - **title (string)**
     - **label (string)**
     - **padding (number)**
-    - **orientation (string, "leftRight" or "topBottom")**: Determines based on the dx, and dy, which direction to orient the \`Note\`. Default is set to \`"topBottom\`
+    - **orientation (string, "leftRight" or "topBottom")**: Determines based on the dx, and dy, which direction to orient the \`Note\`. Default is set to \`"topBottom"\`
     - **lineType (string, "vertical" or "horizontal")**: Creates a line along the edge of the note text. **Please Note** if you set this to \`"vertical"\` then \`orientation\` is fixed at \`"leftRight"\` and vice versa if it is \`"horizontal"\` then \`orientation\` is fixed at \`"topBottom"\` 
     - **align (string, "left", "right", "middle", "top", "bottom", "dynamic")**: When the orientation is set to \`"topBottom"\` or lineType is set to \`"horiztonal"\` you can align the note with \`"top"\`, \`"bottom"\`, \`"middle"\`, or \`"dynamic"\`. When the orientation is set to \`"leftRight"\` or \`lineType\` is set to \`"vertical"\` you can align the note with \`"left"\`, \`"right"\`, \`"middle"\`, or \`"dynamic"\`. In addition to the alignment settings for the note, you can also use the css ${"`text-anchor`"} attribute to align the text within the note
     - **color (string)**: Color string, inherited from Annotation but can be customized by directly adding to Note as a prop
-    - **wrapSplitter (string or regex)**:
+    - **wrapSplitter (string or regex)**: A string if you want to customize the way your text is split into new lines, such as manual breaks on new lines
   - **subject (object)**: The following section details the props that can be sent to each Annotation Type's subject property
   
-  Specific variables can be sent as properties of the \`subject\` annotation
+  Specific variables can be sent as properties of the \`subject\` 
 
   **&lt;AnnotationCalloutCircle />**
   - **radius (number)**: Radius of circle
-  - **radiusPadding (number)**: Padding outside of circle, affects space between circle stroke and start of connector
+  - **radiusPadding (number)**: Padding outside of circle, affects spacing between the circle and the start of the connector
   - **innerRadius (number)**: Inner radius to make a ring annotation
   - **outerRadius (number)**: Outer radius to make a ring annotation
   
@@ -159,10 +165,10 @@ export function AnnotationTypesAPI() {
 
   **&lt;AnnotationBadge />**: this is the only base annotation that doesn't have a connector or note
   - **text (string)**: Text placed in the center of the badge
-  - **radius (number)**: Default of 14px
+  - **radius (number)**: Defaults to 14.
   - **topBottom (string, "top" or "bottom")**: Location, can be combined with leftRight to offset the badge into a corner such as the top right corner. Default places the badge in the center.
   - **leftRight (string, "left" or "right")**: Location, can be combined with topBottom to offset the badge into a corner such as the top right corner. Default places the badge in the center.
-  "
+  
   
   These built-in types do not have a Subject
   - **&lt;AnnotationLabel />**
@@ -181,18 +187,29 @@ export function AnnotationTypesAPI() {
 }
 
 export function ExtendingTypes() {
+  const x = 100
+  const y = 50
+
+  const circle = (
+    <circle cx={x} cy={y} r={7} fill="none" stroke={theme.accent} />
+  )
+
+  const NoteCircle = ({ x, y, color }) => {
+    return <circle cx={x} cy={y} r={3} fill={color} />
+  }
+
   return (
     <section>
-      <Title text="Extending Types" id="extending-types" />
+      <Title text="Composable Annotations" id="composable" />
       <p>
-        In react-annotation it is easy to add custom elements to an annotation.
-        All annotations are composable with the different subjects, connectors,
-        and a note.
+        In <code>react-annotation</code> it is easy to add custom elements to an
+        annotation. All annotations are composable with the different subjects,
+        connectors, and notes.
       </p>
       <svg height={300} className="viz">
         <Annotation
-          x={100}
-          y={100}
+          x={x}
+          y={y}
           dx={100}
           dy={50}
           radius={35}
@@ -205,28 +222,49 @@ export function ExtendingTypes() {
           <ConnectorElbow>
             <ConnectorEndDot />
           </ConnectorElbow>
-          <circle fill={theme.accent} cx={100} cy={50} r={3} />
+          <NoteCircle />
+          {circle}
           <Note align="middle" lineType="vertical" padding={10} />
         </Annotation>
       </svg>
       <Code>
         {`
+        const x = 100
+        const y = 50
+      
+        //You can customize just by using the same
+        //values you would pass to annotation
+        const circle = (
+          <circle cx={x} cy={y} r={7} fill="none" stroke={theme.accent} />
+        )
+      
+        //Or you can use a render function that 
+        //inherits all of the props from the parent
+        //Anotation element
+        const NoteCircle = ({ x, y, color }) => {
+          return <circle cx={x} cy={y} r={3} fill={color} />
+        }
+
         <Annotation
-        x={100}
-        y={100}
+        x={x}
+        y={y}
         dx={100}
         dy={50}
         radius={35}
         color={theme.accent}
         title="Custom annotation"
-        label="A donut a day is just really cute"
+        label="Donut annotations be free!"
       >
-        <SubjectCircle />
         <DonutIcon />
+        <SubjectCircle />
         <ConnectorElbow>
           <ConnectorEndDot />
         </ConnectorElbow>
-        <circle fill={theme.accent} cx={100} cy={50} r={3} />
+
+        //Two custom elements added to this annotation
+        <NoteCircle />
+        {circle}
+
         <Note align="middle" lineType="vertical" padding={10} />
       </Annotation>`}
       </Code>
@@ -241,42 +279,46 @@ export function ExtendingTypes() {
 // }
 
 export function InPractice() {
-  const source = `
+  const source1 = `
   ### Selecting Elements
   
   - All of the visible shapes (aside from the edit handles) in the default annotations are **paths**
-  - There is an invisible rect (${"`rect.annotation-note-bg`"}) behind the text in the notes as a helper for more click area etc.
   - Hierarchy of classes:
   ![Annotation classes](img/classes.png)
   - Within the g.annotation-note-content there could be three additional elements: ${"`text.annotation-note-label`"}, ${"`text.annotation-note-title`"}, ${"`rect.annotation-note-bg`"}
-  
-  ### Basic Styles
-  
-  There is also a color property on annotations that will easily change the color of the entire annotation.
+    
+  - There is also a color property on annotations that will easily change the color of the entire annotation.
   
   ### Tips
   
   - In addition to the alignment settings for the note, you can also use the css ${"`text-anchor`"} attribute to align the text within the note
+  - There is an invisible rect (${"`rect.annotation-note-bg`"}) behind the text in the notes as a helper for more click area etc.
+  - If you are importing custom fonts, you may notice the annotations don't load perfectly with text wrapping and alignment. To fix that see [this example](https://github.com/susielu/d3-annotation/issues/33). 
 
-  - If you are importing custom fonts, you may notice the annotations don't load perfectly with text wrapping and alignment. To fix that you can use, ${"`document.fonts.ready`"} to make sure the fonts are loaded first to reflect the custom font's spacing for all of the calculations. 
+  ### Examples in Viz Frameworks
 
-  ### Integration with Semiotic
+  [Semiotic](https://emeeks.github.io/semiotic/#/semiotic/annotations)
 
-  react-annotation is integrated with semiotic. If you want to use one of these annotation types you simply need to.
 
-  ### Migrating from d3-annotation
+`
 
-  Differences from d3-annotation
-  - Component names are capitalized so annotationLabel in d3-annotation corresponds with AnnotationLabel in react-annotation
-  - There is no concept of an annotation collection. This felt unnecessary since the annotation data was being pushed into each annotation directly
-  - There is no concept of accessors. The assumption is that you would make over your annotations and give them the x, y, with any type of scaling functions.
-  
-  If you want to update your code from d3-annotation to react-annotation, here's an example: 
-  `
+  const source2 = `
+Differences from [d3-annotation](http://d3-annotation.susielu.com/)
+- Component names are capitalized so \`annotationLabel\` in d3-annotation corresponds with \`AnnotationLabel\` in react-annotation
+- There is no longer an annotation collection. This felt unnecessary since the annotation data was being pushed into each annotation directly
+- There is no longer accessors. The assumption is that you would map over your annotations and give them the x, y, with any type of scaling functions.
+- AnnotationBadge in react-annotation takes \`leftRight\` and \`topBottom\` parameters instead of the corresponding \`x\` and \`y\` parameteres in d3-annotation
+
+If you want to update your code from d3-annotation to react-annotation, here's an example of translation: 
+
+`
+
   return (
     <section>
       <Title text="In Practice" id="in-practice" />
-      <ReactMarkdown source={source} />
+      <ReactMarkdown source={source1} />
+      <h3 id="migrating">Migrating from d3-annotation</h3>
+      <ReactMarkdown source={source2} />
     </section>
   )
 }
@@ -292,13 +334,11 @@ export function Examples() {
 
 export function API() {
   const source1 = `  
-
-  
   
   ### **_Composable Annotations_**
-  When using composable annotations, you have an Annotation component, a subject, a connector, and a note are its children.
+  When using composable annotations, you have an Annotation component. Then a subject, a connector, and a note can be its children.
   
-  Examples are in the [Annotation Types UI]("#annotation-types"), and the [Extending Types]("#extending-types) sections.
+  Examples are in the [Annotation Types UI](#types), and the [Composable Annotations](#composable) sections.
   
   ### Annotation
   **&lt;Annotation />**
@@ -309,7 +349,7 @@ export function API() {
   - **dx (number)**: Y Position of the note and one end of the connector, as an offset from x,y
   - **nx (number)**: X Position of the note and one end of the connector, as the raw x,y position **not** an offset
   - **ny (number)**: Y Position of the note and one end of the connector, as the raw x,y position **not** an offset
-  - **color(string)**: only in version 2.0, you can pass a color string that will be applied to the annotation. This color can be overridden via css or inline-styles
+  - **color(string)**: A color string that will be applied to the annotation. This color can be overridden via css or inline-styles
 
    **&lt;EditableAnnotation />**
   
@@ -326,7 +366,7 @@ export function API() {
   const source3 = `
 **&lt;SubjectCircle />** 
   - **radius (number)**: Radius of circle
-  - **radiusPadding (number)**: Padding outside of circle, affects space between circle stroke and start of connector
+  - **radiusPadding (number)**: Padding outside of circle, affects spacing between the circle and the start of the connector
   - **innerRadius (number)**: Inner radius to make a ring annotation
   - **outerRadius (number)**: Outer radius to make a ring annotation
 
@@ -339,32 +379,29 @@ export function API() {
   - **x1, x2 or y1, y2 (number)**: x1, x2 for a horizontal line, y1, y2 for a vertical line
   
   **&lt;SubjectCustom />**
-  - **customID (string: Required)**: Needed for masking the connector by the subject, must be a unique DOM id for the entire page.
-  - **custom ([array of JSX SVG shapes])**: Array of JSX SVG shapes that are used to compose the custom element.
+  - **customID (string: Required)**: Needed for masking the connector by the subject, must be a unique DOM id for the entire page
+  - **custom ([array of JSX SVG shapes])**: Array of JSX SVG shapes that are used to compose the custom element
   - **transform (SVG transform string)**: Convenience if you need to offset your custom shape
 
   **&lt;SubjectBracket />**
   - **width or height (number)**: Using width creates a horizontal bracket, using a height creates a vertical bracket
-  - **depth (number)**: How far the bracket pops out from the corners. Defaults to 20.
+  - **depth (number)**: How far the bracket pops out from the corners, defaults to 20
   - **type (string, "square" or "curly")**: Type of bracket 
 
   **&lt;SubjectBadge />**
   - **text (string)**: Text placed in the center of the badge
-  - **radius (number)**: Default of 14px
-  - **topBottom (string, "top" or "bottom")**: Location, can be combined with leftRight to offset the badge into a corner such as the top right corner. Default places the badge in the center.
-  - **leftRight (string, "left" or "right")**: Location, can be combined with topBottom to offset the badge into a corner such as the top right corner. Default places the badge in the center.
+  - **radius (number)**: Defaults to 14
+  - **topBottom (string, "top" or "bottom")**: Location, can be combined with leftRight to offset the badge into a corner such as the top right corner. Default places the badge in the center
+  - **leftRight (string, "left" or "right")**: Location, can be combined with topBottom to offset the badge into a corner such as the top right corner. Default places the badge in the center
   
   ### Connectors
 
-  All connectors are automatically passed the x,y and dx,dy positions from \`Annotation\`.  
+  All connectors are automatically passed the x, y and dx, dy positions from \`Annotation\`.  
 
   - **x (number)**: X position of the subject and one end of the connector
   - **y (number)**: Y position of the subject and one end of the connector
   - **dx (number)**: X Position of the note and one end of the connector, as an offset from x,y
   - **dx (number)**: Y Position of the note and one end of the connector, as an offset from x,y
-
-  All connectors have this 
-  - **connectorProps (object)**: any additional props on the group element containing the note. For example this is where you could attach mouseover events.
 
   **&lt;ConnectorLine />** no additional props
 
@@ -373,7 +410,7 @@ export function API() {
 
 
   **&lt;ConnectorCurve />**
-  - **curve (function):** Made to use a curve function from [d3-shape](https://github.com/d3/d3-shape). Defaults to \`curveCatmullRom\`.
+  - **curve (function):** Made to use a curve function from [d3-shape](https://github.com/d3/d3-shape), defaults to \`curveCatmullRom\`.
   - **points (array[[x,y],[x,y]...])**: Anchor points for the curve function
 
 
@@ -386,9 +423,7 @@ export function API() {
 
   **&lt;ConnectorEndArrow />** no additional props
 
-  **&lt;ConnectorEndDot />** no additional props
-  
-  - Default dot is a circle with a radius of 3.
+  **&lt;ConnectorEndDot />** no additional props  
   
   ### Notes
 
@@ -401,16 +436,15 @@ export function API() {
   
   - **align (string, "left", "right", "middle", "top", "bottom", "dynamic")**: When the orientation is set to \`"topBottom"\` or lineType is set to \`"horiztonal"\` you can align the note with \`"top"\`, \`"bottom"\`, \`"middle"\`, or \`"dynamic"\`. When the orientation is set to \`"leftRight"\` or \`lineType\` is set to \`"vertical"\` you can align the note with \`"left"\`, \`"right"\`, \`"middle"\`, or \`"dynamic"\`. In addition to the alignment settings for the note, you can also use the css ${"`text-anchor`"} attribute to align the text within the note
   - **color (string)**: Color string, inherited from Annotation but can be customized by directly adding to Note as a prop
- - **wrapSplitter (string or regex)**:
- - **gProps (object)**: any additional props on the group element containing the note. For example this is where you could attach mouseover events.
-
+  - **wrapSplitter (string or regex)**: A string if you want to customize the way your text is split into new lines, such as manual breaks on new lines
+  
   **&lt;BracketNote />** use with &lt;SubjectBracket />
   - This Note has all of the same properties as the regular Note, except it has dynamic positioning of the dx, and dy depending on the settings given to \`SubjectBracket\`
 
   `
   return (
     <section>
-      <Title text="API" id="api" />
+      <Title text="API" id="composable-api" />
       <ReactMarkdown source={source1} />
       <Chip>
         <Avatar backgroundColor={theme.accent} icon={<AlertIcon />} />
@@ -429,7 +463,7 @@ export function API() {
         y={100}
         dx={20}
         
-        //Subject props given to annotation.
+        //Subject props given to Annotation.
         //They are passed down to the Subject.
         radius={30}
       >
@@ -442,9 +476,18 @@ export function API() {
 }
 
 export function Notes() {
+  const source = `
+
+  Inspired by [Mike Bostock](https://twitter.com/mbostock)'s work on [d3](https://d3js.org/), and all of the [prior art](https://github.com/susielu/d3-annotation#prior-art) in annotations, particularly [Adam Pearce](https://twitter.com/adamrpearce)'s [Swoopy Drag](https://1wheel.github.io/swoopy-drag/), and [Andrew Mollica](https://twitter.com/armollica)'s [Ring Note](https://github.com/armollica/d3-ring-note). 
+  
+  Thumbs up to [Nunito](https://fonts.google.com/specimen/Nunito) and [Bungee](https://fonts.google.com/specimen/Bungee) via Google Fonts and [Material UI](http://www.material-ui.com/#/) for making the docs site building a breeze.
+  
+  `
+
   return (
     <section>
       <Title text="Notes" id="notes" />
+      <ReactMarkdown source={source} />
     </section>
   )
 }

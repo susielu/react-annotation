@@ -475,10 +475,14 @@ export default class Types extends React.Component {
             color={theme.accent}
             note={note}
           />
+          <text x="30" y="415" className="summary">
+            Code below is ready to use with these setttings
+          </text>
         </svg>
 
         <Code>
           {`
+        /* This code is UPDATING based on the UI selections above */  
         /* With built-in defaults */
         <${name}
           x={150}

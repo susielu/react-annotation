@@ -20,7 +20,6 @@ export default class Annotation extends React.Component {
           ...child.props
         })
       )
-
     return (
       <g
         className={classnames("annotation", this.props.className)}
