@@ -8703,7 +8703,6 @@ window["ReactAnnotation"] =
 	      var childrenWithProps = _react2.default.Children.toArray(this.props.children).map(function (child) {
 	        return _react2.default.cloneElement(child, _extends({}, cleanedProps, child.props));
 	      });
-
 	      return _react2.default.createElement(
 	        "g",
 	        {
