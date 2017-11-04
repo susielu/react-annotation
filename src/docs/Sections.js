@@ -5,7 +5,7 @@ import { PrismCode } from "react-prism"
 import TypesUI from "./Types"
 import Chip from "material-ui/Chip"
 import Avatar from "material-ui/Avatar"
-import { Tooltip } from "./Examples"
+import { Tooltip, Emmys } from "./Examples"
 
 import {
   Annotation,
@@ -328,6 +328,10 @@ export function Examples() {
     <section>
       <Title text="Examples" id="examples" />
       <Tooltip />
+      <hr />
+      <h3>Annotations for labels, axis, and emphasis</h3>
+
+      <Emmys />
     </section>
   )
 }

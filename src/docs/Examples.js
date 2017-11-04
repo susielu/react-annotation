@@ -5,8 +5,14 @@ import { line } from "d3-shape"
 import { extent, max } from "d3-array"
 import stock from "./data/stock.json"
 import theme from "./theme"
-import { AnnotationCalloutCircle } from "../components/index"
+import {
+  AnnotationCalloutCircle,
+  AnnotationBadge,
+  AnnotationLabel,
+  AnnotationXYThreshold
+} from "../components/index"
 import { Code } from "./Sections"
+import yearNetwork from "./data/yearNetwork.json"
 
 export class Tooltip extends React.Component {
   constructor(props) {
@@ -222,4 +228,163 @@ export class Tooltip extends React.Component {
       </div>
     )
   }
+}
+
+export function Emmys() {
+  const width = 960,
+    height = 500,
+    margin = { top: 30, right: 130, bottom: 50, left: 340 }
+
+  const x = scaleLinear()
+    .range([margin.left, width - margin.right])
+    .domain([2013, 2017])
+  const y = scaleLinear().range([height - margin.bottom, margin.top])
+  const networkLines = yearNetwork.networkLines
+
+  y.domain([0, Math.max(...networkLines.map(d => d.max))])
+  let lineGen = line()
+    .x(function(d) {
+      return x(d.year)
+    })
+    .y(function(d) {
+      return y(d.value)
+    })
+
+  const colors = {
+    HBO: "black",
+    Netflix: "#D32F2F",
+    NBC: "#ffc107",
+    "FX Networks": "#0097a7",
+    ABC: "#00BFA5",
+    CBS: "#00BCD4",
+    FOX: "#3f51b5",
+    Showtime: "#C5CAE9",
+    AMC: "#D32F2F",
+    PBS: "#B39DDB",
+    Amazon: "#ffc107",
+    "Nat Geo": "#ff9800",
+    Hulu: "#00BFA5"
+  }
+  const highlight = ["HBO", "Netflix"]
+
+  const lines = networkLines
+    .sort((a, b) => a.total - b.total)
+    .map(d => (
+      <path
+        className="segment"
+        d={lineGen(d.line)}
+        fill="none"
+        stroke={colors[d.network] || "grey"}
+        strokeDasharray={highlight.indexOf(d.network) !== -1 ? "none" : "2, 4"}
+      />
+    ))
+
+  /* Code below relevant for annotations */
+  let previousNY = 0
+  const labelAnnotations = networkLines
+    .sort(
+      //sort annotations by last data point for ordering
+      (a, b) =>
+        b.line[b.line.length - 1].value - a.line[a.line.length - 1].value
+    )
+    .reduce((p, c) => {
+      //push annotation down if it will overlap
+      const ypx = y(c.line[c.line.length - 1].value)
+      let ny
+
+      if (ypx - previousNY < 10) {
+        ny = previousNY + 15
+      }
+
+      p.push(
+        <AnnotationLabel
+          note={{ label: c.network, orientation: "leftRight", align: "middle" }}
+          y={ypx}
+          x={width - margin.right}
+          dx={highlight.indexOf(c.network) !== -1 ? 20 : 5}
+          id={c.network}
+          color={colors[c.network]}
+          disable={["connector"]}
+          ny={ny} //use ny to directly place the note in xy space if needed
+        />
+      )
+      previousNY = ny || ypx
+
+      return p
+    }, [])
+
+  const axisAnnotations = networkLines
+    .filter(d => d.network === "HBO")[0]
+    .line.map(d => (
+      <AnnotationXYThreshold
+        note={{ label: d.year, align: "middle", lineType: null }}
+        ny={190}
+        className={"axis"}
+        y={190}
+        x={x(d.year)}
+        subject={{
+          y1: y(0),
+          y2: y(d.value)
+        }}
+      />
+    ))
+
+  const labels = networkLines
+    .filter(d => highlight.indexOf(d.network) !== -1)
+    .reduce((p, c) => {
+      p = p.concat(
+        c.line.map(d => {
+          return {
+            network: c.network,
+            year: d.year,
+            value: d.value
+          }
+        })
+      )
+      return p
+    }, [])
+
+  const badgeAnnotations = labels.map(d => {
+    return (
+      <AnnotationBadge
+        subject={{
+          text: d.value,
+          radius: 12
+        }}
+        color={colors[d.network]}
+        x={x(d.year)}
+        y={y(d.value)}
+      />
+    )
+  })
+
+  return (
+    <div>
+      <a href="https://codepen.io/susielu/pen/EbVQYL?editors=0010#0">
+        Explore in CodePen
+      </a>
+      <div style={{ position: "relative" }}>
+        <svg width={960} height={500} id="emmys">
+          <g className="lineChart">
+            {lines}
+            {labelAnnotations}
+            {axisAnnotations}
+            {badgeAnnotations}
+            <line
+              className="basline axis"
+              stroke="lightgrey"
+              x1={x(2013)}
+              x2={x(2017)}
+              y1={y(0)}
+              y2={y(0)}
+            />
+          </g>
+        </svg>
+        <div className="title">
+          <b style={{ color: "#d32f2f" }}>Netflix</b> Challenges <b>HBO</b> at
+          the 2017 Emmys
+        </div>
+      </div>
+    </div>
+  )
 }

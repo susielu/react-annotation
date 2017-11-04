@@ -1,5 +1,7 @@
 {
   "parser": "babel-eslint",
+  "plugins": ["react"],
+
   "rules": {
     "array-bracket-spacing": 0,
     "curly": 0,

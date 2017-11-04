@@ -163,3 +163,43 @@ img {
     display: none;
   }
 }
+
+#emmys .subject-ring {
+  display: none;
+}
+
+div.title {
+  font-size: 2em;
+  width: 200px;
+  position: absolute;
+  left: 70px;
+  top: 100px;
+  line-height: 1.5em;
+  color: "black";
+  /* font-family: "Lato"; */
+}
+
+#emmys .annotation.badge text {
+  font-weight: normal;
+  font-size: 10px;
+}
+
+#emmys .annotation text {
+  font-size: 0.7em;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.annotation.axis .annotation-note-bg {
+  fill: white;
+  stroke: white;
+  stroke-width: 10;
+}
+
+.annotation.axis path {
+  stroke: lightgrey;
+}
+
+.annotation.axis text {
+  fill: lightgrey;
+}

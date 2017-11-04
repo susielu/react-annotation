@@ -1,5 +1,7 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+public/ga.js
+
 # dependencies
 node_modules
 
@@ -9,6 +11,7 @@ coverage
 # production
 dist
 build
+build.zip
 lib
 
 # misc
