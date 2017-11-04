@@ -9096,8 +9096,8 @@ window["ReactAnnotation"] =
 	      connector,
 	      ConnectorEndType && _react2.default.createElement(ConnectorEndType, null)
 	    ),
-	    note && disable.indexOf("note") === -1 && _react2.default.createElement(NoteType, _extends({}, NoteDefaultProps, note)),
-	    Subject && disable.indexOf("subject") === -1 && _react2.default.createElement(Subject, null)
+	    Subject && disable.indexOf("subject") === -1 && _react2.default.createElement(Subject, null),
+	    note && disable.indexOf("note") === -1 && _react2.default.createElement(NoteType, _extends({}, NoteDefaultProps, note))
 	  );
 	};
 
