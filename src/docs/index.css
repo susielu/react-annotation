@@ -203,3 +203,9 @@ div.title {
 .annotation.axis text {
   fill: lightgrey;
 }
+
+.sticky-menu {
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+}
