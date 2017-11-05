@@ -43,7 +43,7 @@ class Docs extends React.Component {
     ]
 
     const list = sections.map(d => (
-      <p>
+      <p key={d.id}>
         <a href={"#" + d.id}>{d.name}</a>
       </p>
     ))
@@ -51,6 +51,7 @@ class Docs extends React.Component {
     const drawerSections = sections.map(d => {
       return (
         <MenuItem
+          key={d.id}
           onTouchTap={() => {
             this.setState({ open: false })
             window.location = `#${d.id}`

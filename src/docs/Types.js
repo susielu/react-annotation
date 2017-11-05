@@ -1,20 +1,14 @@
 import React from "react"
-import {
-  Card,
-  CardActions,
-  CardHeader,
-  CardMedia,
-  CardTitle,
-  CardText
-} from "material-ui/Card"
+import { Card, CardHeader, CardTitle, CardText } from "material-ui/Card"
 import Toggle from "material-ui/Toggle"
 import TextField from "material-ui/TextField"
-import classnames from "classnames"
+import FloatingActionButton from "material-ui/FloatingActionButton"
+import ContentAdd from "material-ui/svg-icons/content/add"
 
 import Annotations from "../components/index"
 import theme from "./theme"
 import { Code } from "./Sections"
-import { DonutIcon, PuppersIcon } from "./Icons"
+import { PuppersIcon } from "./Icons"
 
 const types = {
   AnnotationLabel: {
@@ -175,6 +169,14 @@ export default class Types extends React.Component {
     })
   }
 
+  updateSubject(property, value) {
+    const settings = Object.assign({}, this.state.subject)
+    settings[property] = value
+    this.setState({
+      subject: settings
+    })
+  }
+
   render() {
     const name = this.state.name
     const imgs = typesOrder.map(i => {
@@ -182,6 +184,7 @@ export default class Types extends React.Component {
       return (
         <img
           key={i}
+          alt={t.img}
           className={`icon ${name === i ? "selected" : ""}`}
           onClick={this.updateType.bind(this, i)}
           src={`img/${t.img}`}
@@ -290,9 +293,42 @@ export default class Types extends React.Component {
       alignSecond = "bottom"
     }
 
+    let bracketType
+
+    if (this.state.name === "AnnotationBracket") {
+      bracketType = (
+        <div style={{ position: "absolute", top: 20, right: 30 }}>
+          <FloatingActionButton
+            onTouchTap={this.updateSubject.bind(this, "type", "square")}
+            mini={true}
+            secondary={this.state.subject.type === "curly" ? true : false}
+            iconStyle={{
+              color: "white",
+              lineHeight: ".8em",
+              fontSize: "1.4em"
+            }}
+          >
+            {"]"}
+          </FloatingActionButton>
+          <FloatingActionButton
+            onTouchTap={this.updateSubject.bind(this, "type", "curly")}
+            mini={true}
+            secondary={this.state.subject.type !== "curly" ? true : false}
+            iconStyle={{
+              color: "white",
+              lineHeight: ".8em",
+              fontSize: "1.4em"
+            }}
+          >
+            {"}"}
+          </FloatingActionButton>
+        </div>
+      )
+    }
+
     return (
       <div>
-        <Card className="types-ui" expanded={true}>
+        <Card className="types-ui" initiallyExpanded={true}>
           <CardHeader
             title="Presets"
             style={{ fontWeight: "bold", borderBottom: "1px solid #d6daea" }}
@@ -381,6 +417,9 @@ export default class Types extends React.Component {
               <TextField
                 hintText="120"
                 floatingLabelFixed={true}
+                floatingLabelShrinkStyle={{
+                  height: 80
+                }}
                 fullWidth={true}
                 type="number"
                 onChange={(e, v) => {
@@ -457,29 +496,31 @@ export default class Types extends React.Component {
           </CardText>
         </Card>
         <h3>Use {name}</h3>
-        <svg className="types viz">
-          <g transform="translate(30,60)">
-            <text className="title">{name}</text>
-            <text className="summary" y={30}>
-              {this.state.description}
+        <div style={{ position: "relative" }}>
+          {bracketType}
+          <svg className="types viz">
+            <g transform="translate(30,60)">
+              <text className="title">{name}</text>
+              <text className="summary" y={30}>
+                {this.state.description}
+              </text>
+            </g>
+            <Annotation
+              x={150}
+              y={170}
+              dy={name === "AnnotationBracket" ? undefined : 117}
+              dx={name === "AnnotationBracket" ? undefined : 162}
+              editMode={this.state.editMode}
+              subject={subjectJoined}
+              connector={connector}
+              color={theme.accent}
+              note={note}
+            />
+            <text x="30" y="415" className="summary">
+              Code below is ready to use with these setttings
             </text>
-          </g>
-          <Annotation
-            x={150}
-            y={170}
-            dy={name === "AnnotationBracket" ? undefined : 117}
-            dx={name === "AnnotationBracket" ? undefined : 162}
-            editMode={this.state.editMode}
-            subject={subjectJoined}
-            connector={connector}
-            color={theme.accent}
-            note={note}
-          />
-          <text x="30" y="415" className="summary">
-            Code below is ready to use with these setttings
-          </text>
-        </svg>
-
+          </svg>
+        </div>
         <Code>
           {`
         /* This code is UPDATING based on the UI selections above */  

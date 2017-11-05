@@ -40,7 +40,7 @@ export default class SubjectBadge extends Subject {
 SubjectBadge.propTypes = {
   leftRight: PropTypes.oneOf(["left", "right"]),
   topBottom: PropTypes.oneOf(["top", "bottom"]),
-  text: PropTypes.string,
+  text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   color: PropTypes.string,
   editMode: PropTypes.bool
 }

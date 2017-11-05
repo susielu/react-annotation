@@ -76,7 +76,7 @@ export class Tooltip extends React.Component {
     })
 
     const annotations = labels.map((a, i) => (
-      <g>
+      <g key={i}>
         <AnnotationCalloutCircle
           dx={a.dx}
           dy={a.dy}
@@ -271,6 +271,7 @@ export function Emmys() {
     .sort((a, b) => a.total - b.total)
     .map(d => (
       <path
+        key={d.network}
         className="segment"
         d={lineGen(d.line)}
         fill="none"
@@ -298,6 +299,7 @@ export function Emmys() {
 
       p.push(
         <AnnotationLabel
+          key={c.network}
           note={{ label: c.network, orientation: "leftRight", align: "middle" }}
           y={ypx}
           x={width - margin.right}
@@ -317,6 +319,7 @@ export function Emmys() {
     .filter(d => d.network === "HBO")[0]
     .line.map(d => (
       <AnnotationXYThreshold
+        key={d.year}
         note={{ label: d.year, align: "middle", lineType: null }}
         ny={190}
         className={"axis"}
@@ -347,6 +350,7 @@ export function Emmys() {
   const badgeAnnotations = labels.map(d => {
     return (
       <AnnotationBadge
+        key={d.year + d.network}
         subject={{
           text: d.value,
           radius: 12

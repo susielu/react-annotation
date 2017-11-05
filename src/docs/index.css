@@ -132,7 +132,7 @@ img {
 
 .hide-sm img {
   float: left;
-  margin-left: 20px;
+  margin-left: 5px;
   margin-top: 0px;
   cursor: pointer;
 }
@@ -175,8 +175,8 @@ div.title {
   left: 70px;
   top: 100px;
   line-height: 1.5em;
-  color: "black";
-  /* font-family: "Lato"; */
+  color: black;
+  font-family: sans-serif;
 }
 
 #emmys .annotation.badge text {

@@ -11,7 +11,7 @@ export const muiTheme = {
     primary1Color: "#9610ff",
     //   // primary2Color: cyan700,
     //   // primary3Color: grey400,
-    //   accent1Color: "#b2dfdb",
+    accent1Color: "#bdbdbd",
     //   accent1ColorDark: "#82ada9"
     //   // accent2Color: grey100,
     //   // accent3Color: grey500,
