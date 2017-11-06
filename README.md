@@ -6,8 +6,6 @@ Full documentation: [http://react-annotation.susielu.com](http://react-annotatio
 
 
 ## Setup 
-### Include the file directly
-
 ### Using NPM
 
 You can add react-annotation as a node module by running
@@ -15,6 +13,7 @@ You can add react-annotation as a node module by running
 ```bash
 npm i react-annotation -S
 ```
+
 
 If you're new to using React, I suggest using [react-create-app](https://github.com/facebookincubator/create-react-app) to start your project
 
