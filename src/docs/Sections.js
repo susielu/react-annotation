@@ -229,6 +229,9 @@ export function ExtendingTypes() {
       </svg>
       <Code>
         {`
+        import { Annotation, SubjectCircle, ConnectorElbow, ConnectorEndDot, 
+          Note } from 'react-annotation'
+
         const x = 100
         const y = 50
       
@@ -297,8 +300,11 @@ export function InPractice() {
 
   ### Examples in Viz Frameworks
 
-  [Semiotic](https://emeeks.github.io/semiotic/#/semiotic/annotations)
+  Semiotic
+  - [Example](https://emeeks.github.io/semiotic/#/semiotic/annotations) with an AnnotationCalloutCircle, AnnotationXYThreshold, and AnnotationClloutElbow
+  - [Wiki](https://github.com/emeeks/semiotic/wiki/Using-Annotations) on using annotations
 
+  Reach out if you add examples to your framework and would like them listed here.
 
 `
 
@@ -319,6 +325,127 @@ If you want to update your code from d3-annotation to react-annotation, here's a
       <ReactMarkdown source={source1} />
       <h3 id="migrating">Migrating from d3-annotation</h3>
       <ReactMarkdown source={source2} />
+      <Code>
+        {`
+/* ---------------------------- */        
+/* Annotations in d3-annotation */
+/* ---------------------------- */
+
+const annotations = [{
+    note: { label: "Steve Jobs Returns" },
+    subject: {
+      y1: margin.top,
+      y2: height - margin.bottom
+    },
+    y: margin.top,
+    data: { x: "7/9/1997"} //position the x based on an x scale
+  },
+  {
+    note: { label: "iPod Release"},
+    subject: {
+      y1: margin.top,
+      y2: height - margin.bottom
+    },
+    y: margin.top,
+    data: { x: "10/23/2001"}
+  },
+  {
+    note: { label: "Stock Split 2:1", 
+      lineType:"none", 
+      orientation: "leftRight", 
+      align: "middle" },
+    className: "anomaly",
+    type: d3.annotationCalloutCircle,
+    subject: { radius: 35 },
+    data: { x: "6/21/2000", y: 76},
+    dx: 40
+  },
+  ]
+
+  const type = d3.annotationCustomType(
+    d3.annotationXYThreshold, 
+    {"note":{
+        "lineType":"none",
+        "orientation": "top",
+        "align":"middle"}
+    }
+  )
+
+  const makeAnnotations = d3.annotation()
+    .type(type)
+    //Gives you access to any data objects in the annotations array
+    .accessors({ 
+      x: function(d){ return x(new Date(d.x))},
+      y: function(d){ return y(d.y) }
+    })
+    .annotations(annotations)
+    .textWrap(30)
+
+  d3.select("svg")
+    .append("g")
+    .attr("class", "annotation-group")
+    .call(makeAnnotations)
+
+/* ------------------------------- */
+/* Annotations in react-annotation */
+/* ------------------------------- */
+
+import { AnnotationXYThreshold, AnnotationCalloutCircle } from "react-annotation"
+
+const makeAnnotations = () => {
+  const annotations = [{
+    note: { label: "Steve Jobs Returns",     
+      orientation: "top"},
+    subject: {
+      y1: margin.top,
+      y2: height - margin.bottom
+    },
+    y: margin.top,
+    data: { x: "7/9/1997"},
+    type: AnnotationXYThreshold
+  },
+  {
+    note: { label: "iPod Release",
+      orientation: "top"},
+    subject: {
+      y1: margin.top,
+      y2: height - margin.bottom
+    },
+    y: margin.top,
+    data: { x: "10/23/2001"},
+    type: AnnotationXYThreshold
+  },
+  {
+    note: { label: "Stock Split 2:1", 
+      orientation: "leftRight"},
+    className: "anomaly",
+    subject: { radius: 35 },
+    data: { x: "6/21/2000", y: 76},
+    dx: 40
+    type: AnnotationCalloutCircle,
+  }].map(a => {
+    const Annotation = a.type
+    const { note, subject, y, dx, data } = a 
+    note.wrap = 30
+    note.lineType = null
+    note.align = "middle"
+    return <Annotation
+      x={x(new Date(data.x))}
+      y={data.y && y(data.y) || y}
+      dx={dx}
+      note={note}
+      subject={subject}
+    />
+  })
+
+  return <svg>
+    <g className="annotation-group">
+      {annotations}
+    </g>
+  </svg>
+}
+`}
+      </Code>
     </section>
   )
 }
@@ -481,8 +608,7 @@ export function API() {
 
 export function Notes() {
   const source = `
-
-  Inspired by [Mike Bostock](https://twitter.com/mbostock)'s work on [d3](https://d3js.org/), and all of the [prior art](https://github.com/susielu/d3-annotation#prior-art) in annotations, particularly [Adam Pearce](https://twitter.com/adamrpearce)'s [Swoopy Drag](https://1wheel.github.io/swoopy-drag/), and [Andrew Mollica](https://twitter.com/armollica)'s [Ring Note](https://github.com/armollica/d3-ring-note). 
+  Inspired by all of the [prior art](https://github.com/susielu/d3-annotation#prior-art) in annotations, particularly [Adam Pearce](https://twitter.com/adamrpearce)'s [Swoopy Drag](https://1wheel.github.io/swoopy-drag/), and [Andrew Mollica](https://twitter.com/armollica)'s [Ring Note](https://github.com/armollica/d3-ring-note). 
   
   Thumbs up to [Nunito](https://fonts.google.com/specimen/Nunito) and [Bungee](https://fonts.google.com/specimen/Bungee) via Google Fonts and [Material UI](http://www.material-ui.com/#/) for making the docs site building a breeze.
   

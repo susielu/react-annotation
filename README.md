@@ -2,6 +2,9 @@
 
 Full documentation: [http://react-annotation.susielu.com](http://react-annotation.susielu.com)
 
+![composable-annotation](composable-annotation.gif)
+
+
 ## Setup 
 ### Include the file directly
 
