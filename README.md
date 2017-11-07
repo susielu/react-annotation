@@ -15,7 +15,7 @@ npm i react-annotation -S
 ```
 
 
-If you're new to using React, I suggest using [react-create-app](https://github.com/facebookincubator/create-react-app) to start your project
+If you're new to using React, I suggest using [create-react-app](https://github.com/facebookincubator/create-react-app) to start your project
 
 ## Feedback
 I would love to hear from you about any additional features that would be useful, please say hi on twitter [@DataToViz](https://www.twitter.com/DataToViz).
