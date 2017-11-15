@@ -115,7 +115,7 @@ export function AnnotationTypesAPI() {
   - **nx (number)**: X Position of the note and one end of the connector, as the raw x,y position **not** an offset
   - **ny (number)**: Y Position of the note and one end of the connector, as the raw x,y position **not** an offset
   - **color(string)**: A color string that will be applied to the annotation. This color can be overridden via css
-  - **events(object)**: An object with [react event hanlders](https://reactjs.org/docs/handling-events.html) as keys and functions to handle those events
+  - **events(object)**: An object with [react event hanlders](https://reactjs.org/docs/handling-events.html) as keys and functions to handle those events. Each handler is bound with the annotation context and has the prarameters: annotation props, annotation state, event
   - **editMode(boolean)**: Turns on handles for moving annotations, the following are only trigged with editMode on:
     - **onDragStart(function)**: Passes the current props of the annotation when dragging starts
     - **onDrag(function)**: Passes the current props of the annotation while dragging 
@@ -217,6 +217,11 @@ export function ExtendingTypes() {
           color={theme.accent}
           title="Custom annotation"
           label="Donut annotations be free!"
+          events={{
+            onClick: (props, state, event) => {
+              console.log(props, state, event)
+            }
+          }}
         >
           <DonutIcon />
           <SubjectCircle />
@@ -258,6 +263,11 @@ export function ExtendingTypes() {
         color={theme.accent}
         title="Custom annotation"
         label="Donut annotations be free!"
+        events={{
+          onClick: (props, state, event) => {
+            console.log(props, state, event)
+          }
+        }}
       >
         <DonutIcon />
         <SubjectCircle />
@@ -482,7 +492,7 @@ export function API() {
   - **nx (number)**: X Position of the note and one end of the connector, as the raw x,y position **not** an offset
   - **ny (number)**: Y Position of the note and one end of the connector, as the raw x,y position **not** an offset
   - **color(string)**: A color string that will be applied to the annotation. This color can be overridden via css or inline-styles
-  - **events(object)**: An object with [react event hanlders](https://reactjs.org/docs/handling-events.html) as keys and functions to handle those events
+  - **events(object)**: An object with [react event hanlders](https://reactjs.org/docs/handling-events.html) as keys and functions to handle those events. Each handler is bound with the annotation context and has the prarameters: annotation props, annotation state, event
 
    **&lt;EditableAnnotation />**
   

@@ -8687,6 +8687,8 @@ window["ReactAnnotation"] =
 	  _createClass(Annotation, [{
 	    key: "render",
 	    value: function render() {
+	      var _this2 = this;
+
 	      var _props = this.props,
 	          x = _props.x,
 	          y = _props.y,
@@ -8704,6 +8706,11 @@ window["ReactAnnotation"] =
 	      var childrenWithProps = _react2.default.Children.toArray(this.props.children).map(function (child) {
 	        return _react2.default.cloneElement(child, _extends({}, cleanedProps, child.props));
 	      });
+
+	      Object.keys(events).forEach(function (k) {
+	        events[k] = events[k].bind(_this2, _this2.props, _this2.state);
+	      });
+
 	      return _react2.default.createElement(
 	        "g",
 	        _extends({
@@ -8726,7 +8733,8 @@ window["ReactAnnotation"] =
 	  y: 0,
 	  dx: 0,
 	  dy: 0,
-	  color: "grey"
+	  color: "grey",
+	  events: {}
 	};
 
 	Annotation.propTypes = {

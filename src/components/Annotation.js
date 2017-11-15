@@ -20,6 +20,11 @@ export default class Annotation extends React.Component {
           ...child.props
         })
       )
+
+    Object.keys(events).forEach(k => {
+      events[k] = events[k].bind(this, this.props, this.state)
+    })
+
     return (
       <g
         className={classnames("annotation", this.props.className)}
@@ -37,7 +42,8 @@ Annotation.defaultProps = {
   y: 0,
   dx: 0,
   dy: 0,
-  color: "grey"
+  color: "grey",
+  events: {}
 }
 
 Annotation.propTypes = {
