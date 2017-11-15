@@ -4,7 +4,7 @@ import PropTypes from "prop-types"
 
 export default class Annotation extends React.Component {
   render() {
-    const { x, y, nx, ny } = this.props
+    const { x, y, nx, ny, events } = this.props
 
     const cleanedProps = Object.assign({}, this.props)
     delete cleanedProps.children
@@ -24,6 +24,7 @@ export default class Annotation extends React.Component {
       <g
         className={classnames("annotation", this.props.className)}
         transform={`translate(${x}, ${y})`}
+        {...events}
       >
         {childrenWithProps}
       </g>
@@ -45,5 +46,6 @@ Annotation.propTypes = {
   dx: PropTypes.number,
   dy: PropTypes.number,
   color: PropTypes.string,
-  editMode: PropTypes.bool
+  editMode: PropTypes.bool,
+  events: PropTypes.object
 }

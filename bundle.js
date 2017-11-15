@@ -7218,7 +7218,7 @@ window["ReactAnnotation"] =
 	SubjectBadge.propTypes = {
 	  leftRight: _propTypes2.default.oneOf(["left", "right"]),
 	  topBottom: _propTypes2.default.oneOf(["top", "bottom"]),
-	  text: _propTypes2.default.string,
+	  text: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number]),
 	  color: _propTypes2.default.string,
 	  editMode: _propTypes2.default.bool
 	};
@@ -8691,7 +8691,8 @@ window["ReactAnnotation"] =
 	          x = _props.x,
 	          y = _props.y,
 	          nx = _props.nx,
-	          ny = _props.ny;
+	          ny = _props.ny,
+	          events = _props.events;
 
 
 	      var cleanedProps = Object.assign({}, this.props);
@@ -8705,10 +8706,10 @@ window["ReactAnnotation"] =
 	      });
 	      return _react2.default.createElement(
 	        "g",
-	        {
+	        _extends({
 	          className: (0, _classnames2.default)("annotation", this.props.className),
 	          transform: "translate(" + x + ", " + y + ")"
-	        },
+	        }, events),
 	        childrenWithProps
 	      );
 	    }
@@ -8734,7 +8735,8 @@ window["ReactAnnotation"] =
 	  dx: _propTypes2.default.number,
 	  dy: _propTypes2.default.number,
 	  color: _propTypes2.default.string,
-	  editMode: _propTypes2.default.bool
+	  editMode: _propTypes2.default.bool,
+	  events: _propTypes2.default.object
 	};
 
 /***/ },
@@ -9053,7 +9055,8 @@ window["ReactAnnotation"] =
 	      onDrag = props.onDrag,
 	      onDragStart = props.onDragStart,
 	      onDragEnd = props.onDragEnd,
-	      editMode = props.editMode;
+	      editMode = props.editMode,
+	      events = props.events;
 
 	  var CONNECTORS = {
 	    type: {
@@ -9090,7 +9093,9 @@ window["ReactAnnotation"] =
 	      onDragStart: onDragStart,
 	      onDragEnd: onDragEnd,
 	      editMode: editMode
-	    }, SubjectDefaultProps, subject),
+	    }, SubjectDefaultProps, subject, {
+	      events: events
+	    }),
 	    ConnectorType && _react2.default.createElement(
 	      ConnectorType,
 	      connector,

@@ -3,7 +3,6 @@ import { Card, CardHeader, CardTitle, CardText } from "material-ui/Card"
 import Toggle from "material-ui/Toggle"
 import TextField from "material-ui/TextField"
 import FloatingActionButton from "material-ui/FloatingActionButton"
-import ContentAdd from "material-ui/svg-icons/content/add"
 
 import Annotations from "../components/index"
 import theme from "./theme"
