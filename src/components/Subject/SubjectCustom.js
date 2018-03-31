@@ -14,8 +14,8 @@ export default class SubjectCustom extends Subject {
     if (editMode) {
       handles = (
         <Handle
-          handleStart={this.props.onDragStart}
-          handleStop={this.props.onDragEnd}
+          handleStart={this.props.dragStart}
+          handleStop={this.props.dragEnd}
           handleDrag={this.props.dragSubject}
         />
       )

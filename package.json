@@ -15,7 +15,7 @@
   "web": "bundle.js",
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && npm run rollup",
     "test": "react-scripts test --env=jsdom",
     "lint": "eslint src",
     "rollup": "rollup -c rollup.js ",
@@ -23,9 +23,7 @@
     "prebuild": "babel src/components --out-dir lib --ignore test.js"
   },
   "browserify": {
-    "transform": [
-      "browserify-global-shim"
-    ]
+    "transform": ["browserify-global-shim"]
   },
   "browserify-global-shim": {
     "react": "React",
@@ -59,7 +57,8 @@
     "react-router": "^4.0.0-beta.6",
     "react-router-dom": "4.0.0",
     "react-scripts": "0.8.5",
-    "react-sticky": "git://github.com/susielu/react-sticky.git#23141c78f7e0501dc6a7b31b9e33db2e367b185f",
+    "react-sticky":
+      "git://github.com/susielu/react-sticky.git#23141c78f7e0501dc6a7b31b9e33db2e367b185f",
     "react-tap-event-plugin": "2.0.1",
     "react-test-renderer": "15.6.1",
     "uglify-js": "3.1.4",
@@ -77,12 +76,7 @@
     "react-draggable": "3.0.3",
     "viz-annotation": "0.0.1-3"
   },
-  "files": [
-    "LICENSE",
-    "README.md",
-    "CHANGELOG.md",
-    "lib"
-  ],
+  "files": ["LICENSE", "README.md", "CHANGELOG.md", "lib"],
   "keywords": [
     "react",
     "component",
