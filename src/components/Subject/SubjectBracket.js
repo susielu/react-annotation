@@ -13,12 +13,12 @@ export default class SubjectBracket extends Subject {
     components.handleFunction = (h, data) => {
       if (h.key === "depth") {
         return {
-          depth: depth + data[`delta${h.type}`]
+          depth: depth + data[`oDelta${h.type}`]
         }
       } else {
         return {
           [h.key]:
-            handleKeys[h.key] + data[h.key === "width" ? "deltaX" : "deltaY"]
+            handleKeys[h.key] + data[h.key === "width" ? "oDeltaX" : "oDeltaY"]
         }
       }
     }

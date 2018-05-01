@@ -19,13 +19,17 @@ export default class SubjectBadge extends Subject {
     components.handleKeys = { leftRight, topBottom }
     components.handleFunction = (h, data) => {
       const lr =
-        data.x < -radius * 2
+        data.oDeltaX < -radius * 2
           ? "left"
-          : data.x > radius * 2 ? "right" : undefined
+          : data.oDeltaX > radius * 2
+            ? "right"
+            : undefined
       const tb =
-        data.y < -radius * 2
+        data.oDeltaY < -radius * 2
           ? "top"
-          : data.y > radius * 2 ? "bottom" : undefined
+          : data.oDeltaY > radius * 2
+            ? "bottom"
+            : undefined
 
       return {
         leftRight: lr,

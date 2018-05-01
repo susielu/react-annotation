@@ -24,7 +24,7 @@ export default class SubjectCircle extends Subject {
     components.handleKeys = { radius, innerRadius, outerRadius }
     components.handleFunction = (h, data) => {
       return {
-        [h.key]: components.handleKeys[h.key] + data.deltaX * Math.sqrt(2)
+        [h.key]: components.handleKeys[h.key] + data.oDeltaX * Math.sqrt(2)
       }
     }
     return components

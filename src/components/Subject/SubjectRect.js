@@ -12,7 +12,8 @@ export default class SubjectRect extends Subject {
 
     components.handleFunction = (h, data) => {
       return {
-        [h.key]: h.key === "width" ? width + data.deltaX : height + data.deltaY
+        [h.key]:
+          h.key === "width" ? width + data.oDeltaX : height + data.oDeltaY
       }
     }
 
