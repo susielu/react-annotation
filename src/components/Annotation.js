@@ -1,5 +1,5 @@
 import React from "react"
-import classnames from "classnames"
+import classnames from "./classnames"
 import PropTypes from "prop-types"
 
 export default class Annotation extends React.Component {

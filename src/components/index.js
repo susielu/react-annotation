@@ -20,18 +20,16 @@ import BracketNote from "./Note/BracketNote"
 import Annotation from "./Annotation"
 import EditableAnnotation from "./EditableAnnotation"
 
-import {
-  AnnotationLabel,
-  AnnotationCallout,
-  AnnotationCalloutCircle,
-  AnnotationCalloutCurve,
-  AnnotationCalloutElbow,
-  AnnotationCalloutRect,
-  AnnotationXYThreshold,
-  AnnotationBadge,
-  AnnotationBracket,
-  AnnotationCalloutCustom
-} from "./Types"
+import AnnotationLabel from "./Types/AnnotationLabel"
+import AnnotationCallout from "./Types/AnnotationCallout"
+import AnnotationCalloutElbow from "./Types/AnnotationCalloutElbow"
+import AnnotationCalloutCurve from "./Types/AnnotationCalloutCurve"
+import AnnotationCalloutCircle from "./Types/AnnotationCalloutCircle"
+import AnnotationCalloutRect from "./Types/AnnotationCalloutRect"
+import AnnotationXYThreshold from "./Types/AnnotationXYThreshold"
+import AnnotationBadge from "./Types/AnnotationBadge"
+import AnnotationBracket from "./Types/AnnotationBracket"
+import AnnotationCalloutCustom from "./Types/AnnotationCalloutCustom"
 
 export {
   Connector,

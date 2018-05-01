@@ -1,6 +1,6 @@
 import React from "react"
 import Annotation from "./Annotation"
-import classnames from "classnames"
+import classnames from "./classnames"
 
 export default class EditableAnnotation extends React.Component {
   state = {
@@ -36,6 +36,8 @@ export default class EditableAnnotation extends React.Component {
   }
 
   dragSubject(event, data) {
+    console.log("in drag", data)
+    // if (data.deltaX || data.deltaY) {
     this.setState(
       {
         x: this.state.x + data.deltaX,
@@ -45,6 +47,7 @@ export default class EditableAnnotation extends React.Component {
         if (this.props.onDrag) this.props.onDrag(this.getData())
       }
     )
+    // }
   }
 
   dragSubjectSettings(event, data) {

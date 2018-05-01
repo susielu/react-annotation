@@ -226,7 +226,9 @@ export default class Types extends React.Component {
       const e =
         connectorJoined.end === "arrow"
           ? "ConnectorEndArrow"
-          : connectorJoined.end === "dot" ? "ConnectorEndDot" : undefined
+          : connectorJoined.end === "dot"
+            ? "ConnectorEndDot"
+            : undefined
 
       if (e) {
         return `
@@ -250,7 +252,9 @@ export default class Types extends React.Component {
             ? "SubjectThreshold"
             : name === "AnnotationBadge"
               ? "SubjectBadge"
-              : name === "AnnotationCalloutRect" ? "SubjectRect" : undefined
+              : name === "AnnotationCalloutRect"
+                ? "SubjectRect"
+                : undefined
 
       if (s) {
         return `<${s} />`
@@ -264,16 +268,16 @@ export default class Types extends React.Component {
         <div>
           <p>Orientation</p>
           <img
-            className={`tiny-icon ${note.orientation === "topBottom"
-              ? "selected"
-              : ""}`}
+            className={`tiny-icon ${
+              note.orientation === "topBottom" ? "selected" : ""
+            }`}
             onClick={this.updateNote.bind(this, "orientation", "topBottom")}
             src="img/topBottom.png"
           />
           <img
-            className={`tiny-icon ${note.orientation === "leftRight"
-              ? "selected"
-              : ""}`}
+            className={`tiny-icon ${
+              note.orientation === "leftRight" ? "selected" : ""
+            }`}
             onClick={this.updateNote.bind(this, "orientation", "leftRight")}
             src="img/leftRight.png"
           />
@@ -338,7 +342,8 @@ export default class Types extends React.Component {
               onToggle={() =>
                 this.setState({
                   editMode: !this.state.editMode
-                })}
+                })
+              }
               style={{
                 float: "right",
                 width: 30,
@@ -367,16 +372,16 @@ export default class Types extends React.Component {
                 onClick={this.updateNote.bind(this, "lineType", null)}
               />
               <img
-                className={`tiny-icon ${note.lineType === "vertical"
-                  ? "selected"
-                  : ""}`}
+                className={`tiny-icon ${
+                  note.lineType === "vertical" ? "selected" : ""
+                }`}
                 src="img/vertical.png"
                 onClick={this.updateNote.bind(this, "lineType", "vertical")}
               />
               <img
-                className={`tiny-icon ${note.lineType === "horizontal"
-                  ? "selected"
-                  : ""}`}
+                className={`tiny-icon ${
+                  note.lineType === "horizontal" ? "selected" : ""
+                }`}
                 src="img/horizontal.png"
                 onClick={this.updateNote.bind(this, "lineType", "horizontal")}
               />
@@ -391,23 +396,23 @@ export default class Types extends React.Component {
                 onClick={this.updateNote.bind(this, "align", null)}
               />
               <img
-                className={`tiny-icon ${note.align === "middle"
-                  ? "selected"
-                  : ""}`}
+                className={`tiny-icon ${
+                  note.align === "middle" ? "selected" : ""
+                }`}
                 src="img/middle.png"
                 onClick={this.updateNote.bind(this, "align", "middle")}
               />
               <img
-                className={`tiny-icon ${note.align === alignFirst
-                  ? "selected"
-                  : ""}`}
+                className={`tiny-icon ${
+                  note.align === alignFirst ? "selected" : ""
+                }`}
                 src={`img/${alignFirst}.png`}
                 onClick={this.updateNote.bind(this, "align", alignFirst)}
               />
               <img
-                className={`tiny-icon ${note.align === alignSecond
-                  ? "selected"
-                  : ""}`}
+                className={`tiny-icon ${
+                  note.align === alignSecond ? "selected" : ""
+                }`}
                 src={`img/${alignSecond}.png`}
                 onClick={this.updateNote.bind(this, "align", alignSecond)}
               />
@@ -449,45 +454,45 @@ export default class Types extends React.Component {
               <b>Connector</b>
               <p>Type</p>
               <img
-                className={`tiny-icon ${connectorJoined.type === "line"
-                  ? "selected"
-                  : ""}`}
+                className={`tiny-icon ${
+                  connectorJoined.type === "line" ? "selected" : ""
+                }`}
                 onClick={this.updateConnector.bind(this, "type", "line")}
                 src="img/line.png"
               />
               <img
-                className={`tiny-icon ${connectorJoined.type === "elbow"
-                  ? "selected"
-                  : ""}`}
+                className={`tiny-icon ${
+                  connectorJoined.type === "elbow" ? "selected" : ""
+                }`}
                 onClick={this.updateConnector.bind(this, "type", "elbow")}
                 src="img/elbow.png"
               />
               <img
-                className={`tiny-icon ${connectorJoined.type === "curve"
-                  ? "selected"
-                  : ""}`}
+                className={`tiny-icon ${
+                  connectorJoined.type === "curve" ? "selected" : ""
+                }`}
                 onClick={this.updateConnector.bind(this, "type", "curve")}
                 src="img/curve.png"
               />
               <p>End</p>
               <img
-                className={`tiny-icon ${!connectorJoined.end
-                  ? "selected"
-                  : ""}`}
+                className={`tiny-icon ${
+                  !connectorJoined.end ? "selected" : ""
+                }`}
                 onClick={this.updateConnector.bind(this, "end", null)}
                 src="img/none.png"
               />
               <img
-                className={`tiny-icon ${connectorJoined.end === "arrow"
-                  ? "selected"
-                  : ""}`}
+                className={`tiny-icon ${
+                  connectorJoined.end === "arrow" ? "selected" : ""
+                }`}
                 onClick={this.updateConnector.bind(this, "end", "arrow")}
                 src="img/arrow.png"
               />
               <img
-                className={`tiny-icon ${connector.end === "dot"
-                  ? "selected"
-                  : ""}`}
+                className={`tiny-icon ${
+                  connector.end === "dot" ? "selected" : ""
+                }`}
                 onClick={this.updateConnector.bind(this, "end", "dot")}
                 src="img/dot.png"
               />
@@ -541,9 +546,11 @@ export default class Types extends React.Component {
               note
             )
           ).replace(/,/g, ",\n            ")}}`}
-          ${connector.type || connector.end
-            ? `connector={${JSON.stringify(connector)}}`
-            : ""}
+          ${
+            connector.type || connector.end
+              ? `connector={${JSON.stringify(connector)}}`
+              : ""
+          }
           ${t.subject ? `subject={${JSON.stringify(t.subject)}}` : ""}
         />
         //
@@ -561,9 +568,9 @@ export default class Types extends React.Component {
           ${(t.subject
             ? Object.keys(t.subject).map(
                 k =>
-                  `\n          ${k}=${k !== "text"
-                    ? `{${t.subject[k]}}`
-                    : `"${t.subject[k]}"`}`
+                  `\n          ${k}=${
+                    k !== "text" ? `{${t.subject[k]}}` : `"${t.subject[k]}"`
+                  }`
               )
             : []
           ).join("")}
