@@ -12,13 +12,11 @@
     "url": "https://github.com/susielu/react-annotation/issues"
   },
   "main": "lib/index.js",
-  "web": "bundle.js",
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && npm run webpack",
     "test": "react-scripts test --env=jsdom",
     "lint": "eslint src",
-    "rollup": "rollup -c rollup.js ",
     "webpack": "NODE_ENV=production webpack",
     "prebuild": "babel src/components --out-dir lib --ignore test.js"
   },
