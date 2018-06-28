@@ -5488,6 +5488,8 @@ window["ReactAnnotation"] =
 	  value: true
 	});
 
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -5754,8 +5756,22 @@ window["ReactAnnotation"] =
 	          lineType = _props2.lineType,
 	          color = _props2.color,
 	          titleColor = _props2.titleColor,
-	          labelColor = _props2.labelColor;
+	          labelColor = _props2.labelColor,
+	          bgPadding = _props2.bgPadding;
 
+
+	      var bgPaddingFinal = { top: 0, bottom: 0, left: 0, right: 0 };
+
+	      if (typeof bgPadding === "number") {
+	        bgPaddingFinal = {
+	          top: bgPadding,
+	          bottom: bgPadding,
+	          left: bgPadding,
+	          right: bgPadding
+	        };
+	      } else if (bgPadding && (typeof bgPadding === "undefined" ? "undefined" : _typeof(bgPadding)) === "object") {
+	        bgPaddingFinal = Object.assign(bgPaddingFinal, bgPadding);
+	      }
 
 	      var noteTitle = void 0,
 	          noteText = void 0,
@@ -5837,8 +5853,10 @@ window["ReactAnnotation"] =
 	          },
 	          _react2.default.createElement("rect", {
 	            className: "annotation-note-bg",
-	            width: this.state.bbox.width,
-	            height: this.state.bbox.height,
+	            width: this.state.bbox.width + bgPaddingFinal.left + bgPaddingFinal.right,
+	            x: -bgPaddingFinal.left,
+	            y: -bgPaddingFinal.top,
+	            height: this.state.bbox.height + bgPaddingFinal.top + bgPaddingFinal.bottom,
 	            stroke: "none",
 	            fill: "white",
 	            fillOpacity: "0"
@@ -5872,6 +5890,7 @@ window["ReactAnnotation"] =
 	  label: _propTypes2.default.string,
 	  orientation: _propTypes2.default.oneOf(["leftRight", "topBottom"]),
 	  padding: _propTypes2.default.number,
+	  bgPadding: _propTypes2.default.oneOfType([_propTypes2.default.number, _propTypes2.default.object]),
 	  align: _propTypes2.default.oneOf(["left", "right", "middle", "top", "bottom", "dynamic"]),
 	  editMode: _propTypes2.default.bool,
 	  lineType: _propTypes2.default.oneOf(["vertical", "horizontal"]),
