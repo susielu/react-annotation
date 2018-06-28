@@ -59,9 +59,7 @@ export function Introduction() {
       </p>
       <p>
         Contact me through the{" "}
-        <a href="https://github.com/susielu/react-annotation/">
-          github repo
-        </a>{" "}
+        <a href="https://github.com/susielu/react-annotation/">github repo</a>{" "}
         or <a href="https://twitter.com/DataToViz">twitter</a>.
       </p>
     </section>
@@ -131,10 +129,13 @@ export function AnnotationTypesAPI() {
     - **title (string)**
     - **label (string)**
     - **padding (number)**
+    - **bgPadding (number or Object with one or more options of top, bottom, left, or right)**: this allows you to add more of a padding to the rectangle behind the text element, only available in version 1.3.0 and higher
     - **orientation (string, "leftRight" or "topBottom")**: Determines based on the dx, and dy, which direction to orient the \`Note\`. Default is set to \`"topBottom"\`
     - **lineType (string, "vertical" or "horizontal")**: Creates a line along the edge of the note text. **Please Note** if you set this to \`"vertical"\` then \`orientation\` is fixed at \`"leftRight"\` and vice versa if it is \`"horizontal"\` then \`orientation\` is fixed at \`"topBottom"\` 
     - **align (string, "left", "right", "middle", "top", "bottom", "dynamic")**: When the orientation is set to \`"topBottom"\` or lineType is set to \`"horiztonal"\` you can align the note with \`"top"\`, \`"bottom"\`, \`"middle"\`, or \`"dynamic"\`. When the orientation is set to \`"leftRight"\` or \`lineType\` is set to \`"vertical"\` you can align the note with \`"left"\`, \`"right"\`, \`"middle"\`, or \`"dynamic"\`. In addition to the alignment settings for the note, you can also use the css ${"`text-anchor`"} attribute to align the text within the note
     - **color (string)**: Color string, inherited from Annotation but can be customized by directly adding to Note as a prop
+    - **titleColor (string)**: Color string, inherited from Annotation but can be customized by directly adding to Note as a prop, overrides color property
+    - **labelColor (string)**: Color string, inherited from Annotation but can be customized by directly adding to Note as a prop, overrides color property
     - **wrapSplitter (string or regex)**: A string if you want to customize the way your text is split into new lines, such as manual breaks on new lines
   - **subject (object)**: The following section details the props that can be sent to each Annotation Type's subject property
   
@@ -502,11 +503,12 @@ export function API() {
   - **onDrag(function)**: Passes the current props of the annotation while dragging 
   - **onDragEnd(function)**: Passes the current props of the annotation when dragging ends
 
-  ### Subjects
 
 `
 
   const source3 = `
+  ### Subjects
+
 **&lt;SubjectCircle />** 
   - **radius (number)**: Radius of circle
   - **radiusPadding (number)**: Padding outside of circle, affects spacing between the circle and the start of the connector
@@ -537,7 +539,10 @@ export function API() {
   - **topBottom (string, "top" or "bottom")**: Location, can be combined with leftRight to offset the badge into a corner such as the top right corner. Default places the badge in the center
   - **leftRight (string, "left" or "right")**: Location, can be combined with topBottom to offset the badge into a corner such as the top right corner. Default places the badge in the center
   
-  ### Connectors
+  
+  `
+
+  const connectorText = `### Connectors
 
   All connectors are automatically passed the x, y and dx, dy positions from \`Annotation\`.  
 
@@ -567,24 +572,30 @@ export function API() {
   **&lt;ConnectorEndArrow />** no additional props
 
   **&lt;ConnectorEndDot />** no additional props  
-  
-  ### Notes
 
-  **&lt;Note />**
-  - **title (string)**
-  - **label (string)**
-  - **padding (number)**
-  - **orientation (string, "leftRight" or "topBottom")**: Determines based on the dx, and dy, which direction to orient the \`Note\`. Default is set to \`"topBottom\`
-  - **lineType (string, "vertical" or "horizontal")**: Creates a line along the edge of the note text. **Please Note** if you set this to \`"vertical"\` then \`orientation\` is fixed at \`"leftRight"\` and vice versa if it is \`"horizontal"\` then \`orientation\` is fixed at \`"topBottom"\` 
   
-  - **align (string, "left", "right", "middle", "top", "bottom", "dynamic")**: When the orientation is set to \`"topBottom"\` or lineType is set to \`"horiztonal"\` you can align the note with \`"top"\`, \`"bottom"\`, \`"middle"\`, or \`"dynamic"\`. When the orientation is set to \`"leftRight"\` or \`lineType\` is set to \`"vertical"\` you can align the note with \`"left"\`, \`"right"\`, \`"middle"\`, or \`"dynamic"\`. In addition to the alignment settings for the note, you can also use the css ${"`text-anchor`"} attribute to align the text within the note
-  - **color (string)**: Color string, inherited from Annotation but can be customized by directly adding to Note as a prop
-  - **wrapSplitter (string or regex)**: A string if you want to customize the way your text is split into new lines, such as manual breaks on new lines
-  
-  **&lt;BracketNote />** use with &lt;SubjectBracket />
-  - This Note has all of the same properties as the regular Note, except it has dynamic positioning of the dx, and dy depending on the settings given to \`SubjectBracket\`
+`
 
-  `
+  const noteText = `
+### Notes
+
+**&lt;Note />**
+- **title (string)**
+- **label (string)**
+- **padding (number)**
+- **bgPadding (number or Object with one or more options of top, bottom, left, or right)**: this allows you to add more of a padding to the rectangle behind the text element, only available in version 1.3.0 and higher
+- **orientation (string, "leftRight" or "topBottom")**: Determines based on the dx, and dy, which direction to orient the \`Note\`. Default is set to \`"topBottom\`
+- **lineType (string, "vertical" or "horizontal")**: Creates a line along the edge of the note text. **Please Note** if you set this to \`"vertical"\` then \`orientation\` is fixed at \`"leftRight"\` and vice versa if it is \`"horizontal"\` then \`orientation\` is fixed at \`"topBottom"\` 
+
+- **align (string, "left", "right", "middle", "top", "bottom", "dynamic")**: When the orientation is set to \`"topBottom"\` or lineType is set to \`"horiztonal"\` you can align the note with \`"top"\`, \`"bottom"\`, \`"middle"\`, or \`"dynamic"\`. When the orientation is set to \`"leftRight"\` or \`lineType\` is set to \`"vertical"\` you can align the note with \`"left"\`, \`"right"\`, \`"middle"\`, or \`"dynamic"\`. In addition to the alignment settings for the note, you can also use the css ${"`text-anchor`"} attribute to align the text within the note
+- **color (string)**: Color string, inherited from Annotation but can be customized by directly adding to Note as a prop
+- **titleColor (string)**: Color string, inherited from Annotation but can be customized by directly adding to Note as a prop, overrides color property
+- **labelColor (string)**: Color string, inherited from Annotation but can be customized by directly adding to Note as a prop, overrides color property
+- **wrapSplitter (string or regex)**: A string if you want to customize the way your text is split into new lines, such as manual breaks on new lines
+
+**&lt;BracketNote />** use with &lt;SubjectBracket />
+- This Note has all of the same properties as the regular Note, except it has dynamic positioning of the dx, and dy depending on the settings given to \`SubjectBracket\`
+`
   return (
     <section>
       <Title text="API" id="composable-api" />
@@ -614,6 +625,8 @@ export function API() {
       </Annotation>
       `}</Code>
       <ReactMarkdown source={source3} />
+      <ReactMarkdown source={connectorText} />
+      <ReactMarkdown source={noteText} />
     </section>
   )
 }

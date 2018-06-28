@@ -248,8 +248,22 @@ export default class Note extends React.Component {
       lineType,
       color,
       titleColor,
-      labelColor
+      labelColor,
+      bgPadding
     } = this.props
+
+    let bgPaddingFinal = { top: 0, bottom: 0, left: 0, right: 0 }
+
+    if (typeof bgPadding === "number") {
+      bgPaddingFinal = {
+        top: bgPadding,
+        bottom: bgPadding,
+        left: bgPadding,
+        right: bgPadding
+      }
+    } else if (bgPadding && typeof bgPadding === "object") {
+      bgPaddingFinal = Object.assign(bgPaddingFinal, bgPadding)
+    }
 
     let noteTitle, noteText, noteLineType
     if (title) {
@@ -295,8 +309,8 @@ export default class Note extends React.Component {
         offset: { x: dx, y: dy }
       }
 
-      const noteComponent = ((lineType === "vertical" &&
-        noteVertical(noteParams)) ||
+      const noteComponent = (
+        (lineType === "vertical" && noteVertical(noteParams)) ||
         (lineType === "horizontal" && noteHorizontal(noteParams))
       ).components[0]
 
@@ -335,8 +349,16 @@ export default class Note extends React.Component {
         >
           <rect
             className="annotation-note-bg"
-            width={this.state.bbox.width}
-            height={this.state.bbox.height}
+            width={
+              this.state.bbox.width + bgPaddingFinal.left + bgPaddingFinal.right
+            }
+            x={-bgPaddingFinal.left}
+            y={-bgPaddingFinal.top}
+            height={
+              this.state.bbox.height +
+              bgPaddingFinal.top +
+              bgPaddingFinal.bottom
+            }
             stroke="none"
             fill="white"
             fillOpacity="0"
@@ -365,6 +387,7 @@ Note.propTypes = {
   label: PropTypes.string,
   orientation: PropTypes.oneOf(["leftRight", "topBottom"]),
   padding: PropTypes.number,
+  bgPadding: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
   align: PropTypes.oneOf([
     "left",
     "right",

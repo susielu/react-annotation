@@ -190,6 +190,11 @@ div.title {
   font-weight: bold;
 }
 
+.show-bg .annotation-note-bg {
+  fill: blue;
+  fill-opacity: 0.05;
+}
+
 .annotation.axis .annotation-note-bg {
   fill: white;
   stroke: white;
