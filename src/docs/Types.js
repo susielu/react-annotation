@@ -12,7 +12,14 @@ import { PuppersIcon } from "./Icons"
 const types = {
   AnnotationLabel: {
     typeSettings: {
-      note: { align: "middle", orientation: "topBottom" },
+      className: "show-bg",
+      note: {
+        align: "middle",
+        orientation: "topBottom",
+        bgPadding: 20,
+        padding: 15,
+        titleColor: "#59039c"
+      },
       connector: { type: "line" }
     },
     summary: "A centered label annotation",
@@ -20,7 +27,13 @@ const types = {
   },
   AnnotationCallout: {
     typeSettings: {
-      note: { lineType: "horizontal" },
+      className: "show-bg",
+      note: {
+        lineType: "horizontal",
+        bgPadding: { top: 15, left: 10, right: 10, bottom: 10 },
+        padding: 15,
+        titleColor: "#59039c"
+      },
       connector: { type: "line" }
     },
     summary: "Adds a line along the note",
@@ -517,6 +530,7 @@ export default class Types extends React.Component {
               editMode={this.state.editMode}
               subject={subjectJoined}
               connector={connector}
+              className={t.typeSettings.className}
               color={theme.accent}
               note={note}
             />
@@ -535,6 +549,9 @@ export default class Types extends React.Component {
           dy={117}
           dx={162}
           color={"${theme.accent}"}
+          ${(t.typeSettings.className &&
+            `className="${t.typeSettings.className}" `) ||
+            ""}
           ${this.state.editMode ? "editMode={true}" : ""}
           ${`note={${JSON.stringify(
             Object.assign(
@@ -565,6 +582,9 @@ export default class Types extends React.Component {
           
           title={"${note.title}"}
           label={"${note.label}"}
+          ${(t.typeSettings.className &&
+            `className="${t.typeSettings.className}"`) ||
+            ""}
           ${(t.subject
             ? Object.keys(t.subject).map(
                 k =>
@@ -578,7 +598,7 @@ export default class Types extends React.Component {
           ${SubjectCode()}
           ${ConnectorCode()}
           <Note ${Object.keys(noteJoined)
-            .map(k => `\n            ${k}="${noteJoined[k]}"`)
+            .map(k => `\n            ${k}={${JSON.stringify(noteJoined[k])}}`)
             .join("")} />
         </${this.state.editMode ? `EditableAnnotation` : `Annotation`}>
         `
