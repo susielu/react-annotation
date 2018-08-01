@@ -5563,6 +5563,10 @@ window["ReactAnnotation"] =
 
 
 	    _this.updateText = _this.updateText.bind(_this);
+
+	    // this.note = React.createRef()
+	    // this.title = React.createRef()
+	    // this.label = React.createRef()
 	    return _this;
 	  }
 
@@ -5604,13 +5608,13 @@ window["ReactAnnotation"] =
 	      newState.changed = this.state.changed + 1;
 
 	      if (title) {
-	        newState.titleWrapped = this.refs.title && this.wrapText(this.refs.title, newState.changed, title, wrap, wrapSplitter);
+	        newState.titleWrapped = this.title && this.wrapText(this.title, newState.changed, title, wrap, wrapSplitter);
 	      }
-	      if (label) newState.labelWrapped = this.refs.label && this.wrapText(this.refs.label, newState.changed, label, wrap, wrapSplitter);
+	      if (label) newState.labelWrapped = this.label && this.wrapText(this.label, newState.changed, label, wrap, wrapSplitter);
 
 	      this.setState(newState, function () {
 	        var setLabel = function setLabel() {
-	          var bbox = getOuterBBox(_this2.refs.title, _this2.refs.label);
+	          var bbox = getOuterBBox(_this2.title, _this2.label);
 	          var noteParams = {
 	            padding: padding,
 	            bbox: bbox,
@@ -5632,7 +5636,7 @@ window["ReactAnnotation"] =
 	        };
 
 	        _this2.setState({
-	          labelOffset: title && _this2.refs.title.getBBox().height || 0
+	          labelOffset: title && _this2.title.getBBox().height || 0
 	        }, setLabel);
 	      });
 	    }
@@ -5698,8 +5702,8 @@ window["ReactAnnotation"] =
 	          lineType = _props.lineType;
 
 
-	      if (this.state.bbox.width && (prevProps.dx !== this.props.dx || prevProps.dy !== this.props.dy) && (this.refs.title || this.refs.label)) {
-	        var bbox = getOuterBBox(this.refs.title, this.refs.label);
+	      if (this.state.bbox.width && (prevProps.dx !== this.props.dx || prevProps.dy !== this.props.dy) && (this.title || this.label)) {
+	        var bbox = getOuterBBox(this.title, this.label);
 	        var noteParams = {
 	          padding: padding,
 	          bbox: bbox,
@@ -5746,6 +5750,8 @@ window["ReactAnnotation"] =
 	  }, {
 	    key: "render",
 	    value: function render() {
+	      var _this3 = this;
+
 	      var _props2 = this.props,
 	          dx = _props2.dx,
 	          dy = _props2.dy,
@@ -5780,7 +5786,9 @@ window["ReactAnnotation"] =
 	        noteTitle = _react2.default.createElement(
 	          "text",
 	          {
-	            ref: "title",
+	            ref: function ref(el) {
+	              return _this3.title = el;
+	            },
 	            className: "annotation-note-title",
 	            fontWeight: "bold",
 	            key: "title",
@@ -5798,7 +5806,9 @@ window["ReactAnnotation"] =
 	        noteText = _react2.default.createElement(
 	          "text",
 	          {
-	            ref: "label",
+	            ref: function ref(el) {
+	              return _this3.label = el;
+	            },
 	            className: "annotation-note-label",
 	            y: this.state.labelOffset * 1.1,
 	            key: "label",
@@ -5849,7 +5859,9 @@ window["ReactAnnotation"] =
 	          {
 	            className: "annotation-note-content",
 	            transform: "translate(" + this.state.translateX + ",\n          " + this.state.translateY + ")",
-	            ref: "note"
+	            ref: function ref(el) {
+	              return _this3.note = el;
+	            }
 	          },
 	          _react2.default.createElement("rect", {
 	            className: "annotation-note-bg",
