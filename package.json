@@ -44,8 +44,8 @@
     "dentist": "1.0.3",
     "envify": "4.1.0",
     "enzyme": "2.9.1",
-    "eslint": "3.8.1",
-    "eslint-plugin-react": "7.4.0",
+    "eslint": "5.3.0",
+    "eslint-plugin-react": "7.10.0",
     "history": "4.2.0",
     "material-ui": "^0.17.1",
     "react": "^15.5.0",
@@ -63,7 +63,8 @@
     "react-test-renderer": "15.6.1",
     "uglify-js": "3.1.4",
     "uglifyify": "4.0.4",
-    "webpack": "1.13.1"
+    "webpack": "^4.16.4",
+    "webpack-cli": "^3.1.0"
   },
   "peerDependencies": {
     "react": "^15.0.0 || ^16.0.0",

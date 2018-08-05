@@ -8,11 +8,11 @@ module.exports = {
     libraryTarget: "window"
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js?/,
         exclude: /build|node_modules|styles/,
-        loaders: ["babel"],
+        loader: "babel-loader",
         include: path.join(__dirname, "src")
       } //,
     ]
