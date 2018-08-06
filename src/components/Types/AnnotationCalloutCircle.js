@@ -1,4 +1,3 @@
-import React from "react"
 import SubjectCircle from "../Subject/SubjectCircle"
 
 import ConnectorElbow from "../Connector/ConnectorElbow"

@@ -1,4 +1,3 @@
-import React from "react"
 import SubjectBracket from "../Subject/SubjectBracket"
 import BracketNote from "../Note/BracketNote"
 import classnames from "../classnames"

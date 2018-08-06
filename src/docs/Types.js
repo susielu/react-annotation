@@ -154,7 +154,6 @@ export default class Types extends React.Component {
     note: {},
     subject: {}
   }
-
   updateType(t) {
     this.setState({
       name: t,
@@ -554,20 +553,20 @@ export default class Types extends React.Component {
             ""}
           ${this.state.editMode ? "editMode={true}" : ""}
           ${`note={${JSON.stringify(
-            Object.assign(
-              {},
-              {
-                title: "Annotations :)",
-                label: "Longer text to show text wrapping"
-              },
-              note
-            )
-          ).replace(/,/g, ",\n            ")}}`}
+        Object.assign(
+          {},
+          {
+            title: "Annotations :)",
+            label: "Longer text to show text wrapping"
+          },
+          note
+        )
+      ).replace(/,/g, ",\n            ")}}`}
           ${
-            connector.type || connector.end
-              ? `connector={${JSON.stringify(connector)}}`
-              : ""
-          }
+      connector.type || connector.end
+        ? `connector={${JSON.stringify(connector)}}`
+        : ""
+      }
           ${t.subject ? `subject={${JSON.stringify(t.subject)}}` : ""}
         />
         //
@@ -586,20 +585,20 @@ export default class Types extends React.Component {
             `className="${t.typeSettings.className}"`) ||
             ""}
           ${(t.subject
-            ? Object.keys(t.subject).map(
-                k =>
-                  `\n          ${k}=${
-                    k !== "text" ? `{${t.subject[k]}}` : `"${t.subject[k]}"`
-                  }`
-              )
-            : []
-          ).join("")}
+        ? Object.keys(t.subject).map(
+          k =>
+            `\n          ${k}=${
+              k !== "text" ? `{${t.subject[k]}}` : `"${t.subject[k]}"`
+            }`
+        )
+        : []
+      ).join("")}
         >
           ${SubjectCode()}
           ${ConnectorCode()}
           <Note ${Object.keys(noteJoined)
-            .map(k => `\n            ${k}={${JSON.stringify(noteJoined[k])}}`)
-            .join("")} />
+        .map(k => `\n            ${k}={${JSON.stringify(noteJoined[k])}}`)
+        .join("")} />
         </${this.state.editMode ? `EditableAnnotation` : `Annotation`}>
         `
             .replace(/^\s*\n/gm, "")

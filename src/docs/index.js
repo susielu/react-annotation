@@ -1,6 +1,5 @@
-/* eslint-disable no-unused-vars */
 import React from "react";
-/* eslint-enable no-unused-vars */ import injectTapEventPlugin from "react-tap-event-plugin";
+import injectTapEventPlugin from "react-tap-event-plugin";
 injectTapEventPlugin();
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import getMuiTheme from "material-ui/styles/getMuiTheme";
@@ -27,7 +26,6 @@ class Docs extends React.Component {
   state = {
     open: false
   };
-
   render() {
     const sections = [
       { id: "introduction", name: "Introduction" },
@@ -68,6 +66,7 @@ class Docs extends React.Component {
             <h1>
               <img
                 src="img/menu.png"
+                role='presentation'
                 onClick={() => {
                   this.setState({ open: !this.state.open });
                 }}
@@ -88,7 +87,7 @@ class Docs extends React.Component {
                   <h1 className="hide-xs">react-annotation</h1>
 
                   <p>
-                    Made with <img src="img/heart.png" /> by
+                    Made with <img alt="A picture of a heart" src="img/heart.png" /> by
                     <a href="http://www.susielu.com"> Susie Lu</a>
                   </p>
                 </header>

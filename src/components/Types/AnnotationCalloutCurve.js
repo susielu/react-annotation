@@ -1,4 +1,3 @@
-import React from "react"
 import ConnectorCurve from "../Connector/ConnectorCurve"
 import classnames from "../classnames"
 import annotationMapper from "./Type"

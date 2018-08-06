@@ -1,4 +1,6 @@
+/* eslint-disable no-unused-vars */
 import React from "react"
+/* eslint-enable no-unused-vars */
 import Annotation from "../Annotation"
 import EditableAnnotation from "../EditableAnnotation"
 import ConnectorLine from "../Connector/ConnectorLine"
@@ -84,8 +86,8 @@ export default function(
       {Subject && disable.indexOf("subject") === -1 && <Subject />}
       {note &&
         disable.indexOf("note") === -1 && (
-          <NoteType {...NoteDefaultProps} {...note} />
-        )}
+        <NoteType {...NoteDefaultProps} {...note} />
+      )}
     </AnnotationType>
   )
 }

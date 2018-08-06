@@ -1,4 +1,3 @@
-import React from "react"
 import ConnectorElbow from "../Connector/ConnectorElbow"
 import classnames from "../classnames"
 import annotationMapper from "./Type"

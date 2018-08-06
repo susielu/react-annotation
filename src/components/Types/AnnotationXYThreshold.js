@@ -1,4 +1,3 @@
-import React from "react"
 import SubjectThreshold from "../Subject/SubjectThreshold"
 import ConnectorElbow from "../Connector/ConnectorElbow"
 import classnames from "../classnames"

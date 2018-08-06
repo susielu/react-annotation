@@ -1,4 +1,3 @@
-import React from "react"
 import SubjectBadge from "../Subject/SubjectBadge"
 import classnames from "../classnames"
 import annotationMapper from "./Type"
