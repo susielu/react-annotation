@@ -10,7 +10,5 @@ cache:
     - ~/.cache
 
 script:
-  #   ## print all Travis environment variables for debugging
-  - $(npm bin)/print-env TRAVIS
-  - npm build
+  - npm run build
   - npm run cypress
