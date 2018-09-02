@@ -1,0 +1,17 @@
+language: node_js
+
+node_js:
+  # Node 10.3+ includes npm@6 which has good "npm ci" command
+  - 10.8
+
+cache:
+  directories:
+    - ~/.npm
+    - ~/.cache
+
+defaults: &defaults
+  script:
+    #   ## print all Travis environment variables for debugging
+    - $(npm bin)/print-env TRAVIS
+    - npm build
+    - npm run cypress
