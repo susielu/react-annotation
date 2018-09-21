@@ -1,16 +1,28 @@
+// @flow
 import React from "react"
 import classnames from "./classnames"
-import PropTypes from "prop-types"
 
-export default class Annotation extends React.Component {
+export type AnnotationType = {
+  x: number,
+  y: number,
+  className?: string,
+  events?: { [key: string]: (props: AnnotationType, state: null) => void },
+  color?: string,
+  nx?: number,
+  ny?: number,
+  editMode?: bool,
+  children?: React$Node,
+}
+
+export default class Annotation extends React.Component<AnnotationType, null> {
   render() {
     const { x, y, nx, ny, events } = this.props
 
     const cleanedProps = Object.assign({}, this.props)
     delete cleanedProps.children
 
-    if (nx !== undefined) cleanedProps.dx = nx - x
-    if (ny !== undefined) cleanedProps.dy = ny - y
+    if (nx != null) cleanedProps.dx = nx - x
+    if (ny != null) cleanedProps.dy = ny - y
 
     const childrenWithProps = React.Children
       .toArray(this.props.children)
@@ -21,9 +33,13 @@ export default class Annotation extends React.Component {
         })
       )
 
-    Object.keys(events).forEach(k => {
-      events[k] = events[k].bind(this, this.props, this.state)
-    })
+    if (events != null) {
+      Object.keys(events).forEach(k => {
+        if (events[k].target != null) {
+          events[k] = events[k].bind(this, this.props, null)
+        }
+      })
+    }
 
     return (
       <g
@@ -35,23 +51,4 @@ export default class Annotation extends React.Component {
       </g>
     )
   }
-}
-
-Annotation.defaultProps = {
-  x: 0,
-  y: 0,
-  dx: 0,
-  dy: 0,
-  color: "grey",
-  events: {}
-}
-
-Annotation.propTypes = {
-  x: PropTypes.number,
-  y: PropTypes.number,
-  dx: PropTypes.number,
-  dy: PropTypes.number,
-  color: PropTypes.string,
-  editMode: PropTypes.bool,
-  events: PropTypes.object
 }
