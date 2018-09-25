@@ -6311,6 +6311,16 @@ window["ReactAnnotation"] =
 	      });
 	    }
 	  }, {
+	    key: "componentWillReceiveProps",
+	    value: function componentWillReceiveProps(nextProps) {
+	      this.setState({
+	        x: nextProps.x,
+	        y: nextProps.y,
+	        dx: nextProps.dx,
+	        dy: nextProps.dy
+	      });
+	    }
+	  }, {
 	    key: "getData",
 	    value: function getData() {
 	      return Object.assign({}, this.props, this.state);
