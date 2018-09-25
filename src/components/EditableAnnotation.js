@@ -19,6 +19,15 @@ export default class EditableAnnotation extends React.Component {
     })
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      x: nextProps.x,
+      y: nextProps.y,
+      dx: nextProps.dx,
+      dy: nextProps.dy
+    })
+  }
+
   getData() {
     return Object.assign({}, this.props, this.state)
   }
