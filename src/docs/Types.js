@@ -124,6 +124,7 @@ const types = {
     },
     summary: "Subject options: radius, text, x:left or right, y:top or bottom",
     subject: {
+      radius: 40,
       custom: PuppersIcon(),
       customID: "puppers",
       transform: "translate(-32, -32)"
@@ -233,15 +234,15 @@ export default class Types extends React.Component {
         connectorJoined.type === "line"
           ? "ConnectorLine"
           : connectorJoined.type === "elbow"
-            ? "ConnectorElbow"
-            : "ConnectorCurve"
+          ? "ConnectorElbow"
+          : "ConnectorCurve"
 
       const e =
         connectorJoined.end === "arrow"
           ? "ConnectorEndArrow"
           : connectorJoined.end === "dot"
-            ? "ConnectorEndDot"
-            : undefined
+          ? "ConnectorEndDot"
+          : undefined
 
       if (e) {
         return `
@@ -262,12 +263,12 @@ export default class Types extends React.Component {
         name === "AnnotationCalloutCircle"
           ? "SubjectCircle"
           : name === "AnnotationXYThreshold"
-            ? "SubjectThreshold"
-            : name === "AnnotationBadge"
-              ? "SubjectBadge"
-              : name === "AnnotationCalloutRect"
-                ? "SubjectRect"
-                : undefined
+          ? "SubjectThreshold"
+          : name === "AnnotationBadge"
+          ? "SubjectBadge"
+          : name === "AnnotationCalloutRect"
+          ? "SubjectRect"
+          : undefined
 
       if (s) {
         return `<${s} />`
