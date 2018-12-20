@@ -1,4 +1,3 @@
-import React from "react"
 import classnames from "../classnames"
 import annotationMapper from "./Type"
 import ConnectorLine from "../Connector/ConnectorLine"
