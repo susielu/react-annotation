@@ -1,4 +1,4 @@
-const path = require("path")
+const path = require("path");
 
 module.exports = {
   entry: "./src/components/index.js",
@@ -21,4 +21,4 @@ module.exports = {
     react: "React",
     "react-dom": "ReactDOM"
   }
-}
+};

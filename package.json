@@ -17,7 +17,6 @@
     "build": "react-scripts build && npm run webpack",
     "test": "react-scripts test --env=jsdom",
     "lint": "eslint src",
-    "cypress": "cypress run",
     "webpack": "NODE_ENV=production webpack",
     "prebuild": "babel src/components --out-dir lib --ignore test.js"
   },
@@ -29,7 +28,6 @@
     "babel-preset-stage-0": "6.5.0",
     "conventional-changelog-cli": "1.1.1",
     "conventional-recommended-bump": "0.3.0",
-    "cypress": "^3.1.0",
     "d3-array": "1.2.1",
     "d3-axis": "1.0.8",
     "d3-scale": "1.0.6",
