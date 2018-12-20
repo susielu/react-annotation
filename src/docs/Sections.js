@@ -1,11 +1,11 @@
 /* eslint-disable no-unused-vars */
-import React from "react"
+import React from "react";
 /* eslint-enable no-unused-vars */
-import { PrismCode } from "react-prism"
-import TypesUI from "./Types"
-import Chip from "material-ui/Chip"
-import Avatar from "material-ui/Avatar"
-import { Tooltip, Emmys } from "./Examples"
+import { PrismCode } from "react-prism";
+import TypesUI from "./Types";
+import Chip from "material-ui/Chip";
+import Avatar from "material-ui/Avatar";
+import { Tooltip, Emmys } from "./Examples";
 
 import {
   Annotation,
@@ -13,29 +13,29 @@ import {
   ConnectorElbow,
   ConnectorEndDot,
   Note
-} from "../components/index"
+} from "../components/index";
 
-import { DonutIcon } from "./Icons"
-import theme from "./theme"
-import { dedent } from "dentist"
-import ReactMarkdown from "react-markdown"
-import AlertIcon from "material-ui/svg-icons/alert/error-outline"
+import { DonutIcon } from "./Icons";
+import theme from "./theme";
+import { dedent } from "dentist";
+import ReactMarkdown from "react-markdown";
+import AlertIcon from "material-ui/svg-icons/alert/error-outline";
 
 const Title = ({ text, id }) => {
   return (
     <h2 id={id}>
       <a href={`#${id}`}>#</a> {text}
     </h2>
-  )
-}
+  );
+};
 
 export const Code = ({ children }) => {
   return (
     <pre>
       <PrismCode className="language-jsx">{dedent(children)}</PrismCode>
     </pre>
-  )
-}
+  );
+};
 
 export function Introduction() {
   return (
@@ -45,10 +45,10 @@ export function Introduction() {
         Annotations{" "}
         <strong>
           establish context, and direct our users to insights and anomalies
-        </strong>. I made{" "}
-        <a href="http://d3-annotation.susielu.com/">d3-annotation</a> to tackle
-        this problem, however most of our apps are built in React. The design is
-        heavily based on d3-annotation, with{" "}
+        </strong>
+        . I made <a href="http://d3-annotation.susielu.com/">d3-annotation</a>{" "}
+        to tackle this problem, however most of our apps are built in React. The
+        design is heavily based on d3-annotation, with{" "}
         <a href="#migrating">a few differences</a>, two new annotation types,
         and easy to compose annotations.
       </p>
@@ -63,7 +63,7 @@ export function Introduction() {
         or <a href="https://twitter.com/DataToViz">twitter</a>.
       </p>
     </section>
-  )
+  );
 }
 
 export function Setup() {
@@ -79,7 +79,7 @@ export function Setup() {
       </a>{" "}
       to start your project.
     </section>
-  )
+  );
 }
 
 export function Types() {
@@ -89,7 +89,7 @@ export function Types() {
   <img alt="Anatomy of an annotation" src="img/anatomy.png" />
   
   They are the foundational blocks of this library. Explore the UI below to understand the built-in types.
-  `
+  `;
 
   return (
     <section>
@@ -97,7 +97,7 @@ export function Types() {
       <ReactMarkdown source={source} />
       <TypesUI />
     </section>
-  )
+  );
 }
 
 export function AnnotationTypesAPI() {
@@ -179,26 +179,26 @@ export function AnnotationTypesAPI() {
   - **&lt;AnnotationCalloutCurve />**
 
 
-  `
+  `;
   return (
     <section>
       <Title text="API" id="types-api" />
       <ReactMarkdown source={source} />
     </section>
-  )
+  );
 }
 
 export function ExtendingTypes() {
-  const x = 100
-  const y = 50
+  const x = 100;
+  const y = 50;
 
   const circle = (
     <circle cx={x} cy={y} r={7} fill="none" stroke={theme.accent} />
-  )
+  );
 
   const NoteCircle = ({ x, y, color }) => {
-    return <circle cx={x} cy={y} r={3} fill={color} />
-  }
+    return <circle cx={x} cy={y} r={3} fill={color} />;
+  };
 
   return (
     <section>
@@ -220,7 +220,7 @@ export function ExtendingTypes() {
           label="Donut annotations be free!"
           events={{
             onClick: (props, state, event) => {
-              console.log(props, state, event)
+              console.log(props, state, event);
             }
           }}
         >
@@ -284,7 +284,7 @@ export function ExtendingTypes() {
       </Annotation>`}
       </Code>
     </section>
-  )
+  );
 }
 
 // export function d3Translator () {
@@ -318,7 +318,7 @@ export function InPractice() {
 
   Reach out if you add examples to your framework and would like them listed here.
 
-`
+`;
 
   const source2 = `
 Differences from [d3-annotation](http://d3-annotation.susielu.com/)
@@ -329,7 +329,7 @@ Differences from [d3-annotation](http://d3-annotation.susielu.com/)
 
 If you want to update your code from d3-annotation to react-annotation, here's an example of translation: 
 
-`
+`;
 
   return (
     <section>
@@ -459,7 +459,7 @@ const makeAnnotations = () => {
 `}
       </Code>
     </section>
-  )
+  );
 }
 
 export function Examples() {
@@ -472,7 +472,7 @@ export function Examples() {
 
       <Emmys />
     </section>
-  )
+  );
 }
 
 export function API() {
@@ -504,7 +504,7 @@ export function API() {
   - **onDragEnd(function)**: Passes the current props of the annotation when dragging ends
 
 
-`
+`;
 
   const source3 = `
   ### Subjects
@@ -540,7 +540,7 @@ export function API() {
   - **leftRight (string, "left" or "right")**: Location, can be combined with topBottom to offset the badge into a corner such as the top right corner. Default places the badge in the center
   
   
-  `
+  `;
 
   const connectorText = `### Connectors
 
@@ -574,7 +574,7 @@ export function API() {
   **&lt;ConnectorEndDot />** no additional props  
 
   
-`
+`;
 
   const noteText = `
 ### Notes
@@ -595,7 +595,7 @@ export function API() {
 
 **&lt;BracketNote />** use with &lt;SubjectBracket />
 - This Note has all of the same properties as the regular Note, except it has dynamic positioning of the dx, and dy depending on the settings given to \`SubjectBracket\`
-`
+`;
   return (
     <section>
       <Title text="API" id="composable-api" />
@@ -628,7 +628,7 @@ export function API() {
       <ReactMarkdown source={connectorText} />
       <ReactMarkdown source={noteText} />
     </section>
-  )
+  );
 }
 
 export function Notes() {
@@ -637,12 +637,12 @@ export function Notes() {
   
   Thumbs up to [Nunito](https://fonts.google.com/specimen/Nunito) and [Bungee](https://fonts.google.com/specimen/Bungee) via Google Fonts and [Material UI](http://www.material-ui.com/#/) for making the docs site building a breeze.
   
-  `
+  `;
 
   return (
     <section>
       <Title text="Notes" id="notes" />
       <ReactMarkdown source={source} />
     </section>
-  )
+  );
 }

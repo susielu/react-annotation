@@ -1,16 +1,17 @@
-import React from "react"
-import Annotation from "../Annotation"
-import EditableAnnotation from "../EditableAnnotation"
-import ConnectorLine from "../Connector/ConnectorLine"
-import ConnectorElbow from "../Connector/ConnectorElbow"
-import ConnectorCurve from "../Connector/ConnectorCurve"
-import ConnectorEndDot from "../Connector/ConnectorEndDot"
-import ConnectorEndArrow from "../Connector/ConnectorEndArrow"
-import DefaultSubject from "../Subject/Subject"
-import Note from "../Note/Note"
+import React from "react";
+import Annotation from "../Annotation";
+import EditableAnnotation from "../EditableAnnotation";
+import ConnectorLine from "../Connector/ConnectorLine";
+import ConnectorElbow from "../Connector/ConnectorElbow";
+import ConnectorCurve from "../Connector/ConnectorCurve";
+import ConnectorEndDot from "../Connector/ConnectorEndDot";
+import ConnectorEndArrow from "../Connector/ConnectorEndArrow";
+import DefaultSubject from "../Subject/Subject";
+import Note from "../Note/Note";
+import JSXNote from "../Note/JSXNote";
 
 const getAnnotationType = editMode =>
-  editMode ? EditableAnnotation : Annotation
+  editMode ? EditableAnnotation : Annotation;
 
 export default function(
   props,
@@ -38,7 +39,7 @@ export default function(
     onDragEnd,
     editMode,
     events
-  } = props
+  } = props;
   const CONNECTORS = {
     type: {
       curve: ConnectorCurve,
@@ -49,15 +50,16 @@ export default function(
       dot: ConnectorEndDot,
       arrow: ConnectorEndArrow
     }
-  }
+  };
 
-  let ConnectorType, ConnectorEndType
+  let ConnectorType, ConnectorEndType;
   if (disable.indexOf("connector") === -1) {
-    ConnectorType = (connector && CONNECTORS.type[connector.type]) || Connector
-    ConnectorEndType = connector && CONNECTORS.end[connector.end]
+    ConnectorType = (connector && CONNECTORS.type[connector.type]) || Connector;
+    ConnectorEndType = connector && CONNECTORS.end[connector.end];
   }
 
-  const AnnotationType = getAnnotationType(props.editMode)
+  const AnnotationType = getAnnotationType(props.editMode);
+
   return (
     <AnnotationType
       x={x}
@@ -83,9 +85,12 @@ export default function(
       )}
       {Subject && disable.indexOf("subject") === -1 && <Subject />}
       {note &&
-        disable.indexOf("note") === -1 && (
-          <NoteType {...NoteDefaultProps} {...note} />
-        )}
+      disable.indexOf("note") === -1 &&
+      (React.isValidElement(note) || typeof note === "function") ? (
+        <JSXNote noteDefaultProps={NoteDefaultProps} note={note} />
+      ) : (
+        <NoteType {...NoteDefaultProps} {...note} />
+      )}
     </AnnotationType>
-  )
+  );
 }
