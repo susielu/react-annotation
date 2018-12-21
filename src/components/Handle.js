@@ -16,71 +16,64 @@ const events = {
 
 const listenerOptions = { passive: false }
 
-export default class Handle extends React.Component {
-  constructor(props) {
-    super(props)
+const makeHandler = (type, handleStart, handleStop, handleDrag) => {
+  return e => {
+    e.preventDefault()
+    const xDim = "clientX"
+    const yDim = "clientY"
+    const oX = e.nativeEvent[xDim]
+    const oY = e.nativeEvent[yDim]
+    let x = oX
+    let y = oY
+    handleStart && handleStart()
 
-    this.makeHandler = this.makeHandler.bind(this)
-  }
-
-  makeHandler(type) {
-    return e => {
-      e.preventDefault()
-      const { handleStart, handleDrag, handleStop } = this.props
-      const xDim = "clientX"
-      const yDim = "clientY"
-      const oX = e.nativeEvent[xDim]
-      const oY = e.nativeEvent[yDim]
-      let x = oX
-      let y = oY
-      handleStart()
-
-      const move = d => {
-        d.preventDefault()
+    const move = d => {
+      d.preventDefault()
+      handleDrag &&
         handleDrag(d, {
           deltaX: d[xDim] - x,
           deltaY: d[yDim] - y,
           oDeltaX: d[xDim] - oX,
           oDeltaY: d[yDim] - oY
         })
-        x = d[xDim]
-        y = d[yDim]
-      }
-
-      const stop = e => {
-        e.preventDefault()
-        document.removeEventListener(events[type].move, move, listenerOptions)
-        document.removeEventListener(events[type].stop, stop, listenerOptions)
-        handleStop()
-      }
-
-      document.addEventListener(events[type].move, move, listenerOptions)
-      document.addEventListener(events[type].stop, stop, listenerOptions)
+      x = d[xDim]
+      y = d[yDim]
     }
-  }
 
-  render() {
-    const { x = 0, y = 0, r = 10 } = this.props
+    const stop = e => {
+      e.preventDefault()
+      document.removeEventListener(events[type].move, move, listenerOptions)
+      document.removeEventListener(events[type].stop, stop, listenerOptions)
+      handleStop && handleStop()
+    }
 
-    return (
-      <circle
-        className="handle"
-        cx={x}
-        cy={y}
-        r={r}
-        // style={{ touchAction: "none" }}
-        onMouseDown={this.makeHandler("mouse")}
-        onTouchStart={this.makeHandler("touch")}
-        strokeDasharray="5"
-        stroke="grey"
-        fill="white"
-        ref={handle => {
-          this.handle = handle
-        }}
-        fillOpacity={0}
-      />
-    )
+    document.addEventListener(events[type].move, move, listenerOptions)
+    document.addEventListener(events[type].stop, stop, listenerOptions)
   }
+}
+
+export default function Handle({
+  x = 0,
+  y = 0,
+  r = 10,
+  handleStart,
+  handleStop,
+  handleDrag
+}) {
+  return (
+    <circle
+      className="handle"
+      cx={x}
+      cy={y}
+      r={r}
+      onMouseDown={makeHandler("mouse", handleStart, handleStop, handleDrag)}
+      onTouchStart={makeHandler("touch", handleStart, handleStop, handleDrag)}
+      strokeDasharray="5"
+      stroke="grey"
+      fill="white"
+      fillOpacity={0}
+    />
+  )
 }
 
 Handle.propTypes = {
