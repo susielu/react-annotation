@@ -1,7 +1,7 @@
-const path = require("path");
+const path = require("path")
 
 module.exports = {
-  mode: 'production',
+  mode: "production",
   entry: "./src/components/index.js",
   output: {
     filename: "bundle.js",
@@ -15,11 +15,11 @@ module.exports = {
         exclude: /build|node_modules|styles/,
         loader: "babel-loader",
         include: path.join(__dirname, "src")
-      } //,
+      }
     ]
   },
   externals: {
     react: "React",
     "react-dom": "ReactDOM"
   }
-};
+}

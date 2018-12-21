@@ -7,18 +7,13 @@
           {
             "debug": false,
             "modules": "commonjs",
-            "targets": {
-              "node": "current"
-            },
+
             "useBuiltIns": "usage"
           }
         ],
-        "@babel/preset-react",
-        "@babel/preset-flow"
+        "@babel/preset-react"
       ],
-      "plugins": [
-        ["@babel/plugin-proposal-class-properties"]
-      ]
+      "plugins": [["@babel/plugin-proposal-class-properties"]]
     },
     "development": {
       "presets": [
@@ -27,18 +22,13 @@
           {
             "debug": false,
             "modules": "commonjs",
-            "targets": {
-              "node": "current"
-            },
+
             "useBuiltIns": "usage"
           }
         ],
-        "@babel/preset-react",
-        "@babel/preset-flow"
+        "@babel/preset-react"
       ],
-      "plugins": [
-        ["@babel/plugin-proposal-class-properties"]
-      ]
+      "plugins": [["@babel/plugin-proposal-class-properties"]]
     },
     "test": {
       "presets": [
@@ -47,18 +37,13 @@
           {
             "debug": false,
             "modules": "commonjs",
-            "targets": {
-              "node": "current"
-            },
+
             "useBuiltIns": "usage"
           }
         ],
-        "@babel/preset-react",
-        "@babel/preset-flow"
+        "@babel/preset-react"
       ],
-      "plugins": [
-        ["@babel/plugin-proposal-class-properties"]
-      ]
+      "plugins": [["@babel/plugin-proposal-class-properties"]]
     }
   }
 }
