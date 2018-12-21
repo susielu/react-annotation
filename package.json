@@ -33,7 +33,7 @@
     "d3-array": "1.2.1",
     "d3-axis": "1.0.8",
     "d3-scale": "1.0.6",
-    "d3-shape": "1.0.4",
+    "d3-shape": "~1.0.4",
     "dentist": "1.0.3",
     "envify": "4.1.0",
     "enzyme": "2.9.1",
@@ -65,7 +65,7 @@
   },
   "dependencies": {
     "prop-types": "15.6.2",
-    "viz-annotation": "0.0.2"
+    "viz-annotation": "0.0.3"
   },
   "files": [
     "LICENSE",
