@@ -6,9 +6,7 @@
           "@babel/preset-env",
           {
             "debug": false,
-            "modules": "commonjs",
-
-            "useBuiltIns": "usage"
+            "modules": "commonjs"
           }
         ],
         "@babel/preset-react"
@@ -21,9 +19,7 @@
           "@babel/preset-env",
           {
             "debug": false,
-            "modules": "commonjs",
-
-            "useBuiltIns": "usage"
+            "modules": "commonjs"
           }
         ],
         "@babel/preset-react"
@@ -36,9 +32,7 @@
           "@babel/preset-env",
           {
             "debug": false,
-            "modules": "commonjs",
-
-            "useBuiltIns": "usage"
+            "modules": "commonjs"
           }
         ],
         "@babel/preset-react"

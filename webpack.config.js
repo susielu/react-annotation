@@ -4,6 +4,7 @@ module.exports = {
   mode: "production",
   entry: "./src/components/index.js",
   output: {
+    path: path.resolve(__dirname),
     filename: "bundle.js",
     library: "ReactAnnotation",
     libraryTarget: "window"
