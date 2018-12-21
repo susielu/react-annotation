@@ -14,52 +14,53 @@ const events = {
   }
 }
 
+const listenerOptions = { passive: false }
+
 export default class Handle extends React.Component {
-  render() {
-    const {
-      x = 0,
-      y = 0,
-      r = 10,
-      handleStart,
-      handleDrag,
-      handleStop
-    } = this.props
+  constructor(props) {
+    super(props)
 
-    const makeHandler = type => {
-      return e => {
-        e.preventDefault()
+    this.makeHandler = this.makeHandler.bind(this)
+  }
 
-        const xDim = "clientX"
-        const yDim = "clientY"
-        const oX = e.nativeEvent[xDim]
-        const oY = e.nativeEvent[yDim]
-        let x = oX
-        let y = oY
+  makeHandler(type) {
+    return e => {
+      e.preventDefault()
+      const { handleStart, handleDrag, handleStop } = this.props
+      const xDim = "clientX"
+      const yDim = "clientY"
+      const oX = e.nativeEvent[xDim]
+      const oY = e.nativeEvent[yDim]
+      let x = oX
+      let y = oY
+      handleStart()
 
-        handleStart()
-
-        const move = d => {
-          d.preventDefault()
-          handleDrag(d, {
-            deltaX: d[xDim] - x,
-            deltaY: d[yDim] - y,
-            oDeltaX: d[xDim] - oX,
-            oDeltaY: d[yDim] - oY
-          })
-
-          x = d[xDim]
-          y = d[yDim]
-        }
-
-        document.addEventListener(events[type].move, move)
-        document.addEventListener(events[type].stop, e => {
-          e.preventDefault()
-          document.removeEventListener(events[type].move, move)
-          document.removeEventListener(events[type].stop, move)
-          handleStop()
+      const move = d => {
+        d.preventDefault()
+        handleDrag(d, {
+          deltaX: d[xDim] - x,
+          deltaY: d[yDim] - y,
+          oDeltaX: d[xDim] - oX,
+          oDeltaY: d[yDim] - oY
         })
+        x = d[xDim]
+        y = d[yDim]
       }
+
+      const stop = e => {
+        e.preventDefault()
+        document.removeEventListener(events[type].move, move, listenerOptions)
+        document.removeEventListener(events[type].stop, stop, listenerOptions)
+        handleStop()
+      }
+
+      document.addEventListener(events[type].move, move, listenerOptions)
+      document.addEventListener(events[type].stop, stop, listenerOptions)
     }
+  }
+
+  render() {
+    const { x = 0, y = 0, r = 10 } = this.props
 
     return (
       <circle
@@ -67,7 +68,9 @@ export default class Handle extends React.Component {
         cx={x}
         cy={y}
         r={r}
-        onMouseDown={makeHandler("mouse")}
+        // style={{ touchAction: "none" }}
+        onMouseDown={this.makeHandler("mouse")}
+        onTouchStart={this.makeHandler("touch")}
         strokeDasharray="5"
         stroke="grey"
         fill="white"
