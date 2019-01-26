@@ -1,19 +1,19 @@
-import React from "react";
-import classnames from "./classnames";
-import PropTypes from "prop-types";
+import React from "react"
+import classnames from "./classnames"
+import PropTypes from "prop-types"
 
 export default class Annotation extends React.Component {
   render() {
-    const { x, y, nx, ny, events } = this.props;
+    const { x, y, nx, ny, events } = this.props
 
-    const cleanedProps = Object.assign({}, this.props);
-    delete cleanedProps.children;
+    const cleanedProps = Object.assign({}, this.props)
+    delete cleanedProps.children
 
-    const cleanedWithoutEvents = Object.assign({}, cleanedProps);
-    delete cleanedWithoutEvents.events;
+    const cleanedWithoutEvents = Object.assign({}, cleanedProps)
+    delete cleanedWithoutEvents.events
 
-    if (nx !== undefined) cleanedProps.dx = nx - x;
-    if (ny !== undefined) cleanedProps.dy = ny - y;
+    if (nx !== undefined) cleanedProps.dx = nx - x
+    if (ny !== undefined) cleanedProps.dy = ny - y
 
     const childrenWithProps = React.Children.toArray(this.props.children).map(
       child =>
@@ -24,21 +24,23 @@ export default class Annotation extends React.Component {
 
           ...child.props
         })
-    );
-
+    )
+    const wrappedEvents = {}
     Object.keys(events).forEach(k => {
-      events[k] = events[k].bind(this, this.props, this.state);
-    });
+      wrappedEvents[k] = e => {
+        events[k](this.props, this.state, e)
+      }
+    })
 
     return (
       <g
         className={classnames("annotation", this.props.className)}
         transform={`translate(${x}, ${y})`}
-        {...events}
+        {...wrappedEvents}
       >
         {childrenWithProps}
       </g>
-    );
+    )
   }
 }
 
@@ -49,7 +51,7 @@ Annotation.defaultProps = {
   dy: 0,
   color: "grey",
   events: {}
-};
+}
 
 Annotation.propTypes = {
   x: PropTypes.number,
@@ -59,4 +61,4 @@ Annotation.propTypes = {
   color: PropTypes.string,
   editMode: PropTypes.bool,
   events: PropTypes.object
-};
+}
