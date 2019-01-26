@@ -1,7 +1,7 @@
 {
   "name": "react-annotation",
   "description": "React components for annotating SVG elements ",
-  "version": "2.1.5",
+  "version": "2.1.6",
   "homepage": ".",
   "repository": {
     "type": "git",
