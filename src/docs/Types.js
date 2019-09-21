@@ -1,8 +1,10 @@
 import React from "react"
-import { Card, CardHeader, CardTitle, CardText } from "material-ui/Card"
-import Toggle from "material-ui/Toggle"
-import TextField from "material-ui/TextField"
-import FloatingActionButton from "material-ui/FloatingActionButton"
+import Card from "@material-ui/core/Card"
+import CardHeader from "@material-ui/core/CardHeader"
+import CardText from "@material-ui/core/CardContent"
+
+import TextField from "@material-ui/core/TextField"
+import FloatingActionButton from "@material-ui/core/Fab"
 
 import Annotations from "../components/index"
 import theme from "./theme"
@@ -233,15 +235,15 @@ export default class Types extends React.Component {
         connectorJoined.type === "line"
           ? "ConnectorLine"
           : connectorJoined.type === "elbow"
-          ? "ConnectorElbow"
-          : "ConnectorCurve"
+            ? "ConnectorElbow"
+            : "ConnectorCurve"
 
       const e =
         connectorJoined.end === "arrow"
           ? "ConnectorEndArrow"
           : connectorJoined.end === "dot"
-          ? "ConnectorEndDot"
-          : undefined
+            ? "ConnectorEndDot"
+            : undefined
 
       if (e) {
         return `
@@ -262,12 +264,12 @@ export default class Types extends React.Component {
         name === "AnnotationCalloutCircle"
           ? "SubjectCircle"
           : name === "AnnotationXYThreshold"
-          ? "SubjectThreshold"
-          : name === "AnnotationBadge"
-          ? "SubjectBadge"
-          : name === "AnnotationCalloutRect"
-          ? "SubjectRect"
-          : undefined
+            ? "SubjectThreshold"
+            : name === "AnnotationBadge"
+              ? "SubjectBadge"
+              : name === "AnnotationCalloutRect"
+                ? "SubjectRect"
+                : undefined
 
       if (s) {
         return `<${s} />`
@@ -342,40 +344,25 @@ export default class Types extends React.Component {
       )
     }
 
+    //TODO add in edit mode
+
     return (
       <div>
-        <Card className="types-ui" initiallyExpanded={true}>
+        <Card className="types-ui">
           <CardHeader
             title="Presets"
-            style={{ fontWeight: "bold", borderBottom: "1px solid #d6daea" }}
-          >
-            <Toggle
-              label="Edit Mode"
-              toggled={this.state.editMode}
-              onToggle={() =>
-                this.setState({
-                  editMode: !this.state.editMode
-                })
-              }
-              style={{
-                float: "right",
-                width: 30,
-                fontSize: ".8em"
-              }}
-            />
-          </CardHeader>
-          <CardTitle>{imgs}</CardTitle>
+            root={{ fontWeight: "bold", borderBottom: "1px solid #d6daea" }}
+          />
+          <CardText>{imgs} </CardText>
           <CardHeader
             title="Options"
-            style={{
+            root={{
               fontWeight: "bold",
               borderTop: "1px solid #d6daea",
               borderBottom: "1px solid #d6daea"
             }}
-            showExpandableButton={true}
-            actAsExpander={true}
           />
-          <CardText expandable={true} className="row">
+          <CardText className="row">
             <div className="col-xs-3">
               <b>Note</b>
               <p>Line Type</p>
@@ -432,11 +419,7 @@ export default class Types extends React.Component {
             </div>
             <div className="col-xs-3">
               <TextField
-                hintText="120"
-                floatingLabelFixed={true}
-                floatingLabelShrinkStyle={{
-                  height: 80
-                }}
+                defaultValue="120"
                 fullWidth={true}
                 type="number"
                 onChange={(e, v) => {
@@ -446,11 +429,10 @@ export default class Types extends React.Component {
                     })
                   })
                 }}
-                floatingLabelText="Text Wrap (120)"
+                label="Text Wrap (120)"
               />
               <TextField
-                hintText="5"
-                floatingLabelFixed={true}
+                defaultValue="5"
                 fullWidth={true}
                 type="number"
                 onChange={(e, v) => {
@@ -460,7 +442,7 @@ export default class Types extends React.Component {
                     })
                   })
                 }}
-                floatingLabelText="Text Padding (5)"
+                label="Text Padding (5)"
               />
             </div>
             <div className="col-xs-3">

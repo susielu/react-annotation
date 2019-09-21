@@ -10,7 +10,7 @@ export default class EditableAnnotation extends React.Component {
     dy: 0
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.setState({
       x: this.props.x,
       y: this.props.y,
@@ -19,13 +19,20 @@ export default class EditableAnnotation extends React.Component {
     })
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      x: nextProps.x,
-      y: nextProps.y,
-      dx: nextProps.dx,
-      dy: nextProps.dy
-    })
+  static getDerivedStateFromProps(props) {
+    return {
+      x: props.x,
+      y: props.y,
+      dx: props.dx,
+      dy: props.dy
+    }
+
+    // this.setState({
+    //   x: nextProps.x,
+    //   y: nextProps.y,
+    //   dx: nextProps.dx,
+    //   dy: nextProps.dy
+    // })
   }
 
   getData() {
