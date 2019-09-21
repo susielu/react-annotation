@@ -4,8 +4,8 @@ Full documentation: [http://react-annotation.susielu.com](http://react-annotatio
 
 ![composable-annotation](composable-annotation.gif)
 
+## Setup
 
-## Setup 
 ### Using NPM
 
 You can add react-annotation as a node module by running
@@ -14,10 +14,37 @@ You can add react-annotation as a node module by running
 npm i react-annotation -S
 ```
 
-
 If you're new to using React, I suggest using [create-react-app](https://github.com/facebookincubator/create-react-app) to start your project
 
+## Local Setup and Build
+
+This project uses [yarn](https://yarnpkg.com/lang/en/docs/install/#mac-stable), make sure that is set up prior to installing and building. To test out the library and run the docs locally, clone the repo and then run:
+
+```js
+yarn install
+```
+
+Then run the start command to have a process watch for changes and build the docs site:
+
+```js
+yarn start
+```
+
+If you want to make a production build of the docs run:
+
+```js
+yarn build
+//this includes the yarn run prebuild command below
+```
+
+If you want to make a production build of just the components and the bundle.js that can be used as a codepen import run:
+
+```js
+yarn prebuild
+```
+
 ## Feedback
+
 I would love to hear from you about any additional features that would be useful, please say hi on twitter [@DataToViz](https://www.twitter.com/DataToViz).
 
 ## Prior art
@@ -32,7 +59,7 @@ I would love to hear from you about any additional features that would be useful
 
 - [Adam Pearce](http://blockbuilder.org/1wheel/68073eeba4d19c454a8c25fcd6e9e68a) has arc-arrows and [swoopy drag](http://1wheel.github.io/swoopy-drag/)
 
-- [Micah Stubbs](http://bl.ocks.org/micahstubbs/fa129089b7989975e96b166077f74de4#annotations.json) has a nice VR chart based on swoopy drag 
+- [Micah Stubbs](http://bl.ocks.org/micahstubbs/fa129089b7989975e96b166077f74de4#annotations.json) has a nice VR chart based on swoopy drag
 
 - [Scott Logic](http://blog.scottlogic.com/2014/08/26/two-line-components-for-d3-charts.html) evokes “line annotation” in a graph (different concept).
 
