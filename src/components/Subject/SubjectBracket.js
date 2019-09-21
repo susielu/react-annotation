@@ -6,6 +6,8 @@ import Subject from "./Subject"
 import PropTypes from "prop-types"
 
 export default class SubjectBracket extends Subject {
+  name = "SubjectBracket"
+
   getComponents({ height, width, depth = 20, type = "square", editMode }) {
     const components = Bracket({ height, width, depth, type, editMode })
 

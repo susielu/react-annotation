@@ -6,6 +6,8 @@ import Subject from "./Subject"
 import PropTypes from "prop-types"
 
 export default class SubjectCircle extends Subject {
+  name = "SubjectCircle"
+
   getComponents({
     radius = 20,
     innerRadius,

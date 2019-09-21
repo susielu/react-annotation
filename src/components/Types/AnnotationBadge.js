@@ -5,7 +5,7 @@ import annotationMapper from "./Type"
 export default function AnnotationBadge(props) {
   const className = classnames("badge", props.className)
   return annotationMapper(
-    { disable: ["connector", "note"], ...props, className },
+    { ...props, disable: ["connector", "note"], className },
     null,
     null,
     SubjectBadge

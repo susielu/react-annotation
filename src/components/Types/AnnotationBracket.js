@@ -6,7 +6,7 @@ import annotationMapper from "./Type"
 export default function AnnotationBracket(props) {
   const className = classnames("bracket", props.className)
   return annotationMapper(
-    { disable: ["connector"], ...props, className },
+    { ...props, disable: ["connector"], className },
     null,
     null,
     SubjectBracket,
