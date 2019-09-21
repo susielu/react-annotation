@@ -1,10 +1,11 @@
 import React from "react"
+import Handle from "../Handle"
 
 export default class Connector extends React.Component {
   getComponents() {}
 
   render() {
-    const { color, dx, dy, customID } = this.props
+    const { color, dx, dy, customID, editMode } = this.props
 
     if (dx === 0 && dy === 0) {
       return <g className="annotation-connector" />
@@ -22,6 +23,23 @@ export default class Connector extends React.Component {
         lineData: d.components[0].data
       })
     )
+    let handles
+
+    if (editMode && d.handles && d.handles.length > 0) {
+      handles = d.handles.map((h, i) => (
+        <Handle
+          key={`connectorhandle-${i}`}
+          handleStart={this.props.dragStart}
+          handleStop={this.props.dragEnd}
+          x={h.x}
+          y={h.y}
+          offsetParent={h.offsetParent && this.connector}
+          handleDrag={(e, data) => {
+            this.props.dragConnectorSettings(e, d.handleFunction(h, data))
+          }}
+        />
+      ))
+    }
 
     return (
       <g className="annotation-connector" {...this.props.gAttrs}>
@@ -49,6 +67,7 @@ export default class Connector extends React.Component {
             )
           })}
         {childrenWithProps}
+        {handles}
       </g>
     )
   }
