@@ -10834,10 +10834,10 @@ vfile@^2.0.0:
     unist-util-stringify-position "^1.0.0"
     vfile-message "^1.0.0"
 
-viz-annotation@0.0.4:
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/viz-annotation/-/viz-annotation-0.0.4.tgz#96f070af012210d4e2fb7b41f87f1476fa6ad251"
-  integrity sha512-kUTsxzfu9nc2n/Q73vg2xC3Io+LlXkEgzUzZIioVNM/e75vQ1j18AozdAtq4lhHkUMBdvMHBkCFCEueWUdIRXg==
+viz-annotation@0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/viz-annotation/-/viz-annotation-0.0.5.tgz#76af6f3538c543a283c0273bd41164c441382ac3"
+  integrity sha512-2l65EVx7AgGGNJQRxYdqScmpZiA5+OvwvcfGEaPZA0SBaQJfJd3dh0CR5fTcgBQoylTopFEMqEcjVEutW0CG6A==
   dependencies:
     d3-shape "~1.0.4"
 
