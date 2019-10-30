@@ -1,4 +1,3 @@
-import React from "react"
 import Elbow from "viz-annotation/lib/Connector/type-elbow"
 import Connector from "./Connector"
 

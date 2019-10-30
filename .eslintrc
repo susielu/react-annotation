@@ -6,6 +6,7 @@
   ],
   "parserOptions": {
     "ecmaFeatures": {
+      "pragma": "React",
       "jsx": true
     }
   },
@@ -41,6 +42,7 @@
     "react/jsx-pascal-case": 0,
     "react/jsx-no-undef": 2,
     "react/jsx-uses-vars": 2,
+    "react/jsx-uses-react": 2,
     "react/jsx-wrap-multilines": 1,
     "react/prop-types": 0,
     "react/no-unescaped-entities": 0,

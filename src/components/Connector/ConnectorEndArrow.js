@@ -1,4 +1,3 @@
-import React from "react"
 import EndArrow from "viz-annotation/lib/Connector/end-arrow"
 import ConnectorEnd from "./ConnectorEnd"
 import PropTypes from "prop-types"

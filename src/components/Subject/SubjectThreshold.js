@@ -1,4 +1,3 @@
-import React from "react"
 import Threshold from "viz-annotation/lib/Subject/threshold"
 import Subject from "./Subject"
 import PropTypes from "prop-types"

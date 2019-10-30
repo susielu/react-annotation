@@ -1,4 +1,3 @@
-import React from "react"
 import Rect from "viz-annotation/lib/Subject/rect"
 import Subject from "./Subject"
 import PropTypes from "prop-types"

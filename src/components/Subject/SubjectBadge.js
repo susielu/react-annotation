@@ -1,4 +1,3 @@
-import React from "react"
 import Badge from "viz-annotation/lib/Subject/badge"
 import Subject from "./Subject"
 import PropTypes from "prop-types"

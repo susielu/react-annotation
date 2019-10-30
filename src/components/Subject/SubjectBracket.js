@@ -1,4 +1,3 @@
-import React from "react"
 import Bracket from "viz-annotation/lib/Subject/bracket"
 import Subject from "./Subject"
 import PropTypes from "prop-types"

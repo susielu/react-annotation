@@ -1,4 +1,3 @@
-import React from "react"
 import Line from "viz-annotation/lib/Connector/type-line"
 import Connector from "./Connector"
 
