@@ -1,7 +1,20 @@
 {
   "parser": "babel-eslint",
   "plugins": ["react"],
-
+  "extends": [
+    "plugin:react/recommended"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "pragma": "React",
+      "jsx": true
+    }
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "rules": {
     "array-bracket-spacing": 0,
     "curly": 0,
@@ -20,13 +33,19 @@
     "comma-dangle": 2,
     "no-unused-expressions": [
       2,
-      { "allowShortCircuit": true, "allowTernary": true }
+      {
+        "allowShortCircuit": true,
+        "allowTernary": true
+      }
     ],
     "no-multiple-empty-lines": 0,
     "react/jsx-pascal-case": 0,
     "react/jsx-no-undef": 2,
     "react/jsx-uses-vars": 2,
+    "react/jsx-uses-react": 2,
     "react/jsx-wrap-multilines": 1,
+    "react/prop-types": 0,
+    "react/no-unescaped-entities": 0,
     "no-sequences": 0
   }
 }

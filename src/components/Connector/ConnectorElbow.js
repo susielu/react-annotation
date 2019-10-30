@@ -1,6 +1,3 @@
-/* eslint-disable no-unused-vars */
-import React from "react"
-/* eslint-enable no-unused-vars */
 import Elbow from "viz-annotation/lib/Connector/type-elbow"
 import Connector from "./Connector"
 

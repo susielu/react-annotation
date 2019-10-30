@@ -1,6 +1,3 @@
-/* eslint-disable no-unused-vars */
-import React from "react"
-/* eslint-enable no-unused-vars */
 import Line from "viz-annotation/lib/Connector/type-line"
 import Connector from "./Connector"
 
