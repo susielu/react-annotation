@@ -1,6 +1,4 @@
-/* eslint-disable no-unused-vars */
 import React from "react"
-/* eslint-enable no-unused-vars */
 import { PrismCode } from "react-prism"
 import TypesUI from "./Types"
 import Chip from "material-ui/Chip"
@@ -85,9 +83,9 @@ export function Setup() {
 export function Types() {
   const source = `
   All annotations are made of just three parts, a **note**, a **connector**, and a **subject**.
-  
+
   <img alt="Anatomy of an annotation" src="img/anatomy.png" />
-  
+
   They are the foundational blocks of this library. Explore the UI below to understand the built-in types.
   `
 
@@ -104,7 +102,7 @@ export function AnnotationTypesAPI() {
   const source = `
   ### **_Built-in Annotations_**
   Built-in annotations are a set of preset Subjects, Connectors, and Notes as seen in the [Annotation Types](#types) section.
-  
+
   All built-in annotation types have the following props
   - **x (number)**: X position of the subject and one end of the connector
   - **y (number)**: Y position of the subject and one end of the connector
@@ -116,42 +114,42 @@ export function AnnotationTypesAPI() {
   - **events(object)**: An object with [react event handlers](https://reactjs.org/docs/handling-events.html) as keys and functions to handle those events. Each handler is bound with the annotation context and has the prarameters: annotation props, annotation state, event
   - **editMode(boolean)**: Turns on handles for moving annotations, the following are only trigged with editMode on:
     - **onDragStart(function)**: Passes the current props of the annotation when dragging starts
-    - **onDrag(function)**: Passes the current props of the annotation while dragging 
+    - **onDrag(function)**: Passes the current props of the annotation while dragging
     - **onDragEnd(function)**: Passes the current props of the annotation when dragging ends
   - **disable ([string])**: takes the values 'connector', 'subject', and 'note'. Pass them in this array if you want to disable those parts from rendering
   - **connector (object with the following properties and (values))**
-    - **type (string, "line", "elbow", or "curve")** 
+    - **type (string, "line", "elbow", or "curve")**
     - **end (string, "dot", or "arrow")**
     - **curve (function):** Made to use a curve function from [d3-shape](https://github.com/d3/d3-shape). Defaults to \`curveCatmullRom\`.
-    - **points (array[[x,y],[x,y]...])**: Anchor points for the curve function  
-    - **endScale (number)**: A multiplying factor for sizing the connector end  
-  - **note (object with the following properties and (values))**: 
+    - **points (array[[x,y],[x,y]...])**: Anchor points for the curve function
+    - **endScale (number)**: A multiplying factor for sizing the connector end
+  - **note (object with the following properties and (values))**:
     - **title (string)**
     - **label (string)**
     - **padding (number)**
     - **bgPadding (number or Object with one or more options of top, bottom, left, or right)**: this allows you to add more of a padding to the rectangle behind the text element, only available in version 1.3.0 and higher
     - **orientation (string, "leftRight" or "topBottom")**: Determines based on the dx, and dy, which direction to orient the \`Note\`. Default is set to \`"topBottom"\`
-    - **lineType (string, "vertical" or "horizontal")**: Creates a line along the edge of the note text. **Please Note** if you set this to \`"vertical"\` then \`orientation\` is fixed at \`"leftRight"\` and vice versa if it is \`"horizontal"\` then \`orientation\` is fixed at \`"topBottom"\` 
+    - **lineType (string, "vertical" or "horizontal")**: Creates a line along the edge of the note text. **Please Note** if you set this to \`"vertical"\` then \`orientation\` is fixed at \`"leftRight"\` and vice versa if it is \`"horizontal"\` then \`orientation\` is fixed at \`"topBottom"\`
     - **align (string, "left", "right", "middle", "top", "bottom", "dynamic")**: When the orientation is set to \`"topBottom"\` or lineType is set to \`"horiztonal"\` you can align the note with \`"top"\`, \`"bottom"\`, \`"middle"\`, or \`"dynamic"\`. When the orientation is set to \`"leftRight"\` or \`lineType\` is set to \`"vertical"\` you can align the note with \`"left"\`, \`"right"\`, \`"middle"\`, or \`"dynamic"\`. In addition to the alignment settings for the note, you can also use the css ${"`text-anchor`"} attribute to align the text within the note
     - **color (string)**: Color string, inherited from Annotation but can be customized by directly adding to Note as a prop
     - **titleColor (string)**: Color string, inherited from Annotation but can be customized by directly adding to Note as a prop, overrides color property
     - **labelColor (string)**: Color string, inherited from Annotation but can be customized by directly adding to Note as a prop, overrides color property
     - **wrapSplitter (string or regex)**: A string if you want to customize the way your text is split into new lines, such as manual breaks on new lines
   - **subject (object)**: The following section details the props that can be sent to each Annotation Type's subject property
-  
-  Specific variables can be sent as properties of the \`subject\` 
+
+  Specific variables can be sent as properties of the \`subject\`
 
   **&lt;AnnotationCalloutCircle />**
   - **radius (number)**: Radius of circle
   - **radiusPadding (number)**: Padding outside of circle, affects spacing between the circle and the start of the connector
   - **innerRadius (number)**: Inner radius to make a ring annotation
   - **outerRadius (number)**: Outer radius to make a ring annotation
-  
+
   **&lt;AnnotationCalloutRect />**
   - **width (number)**: Accepts negative and positive values
   - **height (number)**: Accepts negative and positive values
-  
-  
+
+
   **&lt;AnnotationXYThreshold />**
   - **x1, x2 or y1, y2 (number)**: x1, x2 for a horizontal line, y1, y2 for a vertical line
 
@@ -159,19 +157,19 @@ export function AnnotationTypesAPI() {
   - **customID (string: Required)**: Needed for masking the connector by the subject, must be a unique DOM id for the entire page.
   - **custom ([array of JSX SVG shapes])**: Array of JSX SVG shapes that are used to compose the custom element.
   - **transform (SVG transform string)**: Convenience if you need to offset your custom shape
-  
+
   **&lt;AnnotationBracket />**
   - **width or height (number)**: Using width creates a horizontal bracket, using a height creates a vertical bracket
   - **depth (number)**: How far the bracket pops out from the corners. Defaults to 20.
-  - **type (string, "square" or "curly")**: Type of bracket 
+  - **type (string, "square" or "curly")**: Type of bracket
 
   **&lt;AnnotationBadge />**: this is the only base annotation that doesn't have a connector or note
   - **text (string)**: Text placed in the center of the badge
   - **radius (number)**: Defaults to 14.
   - **topBottom (string, "top" or "bottom")**: Location, can be combined with leftRight to offset the badge into a corner such as the top right corner. Default places the badge in the center.
   - **leftRight (string, "left" or "right")**: Location, can be combined with topBottom to offset the badge into a corner such as the top right corner. Default places the badge in the center.
-  
-  
+
+
   These built-in types do not have a Subject
   - **&lt;AnnotationLabel />**
   - **&lt;AnnotationCallout />**
@@ -236,19 +234,19 @@ export function ExtendingTypes() {
       </svg>
       <Code>
         {`
-        import { Annotation, SubjectCircle, ConnectorElbow, ConnectorEndDot, 
+        import { Annotation, SubjectCircle, ConnectorElbow, ConnectorEndDot,
           Note } from 'react-annotation'
 
         const x = 100
         const y = 50
-      
+
         //You can customize just by using the same
         //values you would pass to annotation
         const circle = (
           <circle cx={x} cy={y} r={7} fill="none" stroke={theme.accent} />
         )
-      
-        //Or you can use a render function that 
+
+        //Or you can use a render function that
         //inherits all of the props from the parent
         //Anotation element
         const NoteCircle = ({ x, y, color }) => {
@@ -296,19 +294,19 @@ export function ExtendingTypes() {
 export function InPractice() {
   const source1 = `
   ### Selecting Elements
-  
+
   - All of the visible shapes (aside from the edit handles) in the default annotations are **paths**
   - Hierarchy of classes:
   ![Annotation classes](img/classes.png)
   - Within the g.annotation-note-content there could be three additional elements: ${"`text.annotation-note-label`"}, ${"`text.annotation-note-title`"}, ${"`rect.annotation-note-bg`"}
-    
+
   - There is also a color property on annotations that will easily change the color of the entire annotation.
-  
+
   ### Tips
-  
+
   - In addition to the alignment settings for the note, you can also use the css ${"`text-anchor`"} attribute to align the text within the note
   - There is an invisible rect (${"`rect.annotation-note-bg`"}) behind the text in the notes as a helper for more click area etc.
-  - If you are importing custom fonts, you may notice the annotations don't load perfectly with text wrapping and alignment. To fix that see [this example](https://github.com/susielu/d3-annotation/issues/33). 
+  - If you are importing custom fonts, you may notice the annotations don't load perfectly with text wrapping and alignment. To fix that see [this example](https://github.com/susielu/d3-annotation/issues/33).
 
   ### Examples in Viz Frameworks
 
@@ -327,7 +325,7 @@ Differences from [d3-annotation](http://d3-annotation.susielu.com/)
 - There is no longer accessors. The assumption is that you would map over your annotations and give them the x, y, with any type of scaling functions.
 - AnnotationBadge in react-annotation takes \`leftRight\` and \`topBottom\` parameters instead of the corresponding \`x\` and \`y\` parameteres in d3-annotation
 
-If you want to update your code from d3-annotation to react-annotation, here's an example of translation: 
+If you want to update your code from d3-annotation to react-annotation, here's an example of translation:
 
 `
 
@@ -339,7 +337,7 @@ If you want to update your code from d3-annotation to react-annotation, here's a
       <ReactMarkdown source={source2} />
       <Code>
         {`
-/* ---------------------------- */        
+/* ---------------------------- */
 /* Annotations in d3-annotation */
 /* ---------------------------- */
 
@@ -362,9 +360,9 @@ const annotations = [{
     data: { x: "10/23/2001"}
   },
   {
-    note: { label: "Stock Split 2:1", 
-      lineType:"none", 
-      orientation: "leftRight", 
+    note: { label: "Stock Split 2:1",
+      lineType:"none",
+      orientation: "leftRight",
       align: "middle" },
     className: "anomaly",
     type: d3.annotationCalloutCircle,
@@ -375,7 +373,7 @@ const annotations = [{
   ]
 
   const type = d3.annotationCustomType(
-    d3.annotationXYThreshold, 
+    d3.annotationXYThreshold,
     {"note":{
         "lineType":"none",
         "orientation": "top",
@@ -386,7 +384,7 @@ const annotations = [{
   const makeAnnotations = d3.annotation()
     .type(type)
     //Gives you access to any data objects in the annotations array
-    .accessors({ 
+    .accessors({
       x: function(d){ return x(new Date(d.x))},
       y: function(d){ return y(d.y) }
     })
@@ -406,7 +404,7 @@ import { AnnotationXYThreshold, AnnotationCalloutCircle } from "react-annotation
 
 const makeAnnotations = () => {
   const annotations = [{
-    note: { label: "Steve Jobs Returns",     
+    note: { label: "Steve Jobs Returns",
       orientation: "top"},
     subject: {
       y1: margin.top,
@@ -428,7 +426,7 @@ const makeAnnotations = () => {
     type: AnnotationXYThreshold
   },
   {
-    note: { label: "Stock Split 2:1", 
+    note: { label: "Stock Split 2:1",
       orientation: "leftRight"},
     className: "anomaly",
     subject: { radius: 35 },
@@ -437,7 +435,7 @@ const makeAnnotations = () => {
     type: AnnotationCalloutCircle,
   }].map(a => {
     const Annotation = a.type
-    const { note, subject, y, dx, data } = a 
+    const { note, subject, y, dx, data } = a
     note.wrap = 30
     note.lineType = null
     note.align = "middle"
@@ -476,13 +474,13 @@ export function Examples() {
 }
 
 export function API() {
-  const source1 = `  
-  
+  const source1 = `
+
   ### **_Composable Annotations_**
   When using composable annotations, you have an Annotation component. Then a subject, a connector, and a note can be its children.
-  
+
   Examples are in the [Annotation Types UI](#types), and the [Composable Annotations](#composable) sections.
-  
+
   ### Annotation
   **&lt;Annotation />**
 
@@ -496,11 +494,11 @@ export function API() {
   - **events(object)**: An object with [react event hanlders](https://reactjs.org/docs/handling-events.html) as keys and functions to handle those events. Each handler is bound with the annotation context and has the prarameters: annotation props, annotation state, event
 
    **&lt;EditableAnnotation />**
-  
+
   All the same props as \`Annotation\`, with built in anchors for dragging the annotation
 
   - **onDragStart(function)**: Passes the current props of the annotation when dragging starts
-  - **onDrag(function)**: Passes the current props of the annotation while dragging 
+  - **onDrag(function)**: Passes the current props of the annotation while dragging
   - **onDragEnd(function)**: Passes the current props of the annotation when dragging ends
 
 
@@ -509,7 +507,7 @@ export function API() {
   const source3 = `
   ### Subjects
 
-**&lt;SubjectCircle />** 
+**&lt;SubjectCircle />**
   - **radius (number)**: Radius of circle
   - **radiusPadding (number)**: Padding outside of circle, affects spacing between the circle and the start of the connector
   - **innerRadius (number)**: Inner radius to make a ring annotation
@@ -526,7 +524,7 @@ export function API() {
 
   **&lt;SubjectThreshold />**
   - **x1, x2 or y1, y2 (number)**: x1, x2 for a horizontal line, y1, y2 for a vertical line
-  
+
   **&lt;SubjectCustom />**
   - **customID (string: Required)**: Needed for masking the connector by the subject, must be a unique DOM id for the entire page
   - **custom ([array of JSX SVG shapes])**: Array of JSX SVG shapes that are used to compose the custom element
@@ -535,19 +533,19 @@ export function API() {
   **&lt;SubjectBracket />**
   - **width or height (number)**: Using width creates a horizontal bracket, using a height creates a vertical bracket
   - **depth (number)**: How far the bracket pops out from the corners, defaults to 20
-  - **type (string, "square" or "curly")**: Type of bracket 
+  - **type (string, "square" or "curly")**: Type of bracket
 
   **&lt;SubjectBadge />**
   - **text (string)**: Text placed in the center of the badge
   - **radius (number)**: Defaults to 14
   - **topBottom (string, "top" or "bottom")**: Location, can be combined with leftRight to offset the badge into a corner such as the top right corner. Default places the badge in the center
   - **leftRight (string, "left" or "right")**: Location, can be combined with topBottom to offset the badge into a corner such as the top right corner. Default places the badge in the center
-  
+
   `
 
   const connectorText = `### Connectors
 
-  All connectors are automatically passed the x, y and dx, dy positions from \`Annotation\`.  
+  All connectors are automatically passed the x, y and dx, dy positions from \`Annotation\`.
 
   - **x (number)**: X position of the subject and one end of the connector
   - **y (number)**: Y position of the subject and one end of the connector
@@ -574,9 +572,9 @@ export function API() {
 
   **&lt;ConnectorEndArrow />** no additional props
 
-  **&lt;ConnectorEndDot />** no additional props  
+  **&lt;ConnectorEndDot />** no additional props
 
-  
+
 `
 
   const noteText = `
@@ -588,7 +586,7 @@ export function API() {
 - **padding (number)**
 - **bgPadding (number or Object with one or more options of top, bottom, left, or right)**: this allows you to add more of a padding to the rectangle behind the text element, only available in version 1.3.0 and higher
 - **orientation (string, "leftRight" or "topBottom")**: Determines based on the dx, and dy, which direction to orient the \`Note\`. Default is set to \`"topBottom\`
-- **lineType (string, "vertical" or "horizontal")**: Creates a line along the edge of the note text. **Please Note** if you set this to \`"vertical"\` then \`orientation\` is fixed at \`"leftRight"\` and vice versa if it is \`"horizontal"\` then \`orientation\` is fixed at \`"topBottom"\` 
+- **lineType (string, "vertical" or "horizontal")**: Creates a line along the edge of the note text. **Please Note** if you set this to \`"vertical"\` then \`orientation\` is fixed at \`"leftRight"\` and vice versa if it is \`"horizontal"\` then \`orientation\` is fixed at \`"topBottom"\`
 
 - **align (string, "left", "right", "middle", "top", "bottom", "dynamic")**: When the orientation is set to \`"topBottom"\` or lineType is set to \`"horiztonal"\` you can align the note with \`"top"\`, \`"bottom"\`, \`"middle"\`, or \`"dynamic"\`. When the orientation is set to \`"leftRight"\` or \`lineType\` is set to \`"vertical"\` you can align the note with \`"left"\`, \`"right"\`, \`"middle"\`, or \`"dynamic"\`. In addition to the alignment settings for the note, you can also use the css ${"`text-anchor`"} attribute to align the text within the note
 - **color (string)**: Color string, inherited from Annotation but can be customized by directly adding to Note as a prop
@@ -619,7 +617,7 @@ export function API() {
         x={20}
         y={100}
         dx={20}
-        
+
         //Subject props given to Annotation.
         //They are passed down to the Subject.
         radius={30}
@@ -636,10 +634,10 @@ export function API() {
 
 export function Notes() {
   const source = `
-  Inspired by all of the [prior art](https://github.com/susielu/d3-annotation#prior-art) in annotations, particularly [Adam Pearce](https://twitter.com/adamrpearce)'s [Swoopy Drag](https://1wheel.github.io/swoopy-drag/), and [Andrew Mollica](https://twitter.com/armollica)'s [Ring Note](https://github.com/armollica/d3-ring-note). 
-  
+  Inspired by all of the [prior art](https://github.com/susielu/d3-annotation#prior-art) in annotations, particularly [Adam Pearce](https://twitter.com/adamrpearce)'s [Swoopy Drag](https://1wheel.github.io/swoopy-drag/), and [Andrew Mollica](https://twitter.com/armollica)'s [Ring Note](https://github.com/armollica/d3-ring-note).
+
   Thumbs up to [Nunito](https://fonts.google.com/specimen/Nunito) and [Bungee](https://fonts.google.com/specimen/Bungee) via Google Fonts and [Material UI](http://www.material-ui.com/#/) for making the docs site building a breeze.
-  
+
   `
 
   return (

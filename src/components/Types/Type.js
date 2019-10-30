@@ -13,7 +13,7 @@ import JSXNote from "../Note/JSXNote"
 const getAnnotationType = editMode =>
   editMode ? EditableAnnotation : Annotation
 
-export default function(
+export default function Type(
   props,
   Connector,
   NoteDefaultProps = {},

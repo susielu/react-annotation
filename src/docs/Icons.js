@@ -1,6 +1,4 @@
-/* eslint-disable no-unused-vars */
 import React from "react"
-/* eslint-enable no-unused-vars */
 
 export function DonutIcon() {
   return (
@@ -18,6 +16,7 @@ export function DonutIcon() {
 export function PuppersIcon() {
   return [
     <circle
+      key="0"
       data-color="color-2"
       fill="none"
       stroke="#9610ff"
@@ -30,6 +29,7 @@ export function PuppersIcon() {
       strokeLinejoin="miter"
     />,
     <circle
+      key="1"
       data-color="color-2"
       fill="none"
       stroke="#9610ff"
@@ -42,6 +42,7 @@ export function PuppersIcon() {
       strokeLinejoin="miter"
     />,
     <path
+      key="2"
       data-cap="butt"
       fill="#9610ff"
       stroke="#9610ff"
@@ -52,6 +53,7 @@ export function PuppersIcon() {
       strokeLinecap="butt"
     />,
     <path
+      key="3"
       data-cap="butt"
       fill="none"
       stroke="#9610ff"
@@ -62,6 +64,7 @@ export function PuppersIcon() {
       strokeLinecap="butt"
     />,
     <path
+      key="4"
       data-cap="butt"
       fill="none"
       stroke="#9610ff"
@@ -72,6 +75,7 @@ export function PuppersIcon() {
       strokeLinecap="butt"
     />,
     <path
+      key="5"
       data-cap="butt"
       fill="#9610ff"
       stroke="#9610ff"
@@ -82,6 +86,7 @@ export function PuppersIcon() {
       strokeLinecap="butt"
     />,
     <path
+      key="6"
       data-cap="butt"
       data-color="color-2"
       fill="none"
@@ -93,6 +98,7 @@ export function PuppersIcon() {
       strokeLinecap="butt"
     />,
     <path
+      key="7"
       data-cap="butt"
       data-color="color-2"
       fill="none"
@@ -104,6 +110,7 @@ export function PuppersIcon() {
       strokeLinecap="butt"
     />,
     <path
+      key="8"
       data-color="color-2"
       fill="#9610ff"
       stroke="#9610ff"
