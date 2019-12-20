@@ -8669,10 +8669,10 @@ prop-types-exact@^1.2.0:
     object.assign "^4.1.0"
     reflect.ownkeys "^0.2.0"
 
-prop-types@15.7.2, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@^15, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
-  resolved "https://registry.npmjs.org/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
-  integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
+  resolved "https://artifacts.netflix.com/api/npm/npm-netflix/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
+  integrity sha1-UsQedbjIfnK52TYOAga5ncv/psU=
   dependencies:
     loose-envify "^1.4.0"
     object-assign "^4.1.1"
@@ -10900,10 +10900,10 @@ vfile@^2.0.0:
     unist-util-stringify-position "^1.0.0"
     vfile-message "^1.0.0"
 
-viz-annotation@0.0.3:
-  version "0.0.3"
-  resolved "https://registry.npmjs.org/viz-annotation/-/viz-annotation-0.0.3.tgz#4186a31d5c483c7ab2bc8ca58f0193104b2bc6db"
-  integrity sha512-kkZ+mZHx+zfAZhBuA/PGzA7ZpKUZFjtgBqVcbPfCrOIrHjERcHyrNhxYfx1ZZu9uyZLO0i/qcoMOtY5HpavSlg==
+viz-annotation@0.0.5:
+  version "0.0.5"
+  resolved "https://artifacts.netflix.com/api/npm/npm-netflix/viz-annotation/-/viz-annotation-0.0.5.tgz#76af6f3538c543a283c0273bd41164c441382ac3"
+  integrity sha1-dq9vNTjFQ6KDwCc71BFkxEE4KsM=
   dependencies:
     d3-shape "~1.0.4"
 
