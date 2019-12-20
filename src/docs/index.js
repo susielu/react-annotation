@@ -64,7 +64,7 @@ class Docs extends React.Component {
               <h1>
                 <img
                   src="img/menu.png"
-                  // role="presentation"
+                  alt="menu"
                   onClick={() => {
                     this.setState({ open: !this.state.open })
                   }}
@@ -86,8 +86,7 @@ class Docs extends React.Component {
                     <h1 className="hide-xs">react-annotation</h1>
 
                     <p>
-                      Made with{" "}
-                      <img alt="A picture of a heart" src="img/heart.png" /> by
+                      Made with <img alt="love" src="img/heart.png" /> by
                       <a href="http://www.susielu.com"> Susie Lu</a>
                     </p>
                   </header>

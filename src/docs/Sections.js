@@ -606,7 +606,7 @@ export function API() {
         label="Please Note"
         avatar={
           <Avatar
-            colorDefault={theme.accent}
+            // colorDefault={theme.accent}
             icon={<AlertIcon color="white" />}
           />
         }

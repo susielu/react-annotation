@@ -288,6 +288,7 @@ export default class Types extends React.Component {
             }`}
             onClick={this.updateNote.bind(this, "orientation", "topBottom")}
             src="img/topBottom.png"
+            alt="topBottom"
           />
           <img
             className={`tiny-icon ${
@@ -295,6 +296,7 @@ export default class Types extends React.Component {
             }`}
             onClick={this.updateNote.bind(this, "orientation", "leftRight")}
             src="img/leftRight.png"
+            alt="leftRight"
           />
         </div>
       )
@@ -370,6 +372,7 @@ export default class Types extends React.Component {
                 className={`tiny-icon ${!note.lineType ? "selected" : ""}`}
                 src="img/none.png"
                 onClick={this.updateNote.bind(this, "lineType", null)}
+                alt="none"
               />
               <img
                 className={`tiny-icon ${
@@ -377,6 +380,7 @@ export default class Types extends React.Component {
                 }`}
                 src="img/vertical.png"
                 onClick={this.updateNote.bind(this, "lineType", "vertical")}
+                alt="vertical"
               />
               <img
                 className={`tiny-icon ${
@@ -384,6 +388,7 @@ export default class Types extends React.Component {
                 }`}
                 src="img/horizontal.png"
                 onClick={this.updateNote.bind(this, "lineType", "horizontal")}
+                alt="horizontal"
               />
               {orientation}
             </div>
@@ -394,6 +399,7 @@ export default class Types extends React.Component {
                 className={`tiny-icon ${!note.align ? "selected" : ""}`}
                 src="img/dynamic.png"
                 onClick={this.updateNote.bind(this, "align", null)}
+                alt="dynamic"
               />
               <img
                 className={`tiny-icon ${
@@ -401,12 +407,14 @@ export default class Types extends React.Component {
                 }`}
                 src="img/middle.png"
                 onClick={this.updateNote.bind(this, "align", "middle")}
+                alt="middle"
               />
               <img
                 className={`tiny-icon ${
                   note.align === alignFirst ? "selected" : ""
                 }`}
                 src={`img/${alignFirst}.png`}
+                alt="alignFirst"
                 onClick={this.updateNote.bind(this, "align", alignFirst)}
               />
               <img
@@ -414,6 +422,7 @@ export default class Types extends React.Component {
                   note.align === alignSecond ? "selected" : ""
                 }`}
                 src={`img/${alignSecond}.png`}
+                alt="alignSecond"
                 onClick={this.updateNote.bind(this, "align", alignSecond)}
               />
             </div>
@@ -454,6 +463,7 @@ export default class Types extends React.Component {
                 }`}
                 onClick={this.updateConnector.bind(this, "type", "line")}
                 src="img/line.png"
+                alt="straight"
               />
               <img
                 className={`tiny-icon ${
@@ -461,6 +471,7 @@ export default class Types extends React.Component {
                 }`}
                 onClick={this.updateConnector.bind(this, "type", "elbow")}
                 src="img/elbow.png"
+                alt="elbow"
               />
               <img
                 className={`tiny-icon ${
@@ -468,6 +479,7 @@ export default class Types extends React.Component {
                 }`}
                 onClick={this.updateConnector.bind(this, "type", "curve")}
                 src="img/curve.png"
+                alt="curve"
               />
               <p>End</p>
               <img
@@ -476,6 +488,7 @@ export default class Types extends React.Component {
                 }`}
                 onClick={this.updateConnector.bind(this, "end", null)}
                 src="img/none.png"
+                alt="none"
               />
               <img
                 className={`tiny-icon ${
@@ -483,6 +496,7 @@ export default class Types extends React.Component {
                 }`}
                 onClick={this.updateConnector.bind(this, "end", "arrow")}
                 src="img/arrow.png"
+                alt="arrow"
               />
               <img
                 className={`tiny-icon ${
@@ -490,6 +504,7 @@ export default class Types extends React.Component {
                 }`}
                 onClick={this.updateConnector.bind(this, "end", "dot")}
                 src="img/dot.png"
+                alt="dot"
               />
             </div>
           </CardText>

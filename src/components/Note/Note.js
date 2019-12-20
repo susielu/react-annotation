@@ -32,9 +32,9 @@ export default class Note extends React.Component {
 
     this.updateText = this.updateText.bind(this)
 
-    this.note = React.createRef()
-    this.title = React.createRef()
-    this.label = React.createRef()
+    // this.note = React.createRef()
+    // this.title = React.createRef()
+    // this.label = React.createRef()
   }
   state = {
     translateX: 0,
@@ -46,21 +46,7 @@ export default class Note extends React.Component {
   componentDidMount() {
     this.updateText(this.props)
   }
-  // componentWillReceiveProps(nextProps) {
-  //   if (
-  //     nextProps.title !== this.props.title ||
-  //     nextProps.label !== this.props.label ||
-  //     nextProps.wrap !== this.props.wrap
-  //   ) {
-  //     this.updateText(nextProps)
-  //   }
-  //   if (
-  //     nextProps.editMode &&
-  //     (nextProps.align === "dynamic" || !nextProps.align)
-  //   ) {
-  //     this.updateText(nextProps)
-  //   }
-  // }
+
   updateText({
     orientation,
     padding,
@@ -79,15 +65,15 @@ export default class Note extends React.Component {
     }
     newState.changed = this.state.changed + 1
 
-    // if (title && this.title) {
-    //   newState.titleWrapped =
-    //     this.title &&
-    //     this.wrapText(this.title, newState.changed, title, wrap, wrapSplitter)
-    // }
-    // if (label && this.label)
-    //   newState.labelWrapped =
-    //     this.label &&
-    //     this.wrapText(this.label, newState.changed, label, wrap, wrapSplitter)
+    if (title) {
+      newState.titleWrapped =
+        this.title &&
+        this.wrapText(this.title, newState.changed, title, wrap, wrapSplitter)
+    }
+    if (label)
+      newState.labelWrapped =
+        this.label &&
+        this.wrapText(this.label, newState.changed, label, wrap, wrapSplitter)
 
     this.setState(newState, () => {
       const setLabel = () => {
@@ -111,12 +97,12 @@ export default class Note extends React.Component {
         })
       }
 
-      // this.setState(
-      //   {
-      //     labelOffset: (title && this.title.getBBox().height) || 0
-      //   },
-      //   setLabel
-      // )
+      this.setState(
+        {
+          labelOffset: (title && this.title.getBBox().height) || 0
+        },
+        setLabel
+      )
     })
   }
 
@@ -131,14 +117,13 @@ export default class Note extends React.Component {
       .reverse()
       .filter(w => w !== "")
 
-    let word,
+    let word = words.pop(),
       line = []
 
     const tspans = []
 
-    while ((word = words.pop())) {
+    while (word) {
       line.push(word)
-
       textRef.lastChild.textContent = line.join(" ")
 
       const length = textRef.lastChild.getComputedTextLength()
@@ -154,6 +139,7 @@ export default class Note extends React.Component {
         )
         line = [word]
       }
+      word = words.pop()
     }
 
     if (line.length !== 0) {
@@ -172,6 +158,20 @@ export default class Note extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    if (
+      prevProps.title !== this.props.title ||
+      prevProps.label !== this.props.label ||
+      prevProps.wrap !== this.props.wrap
+    ) {
+      this.updateText(this.props)
+    }
+    // if (
+    //   prevProps.editMode &&
+    //   (prevProps.align === "dynamic" || !prevProps.align)
+    // ) {
+    //   this.updateText(this.props)
+    // }
+
     const { orientation, padding, align, dx, dy, lineType } = this.props
 
     if (
@@ -246,7 +246,7 @@ export default class Note extends React.Component {
     } = this.props
 
     let bgPaddingFinal = { top: 0, bottom: 0, left: 0, right: 0 }
-    console.log("THIS", this)
+
     if (typeof bgPadding === "number") {
       bgPaddingFinal = {
         top: bgPadding,
@@ -262,7 +262,7 @@ export default class Note extends React.Component {
     if (title) {
       noteTitle = (
         <text
-          ref={this.title}
+          ref={el => (this.title = el)}
           className="annotation-note-title"
           fontWeight="bold"
           key="title"
@@ -280,7 +280,7 @@ export default class Note extends React.Component {
     if (label) {
       noteText = (
         <text
-          ref={this.label}
+          ref={el => (this.label = el)}
           className="annotation-note-label"
           y={this.state.labelOffset * 1.1}
           key="label"
@@ -338,7 +338,7 @@ export default class Note extends React.Component {
           className="annotation-note-content"
           transform={`translate(${this.state.translateX},
           ${this.state.translateY})`}
-          ref={this.note}
+          ref={el => (this.note = el)}
         >
           <rect
             className="annotation-note-bg"
