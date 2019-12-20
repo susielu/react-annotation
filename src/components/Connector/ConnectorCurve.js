@@ -12,9 +12,10 @@ export default class ConnectorCurve extends Connector {
     radius,
     outerRadius,
     width,
-    height
+    height,
+    editMode
   }) {
-    return Curve({
+    const components = Curve({
       curve,
       points,
       x,
@@ -24,7 +25,20 @@ export default class ConnectorCurve extends Connector {
       radius,
       outerRadius,
       width,
-      height
+      height,
+      editMode
     })
+
+    components.handleKeys = { points: components.handles }
+    components.handleFunction = (h, data) => {
+      const p = components.points.slice(0)
+      p[h.index] = [h.x + data.oDeltaX, h.y + data.oDeltaY]
+
+      return {
+        points: p
+      }
+    }
+
+    return components
   }
 }

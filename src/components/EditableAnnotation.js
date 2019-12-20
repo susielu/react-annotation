@@ -26,13 +26,6 @@ export default class EditableAnnotation extends React.Component {
       dx: props.dx,
       dy: props.dy
     }
-
-    // this.setState({
-    //   x: nextProps.x,
-    //   y: nextProps.y,
-    //   dx: nextProps.dx,
-    //   dy: nextProps.dy
-    // })
   }
 
   getData() {
@@ -63,6 +56,12 @@ export default class EditableAnnotation extends React.Component {
     )
   }
 
+  dragConnectorSettings(event, data) {
+    this.setState(data, () => {
+      if (this.props.onDrag) this.props.onDrag(this.getData())
+    })
+  }
+
   dragSubjectSettings(event, data) {
     this.setState(data, () => {
       if (this.props.onDrag) this.props.onDrag(this.getData())
@@ -87,6 +86,8 @@ export default class EditableAnnotation extends React.Component {
       dragSubject: this.dragSubject.bind(this),
       dragNote: this.dragNote.bind(this),
       dragSubjectSettings: this.dragSubjectSettings.bind(this),
+      dragConnectorSettings: this.dragConnectorSettings.bind(this),
+
       dragEnd: this.dragEnd.bind(this),
       dragStart: this.dragStart.bind(this),
       editMode: true,

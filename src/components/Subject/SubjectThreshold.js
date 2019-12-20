@@ -6,6 +6,8 @@ import Subject from "./Subject"
 import PropTypes from "prop-types"
 
 export default class SubjectThreshold extends Subject {
+  name = "SubjectThreshold"
+
   getComponents({ x1, x2, y1, y2, x, y, editMode }) {
     return Threshold({ x1, x2, y1, y2, x, y, editMode })
   }

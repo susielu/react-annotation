@@ -1,11 +1,13 @@
 import React from "react"
 import Handle from "../Handle"
 
+const FILLABLE = ["SubjectCircle", "SubjectRect"]
+
 export default class Subject extends React.Component {
   getComponents() {}
 
   render() {
-    const { editMode, color } = this.props
+    const { editMode, color, fill = "none", fillOpacity = 1 } = this.props
 
     const d = this.getComponents(this.props) || {}
 
@@ -39,6 +41,8 @@ export default class Subject extends React.Component {
       }
     }
 
+    const honorFill = FILLABLE.indexOf(this.name) !== -1
+
     return (
       <g
         className="annotation-subject"
@@ -61,7 +65,12 @@ export default class Subject extends React.Component {
               <c.type
                 key={i}
                 className={c.className}
-                fill="none"
+                fill={(honorFill && fill) || "none"}
+                fillOpacity={
+                  honorFill && fillOpacity !== undefined
+                    ? fillOpacity
+                    : undefined
+                }
                 stroke={color}
                 {...attrs}
               >

@@ -61,7 +61,7 @@
   },
   "dependencies": {
     "prop-types": "15.7.2",
-    "viz-annotation": "0.0.3"
+    "viz-annotation": "0.0.5"
   },
   "files": [
     "LICENSE",

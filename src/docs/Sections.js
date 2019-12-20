@@ -148,11 +148,14 @@ export function AnnotationTypesAPI() {
   - **radiusPadding (number)**: Padding outside of circle, affects spacing between the circle and the start of the connector
   - **innerRadius (number)**: Inner radius to make a ring annotation
   - **outerRadius (number)**: Outer radius to make a ring annotation
+  - **fill (number)**: Accepts color string
+  - **fillOpacity (number)**: Accepts opacity value from 0-1
   
   **&lt;AnnotationCalloutRect />**
   - **width (number)**: Accepts negative and positive values
   - **height (number)**: Accepts negative and positive values
-  
+  - **fill (number)**: Accepts color string
+  - **fillOpacity (number)**: Accepts opacity value from 0-1
   
   **&lt;AnnotationXYThreshold />**
   - **x1, x2 or y1, y2 (number)**: x1, x2 for a horizontal line, y1, y2 for a vertical line
