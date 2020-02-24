@@ -30,11 +30,9 @@ export default class Note extends React.Component {
   constructor(props) {
     super(props)
 
-    this.updateText = this.updateText.bind(this)
-
-    // this.note = React.createRef()
-    // this.title = React.createRef()
-    // this.label = React.createRef()
+    if (!props.noWrap) {
+      this.updateText = this.updateText.bind(this)
+    }
   }
   state = {
     translateX: 0,
@@ -44,7 +42,7 @@ export default class Note extends React.Component {
     bbox: { width: 0, height: 0, x: 0, y: 0 }
   }
   componentDidMount() {
-    this.updateText(this.props)
+    !this.props.noWrap && this.updateText(this.props)
   }
 
   updateText({
@@ -158,6 +156,7 @@ export default class Note extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    if (!this.props.noWrap) return
     if (
       prevProps.title !== this.props.title ||
       prevProps.label !== this.props.label ||
@@ -242,7 +241,8 @@ export default class Note extends React.Component {
       color,
       titleColor,
       labelColor,
-      bgPadding
+      bgPadding,
+      noWrap
     } = this.props
 
     let bgPaddingFinal = { top: 0, bottom: 0, left: 0, right: 0 }
@@ -262,13 +262,13 @@ export default class Note extends React.Component {
     if (title) {
       noteTitle = (
         <text
-          ref={el => (this.title = el)}
+          ref={!noWrap ? el => (this.title = el) : undefined}
           className="annotation-note-title"
           fontWeight="bold"
           key="title"
           fill={titleColor || color}
         >
-          {this.state.titleWrapped || (
+          {(!noWrap && this.state.titleWrapped) || (
             <tspan x={0} dy=".8em">
               {title}
             </tspan>
@@ -280,13 +280,13 @@ export default class Note extends React.Component {
     if (label) {
       noteText = (
         <text
-          ref={el => (this.label = el)}
+          ref={!noWrap ? el => (this.label = el) : undefined}
           className="annotation-note-label"
           y={this.state.labelOffset * 1.1}
           key="label"
           fill={labelColor || color}
         >
-          {this.state.labelWrapped || (
+          {(!noWrap && this.state.labelWrapped) || (
             <tspan x={0} dy=".8em">
               {label}
             </tspan>
@@ -338,7 +338,7 @@ export default class Note extends React.Component {
           className="annotation-note-content"
           transform={`translate(${this.state.translateX},
           ${this.state.translateY})`}
-          ref={el => (this.note = el)}
+          // ref={el => (this.note = el)}
         >
           <rect
             className="annotation-note-bg"

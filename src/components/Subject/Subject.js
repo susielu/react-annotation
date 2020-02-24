@@ -47,9 +47,13 @@ export default class Subject extends React.Component {
       <g
         className="annotation-subject"
         {...this.props.gAttrs}
-        ref={subject => {
-          this.subject = subject
-        }}
+        ref={
+          d.handles
+            ? subject => {
+                this.subject = subject
+              }
+            : undefined
+        }
       >
         {d.components &&
           d.components.map((c, i) => {
