@@ -75,7 +75,7 @@ export function Setup() {
       <Code>{"npm i react-annotation -S"}</Code>
       If you're new to using React, I suggest using{" "}
       <a href="https://github.com/facebookincubator/create-react-app">
-        react-create-app
+        create-react-app
       </a>{" "}
       to start your project.
     </section>
